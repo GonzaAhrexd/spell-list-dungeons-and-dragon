@@ -49,7 +49,7 @@ function Consumptions() {
             onClick={() => resetSpells && resetSpells()}
             aria-label="Reiniciar consumos"
           >
-            Reset
+            Reiniciar
           </button>
         </div>
       </header>
@@ -75,7 +75,7 @@ function Consumptions() {
                 </div>
               </div>
 
-              <div className="w-16">
+              {/* <div className="w-16">
                 {(() => {
                   const max = maxMap[item.p]
                   const disabled = isFinite(max) && item.count <= 0
@@ -90,7 +90,7 @@ function Consumptions() {
                     </button>
                   )
                 })()}
-              </div>
+              </div> */}
             </div>
           )
         })}
