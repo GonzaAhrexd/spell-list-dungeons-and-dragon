@@ -3,11 +3,7 @@
 type Spell = {
   name?: string;
   level?: string | number;
-  school?: string;
-  castingTime?: string;
-  range?: string;
-  components?: string;
-  duration?: string;
+  potencia: number | undefined;
   description?: string;
 }
 
@@ -29,7 +25,7 @@ function SpellShow({ spell, onClose }: SpellShowProps) {
         <header className="flex items-start justify-between">
           <div>
             <h3 className="text-xl font-bold">{spell.name}</h3>
-            <div className="text-sm opacity-80">Nivel {spell.level} · {spell.school}</div>
+            <div className="text-sm opacity-80">Nivel {spell.level} · Potencia {spell.potencia}</div>
           </div>
           <button className="ml-3 text-sm font-semibold px-3 py-1 rounded-md bg-transparent" onClick={() => onClose && onClose()} aria-label="Cerrar">
             ✕

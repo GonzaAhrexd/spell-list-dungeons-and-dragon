@@ -46,19 +46,42 @@ function SpellList({ level, onBack }: SpellListProps) {
         <h2 className="text-lg font-bold">Hechizos — Nivel: {level}</h2>
         <p className="mt-2 text-sm opacity-80">Pulsa un hechizo para ver más detalles.</p>
 
-        <ul className="spell-grid grid grid-cols-1 gap-2 mt-4">
-          {matched.map((spell: JSONSpell) => (
-            <li key={spell.nombre} className="spell-item">
-              <button
-                className="spell-button w-full text-xs text-left px-3 py-2 rounded-lg bg-white/90 dark:bg-black/10 shadow-sm"
-                onClick={() => openSpell(spell)}
-                aria-label={`Abrir hechizo ${spell.nombre}`}
-              >
-                {spell.nombre}
-              </button>
-            </li>
-          ))}
-        </ul>
+        {/* Agrupar por potencia y mostrar secciones separadas */}
+        {(() => {
+          const groups = matched.reduce((acc: Record<number, JSONSpell[]>, s) => {
+            const p = typeof s.potencia === 'number' ? s.potencia : 1
+            if (!acc[p]) acc[p] = []
+            acc[p].push(s)
+            return acc
+          }, {})
+
+          const potencias = Object.keys(groups)
+            .map(k => Number(k))
+            .sort((a, b) => a - b) // orden ascendente por potencia
+
+          return (
+            <div className="potencia-groups mt-4 space-y-4">
+              {potencias.map(p => (
+                <section key={p} className="potencia-group">
+                  <h4 className="potencia-title text-sm font-semibold mb-2">Potencia {p}</h4>
+                  <ul className="spell-grid grid grid-cols-1 gap-2">
+                    {groups[p].map(spell => (
+                      <li key={spell.nombre} className="spell-item">
+                        <button
+                          className="spell-button w-full text-xs text-left px-3 py-2 rounded-lg bg-white/90 dark:bg-black/10 shadow-sm"
+                          onClick={() => openSpell(spell)}
+                          aria-label={`Abrir hechizo ${spell.nombre}`}
+                        >
+                          {spell.nombre}
+                        </button>
+                      </li>
+                    ))}
+                  </ul>
+                </section>
+              ))}
+            </div>
+          )
+        })()}
       </div>
 
       {/* Modal: usa el componente SpellShow y pasa la data mapeada */}
@@ -68,11 +91,7 @@ function SpellList({ level, onBack }: SpellListProps) {
             name: selectedSpell.nombre,
             level: selectedSpell.nivel ?? 'Truco',
             description: selectedSpell.descripcion,
-            school: undefined,
-            castingTime: undefined,
-            range: undefined,
-            components: undefined,
-            duration: undefined,
+            potencia: selectedSpell.potencia,
           }}
           onClose={closeSpell}
         />

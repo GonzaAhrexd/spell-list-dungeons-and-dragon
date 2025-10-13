@@ -8,6 +8,7 @@ function App() {
   const [selectedLevel, setSelectedLevel] = useState<string | null>(null)
   const [showingSpellList, setShowingSpellList] = useState(false);
 
+  const [showSettings, setShowSettings] = useState(false);
 
 
   const handleSelectedLevel = (level: string) => {
@@ -21,11 +22,15 @@ function App() {
       <main className="mobile-shell w-full max-w-[420px] mx-auto">
 
         <header className="text-center mb-4">
+          <div className='flex justify-around items-center'>
           <h1 className="title">Hechizos</h1>
-
+          <button onClick={() => setShowSettings(!showSettings)}>⚙️</button>
+          </div>
           <p className="subtitle">Bertok</p>
+
+
         </header>
-        {!showingSpellList &&         
+        {!showingSpellList && !showSettings &&         
         <section className="parchment p-4">
               <button
                 key={"Trucos"}
@@ -54,7 +59,7 @@ function App() {
         </section>
         }
 
-        {showingSpellList && (
+        {showingSpellList && !showSettings && (
           <section className="parchment p-4 mt-4">
             <SpellList
               level={selectedLevel}
