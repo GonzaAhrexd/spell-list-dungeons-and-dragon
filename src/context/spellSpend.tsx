@@ -1,6 +1,8 @@
 // @ts-ignore
 import { createContext, ReactNode, useState, useContext, useEffect } from 'react';
 
+
+
 export const SpendContext = createContext<{
     potencia1: number;
     potencia2: number;
@@ -8,8 +10,10 @@ export const SpendContext = createContext<{
     potencia4: number;
     potencia5: number;
     potencia6: number;
-    spendSpell: (potencia: number) => void;
+    historialHechizos: Array<{nombre: string, potencia: number, timestamp: number}>;
+    spendSpell: (potencia: number, nombre: string) => void;
     resetSpells: () => void;
+
 }>({
     potencia1: 100000,
     potencia2: 4,
@@ -17,6 +21,7 @@ export const SpendContext = createContext<{
     potencia4: 3,
     potencia5: 2,
     potencia6: 1,
+    historialHechizos: [],
     spendSpell: () => {},
     resetSpells: () => {},
 });
@@ -28,41 +33,76 @@ export const SpendProvider = ({ children }: { children: ReactNode }) => {
     const [potencia4, setPotencia4] = useState(3);
     const [potencia5, setPotencia5] = useState(2);
     const [potencia6, setPotencia6] = useState(1);
-    const [resetFlag, setResetFlag] = useState(false);
+    const [historialHechizos, setHistorialHechizos] = useState<Array<{nombre: string, potencia: number, timestamp: number}>>([]);
+    // resetFlag removed: not used currently
 
-    const spendSpell = (potencia: number) => {
+    const spendSpell = (potencia: number, nombre: string) => {
+
+        console.log(potencia)
+        console.log('[SpendContext] spendSpell called for potencia', potencia)
         switch (potencia) {
             case 1:
+                setHistorialHechizos(prev => [...prev, {nombre: nombre, potencia: 1, timestamp: Date.now()}]);
+                // Potencia 1 considerada ilimitada / trucos — no decrementar
+                console.log('[SpendContext] potencia 1 no se decrementa')
+                // Hazle el log del historial de hechizos
+                console.log(historialHechizos)
                 break;
             case 2:
-                if (potencia2 > 0) setPotencia2(potencia2 - 1);
+                setPotencia2(prev => {
+                    const next = Math.max(0, prev - 1)
+                    console.log('[SpendContext] potencia2:', prev, '->', next)
+                    setHistorialHechizos(h => [...h, {nombre: nombre, potencia: 2, timestamp: Date.now()}]);
+                    return next
+                })
                 break;
             case 3:
-                if (potencia3 > 0) setPotencia3(potencia3 - 1);
+                setPotencia3(prev => {
+                    const next = Math.max(0, prev - 1)
+                    console.log('[SpendContext] potencia3:', prev, '->', next)
+                    setHistorialHechizos(h => [...h, {nombre: nombre, potencia: 3, timestamp: Date.now()}]);
+                    return next
+                })
                 break;
             case 4:
-                if (potencia4 > 0) setPotencia4(potencia4 - 1);
+                setPotencia4(prev => {
+                    const next = Math.max(0, prev - 1)
+                    console.log('[SpendContext] potencia4:', prev, '->', next)
+                    setHistorialHechizos(h => [...h, {nombre: nombre, potencia: 4, timestamp: Date.now()}]);
+                    return next
+                })
                 break;
             case 5:
-                if (potencia5 > 0) setPotencia5(potencia5 - 1);
+                setPotencia5(prev => {
+                    const next = Math.max(0, prev - 1)
+                    console.log('[SpendContext] potencia5:', prev, '->', next)
+                    setHistorialHechizos(h => [...h, {nombre: nombre, potencia: 5, timestamp: Date.now()}]);
+                    return next
+                })
                 break;
             case 6:
-                if (potencia6 > 0) setPotencia6(potencia6 - 1);
+                setPotencia6(prev => {
+                    const next = Math.max(0, prev - 1)
+                    console.log('[SpendContext] potencia6:', prev, '->', next)
+                    setHistorialHechizos(h => [...h, {nombre: nombre, potencia: 6, timestamp: Date.now()}]);
+                    return next
+                })
                 break;
             default:
+                console.warn('[SpendContext] potencia desconocida', potencia)
                 break;
         }
     };
 
     const resetSpells = () => {
-        setResetFlag(true);
         setPotencia1(1000);
-        setPotencia2(3);
+        setPotencia2(4);
         setPotencia3(3);
         setPotencia4(3);
         setPotencia5(2);
         setPotencia6(1);
-        setTimeout(() => setResetFlag(false), 1000); // Reset the flag after 1 second
+        setHistorialHechizos([]);
+        // reset complete
     };
 
     return (
@@ -74,6 +114,7 @@ export const SpendProvider = ({ children }: { children: ReactNode }) => {
                 potencia4,
                 potencia5,
                 potencia6,
+                historialHechizos,
                 spendSpell,
                 resetSpells,
             }}

@@ -1,6 +1,9 @@
 import { useState } from 'react'
 import spellData from '../spell-list.json'
 import SpellShow from './SpellShow'
+import { useContext } from 'react'
+import { SpendContext } from '../context/spellSpend';
+
 
 type JSONSpell = {
   nombre: string;
@@ -21,6 +24,30 @@ function SpellList({ level, onBack }: SpellListProps) {
 
   const openSpell = (spell: JSONSpell) => setSelectedSpell(spell)
   const closeSpell = () => setSelectedSpell(null)
+
+
+  const { potencia2, potencia3, potencia4, potencia5, potencia6 } = useContext(SpendContext)
+
+
+  const handlePotencia = (p: number) => {
+    switch (p) {
+        case 1:
+            return false; // Potencia 1 considerada ilimitada / trucos
+        case 2:
+            return potencia2 <= 0;
+        case 3:
+            return potencia3 <= 0;
+        case 4:
+            return potencia4 <= 0;
+        case 5:
+            return potencia5 <= 0;
+        case 6:
+            return potencia6 <= 0;
+        default:
+            return false;
+    }
+  }
+
 
   const spells: JSONSpell[] = (spellData as { spells: JSONSpell[] }).spells || []
   const matched = spells.filter((spell: JSONSpell) => {
@@ -43,7 +70,7 @@ function SpellList({ level, onBack }: SpellListProps) {
       </div>
 
       <div className="content">
-        <h2 className="text-lg font-bold">Hechizos — Nivel: {level}</h2>
+        <h2 className="text-lg font-bold">Hechizos — Nivel: {level}</h2> 
         <p className="mt-2 text-sm opacity-80">Pulsa un hechizo para ver más detalles.</p>
 
         {/* Agrupar por potencia y mostrar secciones separadas */}
@@ -63,7 +90,7 @@ function SpellList({ level, onBack }: SpellListProps) {
             <div className="potencia-groups mt-4 space-y-4">
               {potencias.map(p => (
                 <section key={p} className="potencia-group">
-                  <h4 className="potencia-title text-sm font-semibold mb-2">Potencia {p}</h4>
+                  <h4 className="potencia-title text-sm font-semibold mb-2">Potencia {p} {handlePotencia(p) && <span className="text-red-500">Agotado</span>}</h4>
                   <ul className="spell-grid grid grid-cols-1 gap-2">
                     {groups[p].map(spell => (
                       <li key={spell.nombre} className="spell-item">

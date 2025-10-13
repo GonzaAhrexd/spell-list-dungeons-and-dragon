@@ -1,5 +1,8 @@
 // React import not required with the new JSX transform; keep file lean
 
+import { useContext, useState } from 'react'
+import { SpendContext } from '../context/spellSpend';
+
 type Spell = {
   name?: string;
   level?: string | number;
@@ -13,6 +16,10 @@ type SpellShowProps = {
 }
 
 function SpellShow({ spell, onClose }: SpellShowProps) {
+
+  const { spendSpell, potencia2, potencia3, potencia4, potencia5, potencia6 } = useContext(SpendContext)
+  const [isUsing, setIsUsing] = useState(false)
+
   if (!spell) return null
 
   return (
@@ -38,12 +45,42 @@ function SpellShow({ spell, onClose }: SpellShowProps) {
 
         <footer className="mt-4 flex gap-3">
           <button
-            className="flex-1 use-button rounded-md py-3 font-semibold text-white bg-emerald-700 hover:bg-emerald-600"
+            className={`flex-1 use-button rounded-md py-3 font-semibold text-white flex items-center justify-center gap-2 transition-transform duration-150 ${isUsing ? 'scale-95 bg-emerald-700' : 'bg-emerald-700 hover:bg-emerald-600'}`}
             onClick={() => {
-              // Placeholder for 'use' action - intentionally left blank for future implementation
+                if (isUsing) return
+                // comprobar disponibilidad según potencia
+                const p = spell.potencia ?? 1
+                const available = p === 1 || (p === 2 ? potencia2 > 0 : p === 3 ? potencia3 > 0 : p === 4 ? potencia4 > 0 : p === 5 ? potencia5 > 0 : p === 6 ? potencia6 > 0 : false)
+                if (!available) return
+                setIsUsing(true)
+                try {
+                  spendSpell(spell.potencia ?? 1, spell.name ?? 'Desconocido')
+                } catch (e) {
+                  console.error('spendSpell error', e)
+                }
+
+                setTimeout(() => {
+                  setIsUsing(false)
+                  onClose && onClose()
+                }, 420)
             }}
+            disabled={isUsing || !(spell.potencia === 1 || (spell.potencia === 2 ? potencia2 > 0 : spell.potencia === 3 ? potencia3 > 0 : spell.potencia === 4 ? potencia4 > 0 : spell.potencia === 5 ? potencia5 > 0 : spell.potencia === 6 ? potencia6 > 0 : false))}
           >
-            Utilizar
+          {isUsing ? (
+  <>
+    <span className="animate-pulse">●</span>
+    Usando...
+  </>
+) : (
+  (spell.potencia === 1) ||
+  (spell.potencia === 2 && potencia2 > 0) ||
+  (spell.potencia === 3 && potencia3 > 0) ||
+  (spell.potencia === 4 && potencia4 > 0) ||
+  (spell.potencia === 5 && potencia5 > 0) ||
+  (spell.potencia === 6 && potencia6 > 0)
+    ? 'Utilizar'
+    : 'Agotado'
+)}
           </button>
 
           <button
