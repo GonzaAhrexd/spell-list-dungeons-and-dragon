@@ -1,0 +1,290 @@
+{
+  "meta": {
+    "nota": "Si es 'truco' el campo 'nivel' se deja en null. Las potencias faltantes fueron inferidas razonablemente (Palabra curativa: potencia 2; Onda atronadora: potencia 2).",
+    "reglas_seleccion_trucos": {
+      "inicial": 2,
+      "nivel_6_adicional": 2
+    },
+    "pool_potencias": {
+      "potencia_2": 4,
+      "potencia_3": 3,
+      "potencia_4": 3,
+      "potencia_5": 2,
+      "potencia_6": 1
+    }
+  },
+  "spells": [
+    {
+      "nombre": "Burla hiriente (Vicious Mockery)",
+      "tipo": "truco",
+      "nivel": null,
+      "descripcion": "Lanzas un insulto que puede dañar y/o intimidar al enemigo. Considerado acción rápida.",
+      "potencia": 1
+    },
+    {
+      "nombre": "Luz (Light)",
+      "tipo": "truco",
+      "nivel": null,
+      "descripcion": "Creas una luz alrededor tuyo que permite ver mejor en la oscuridad.",
+      "potencia": 1
+    },
+    {
+      "nombre": "Amigos (Friends)",
+      "tipo": "truco",
+      "nivel": null,
+      "descripcion": "Te da ventaja sobre NPCs neutrales o amigables durante interacciones sociales.",
+      "potencia": 1
+    },
+    {
+      "nombre": "Ilusión menor (Minor Illusion)",
+      "tipo": "truco",
+      "nivel": null,
+      "descripcion": "Creas una copia ilusoria que puede ayudar en tiradas de salvación o distraer.",
+      "potencia": 1
+    },
+    {
+      "nombre": "Mano de mago (Mage Hand)",
+      "tipo": "truco",
+      "nivel": null,
+      "descripcion": "Invocas una mano espectral que realiza tareas simples a distancia siguiendo órdenes.",
+      "potencia": 1
+    },
+
+    {
+      "nombre": "Amistad animal",
+      "tipo": "hechizo",
+      "nivel": "I",
+      "descripcion": "Te permite ganarte la confianza de animales y hacer trato con ellos por un tiempo limitado.",
+      "potencia": 2
+    },
+    {
+      "nombre": "Armadura de mago",
+      "tipo": "hechizo",
+      "nivel": "I",
+      "descripcion": "Proporciona una armadura mágica. Solo disponible si alguien te lo enseña o lo aprendes de un libro/pergamino.",
+      "potencia": 2
+    },
+    {
+      "nombre": "Caída suave",
+      "tipo": "hechizo",
+      "nivel": "I",
+      "descripcion": "Reduce el daño por caídas y permite aterrizar con seguridad.",
+      "potencia": 2
+    },
+    {
+      "nombre": "Curar heridas",
+      "tipo": "hechizo",
+      "nivel": "I",
+      "descripcion": "Restaura puntos de vida a una criatura tocada.",
+      "potencia": 2
+    },
+    {
+      "nombre": "Detectar magia",
+      "tipo": "hechizo",
+      "nivel": "I",
+      "descripcion": "Permite percibir presencias mágicas y aura de magia en objetos o criaturas.",
+      "potencia": 2
+    },
+    {
+      "nombre": "Detectar pensamientos",
+      "tipo": "hechizo",
+      "nivel": "I",
+      "descripcion": "Te permite leer pensamientos superficiales o profundos según lanzamiento y duración.",
+      "potencia": 4
+    },
+    {
+      "nombre": "Disfrazarse",
+      "tipo": "hechizo",
+      "nivel": "I",
+      "descripcion": "Cambia tu apariencia física temporalmente para parecer otra persona.",
+      "potencia": 3
+    },
+    {
+      "nombre": "Encantar persona",
+      "tipo": "hechizo",
+      "nivel": "I",
+      "descripcion": "Encantas a una criatura humanoide; te ofrece ventaja en interacciones sociales (tira 2 dados a favor).",
+      "potencia": 2
+    },
+    {
+      "nombre": "Hechizar",
+      "tipo": "hechizo",
+      "nivel": "I",
+      "descripcion": "Hechizas a un objetivo para que no pueda golpearte (efecto depende de la mecánica de la campaña).",
+      "potencia": 3
+    },
+    {
+      "nombre": "Miedo",
+      "tipo": "hechizo",
+      "nivel": "I",
+      "descripcion": "Infunde un estado que dificulta golpear al enemigo. Solo si te lo enseñan o lo aprendes de un pergamino.",
+      "potencia": 2
+    },
+    {
+      "nombre": "Sueño",
+      "tipo": "hechizo",
+      "nivel": "I",
+      "descripcion": "Envías creaturas al sueño; útil contra grupos con poca vida.",
+      "potencia": 4
+    },
+    {
+      "nombre": "Palabra curativa",
+      "tipo": "hechizo",
+      "nivel": "I",
+      "descripcion": "Una palabra breve que cura a un aliado a distancia instantáneamente.",
+      "potencia": 2
+    },
+    {
+      "nombre": "Onda atronadora",
+      "tipo": "hechizo",
+      "nivel": "I",
+      "descripcion": "Genera una explosión sonora que daña y puede empujar o aturdir a enemigos cercanos.",
+      "potencia": 2
+    },
+
+    {
+      "nombre": "Agrandar/reducir",
+      "tipo": "hechizo",
+      "nivel": "II",
+      "descripcion": "Aumenta o reduce el tamaño de una criatura u objeto, con efectos en fuerza y alcance.",
+      "potencia": 3
+    },
+    {
+      "nombre": "Ceguera",
+      "tipo": "hechizo",
+      "nivel": "II",
+      "descripcion": "Creas una zona que provoca ceguera a quienes estén dentro.",
+      "potencia": 3
+    },
+    {
+      "nombre": "Inmovilizar persona",
+      "tipo": "hechizo",
+      "nivel": "II",
+      "descripcion": "Inmoviliza a una criatura humanoide; no es aplicable a todas las criaturas.",
+      "potencia": 3
+    },
+    {
+      "nombre": "Invisibilidad",
+      "tipo": "hechizo",
+      "nivel": "II",
+      "descripcion": "Hace invisible al objetivo. Solo si alguien te lo enseña o lo aprendes de un libro/pergamino.",
+      "potencia": 2
+    },
+    {
+      "nombre": "Silencio",
+      "tipo": "hechizo",
+      "nivel": "II",
+      "descripcion": "Creas una zona donde no se pueden usar habilidades ni magias que requieran sonido. Solo si alguien te lo enseña.",
+      "potencia": 4
+    },
+
+    {
+      "nombre": "Disipar magia",
+      "tipo": "hechizo",
+      "nivel": "III",
+      "descripcion": "Cancela efectos mágicos activos en un objetivo o área.",
+      "potencia": 2
+    },
+    {
+      "nombre": "Rayo relampagueante",
+      "tipo": "hechizo",
+      "nivel": "III",
+      "descripcion": "Lanza un rayo de energía eléctrica. Solo si lo aprendes de un libro/pergamino.",
+      "potencia": 4
+    },
+    {
+      "nombre": "Revivir",
+      "tipo": "hechizo",
+      "nivel": "III",
+      "descripcion": "Restaura la vida a un aliado recientemente fallecido (condiciones aplican).",
+      "potencia": 1
+    },
+    {
+      "nombre": "Contramagia",
+      "tipo": "hechizo",
+      "nivel": "III",
+      "descripcion": "Interrumpes el lanzamiento de un hechizo de otro caster.",
+      "potencia": 2
+    },
+
+    {
+      "nombre": "Confusión",
+      "tipo": "hechizo",
+      "nivel": "IV",
+      "descripcion": "Hace que el enemigo se comporte de forma errática y realice acciones aleatorias.",
+      "potencia": 3
+    },
+    {
+      "nombre": "Polimorfia",
+      "tipo": "hechizo",
+      "nivel": "IV",
+      "descripcion": "Transforma a una criatura en otra (animal u otra forma) con potentes efectos.",
+      "potencia": 5
+    },
+    {
+      "nombre": "Localizar criatura",
+      "tipo": "hechizo",
+      "nivel": "IV",
+      "descripcion": "Marca un objetivo que no puedes perder de vista aunque se haga invisible; seguimiento garantizado.",
+      "potencia": 3
+    },
+    {
+      "nombre": "Transformación mayor",
+      "tipo": "hechizo",
+      "nivel": "IV",
+      "descripcion": "Envuelve ataques (tuyos o de tus compañeros) con un elemento: Fuego, Agua, Viento o Roca.",
+      "potencia": 6
+    },
+
+    {
+      "nombre": "Animar objetos",
+      "tipo": "hechizo",
+      "nivel": "V",
+      "descripcion": "Das vida a objetos inanimados para que te ayuden en combate o en tareas.",
+      "potencia": 4
+    },
+    {
+      "nombre": "Restauración mayor",
+      "tipo": "hechizo",
+      "nivel": "V",
+      "descripcion": "Elimina estados negativos importantes y restaura capacidades perdidas.",
+      "potencia": 3
+    },
+    {
+      "nombre": "Reanimar muerto",
+      "tipo": "hechizo",
+      "nivel": "V",
+      "descripcion": "Resucita a criaturas muertas más allá de la ventana del revivir; condiciones y consecuencias aplican.",
+      "potencia": 4
+    },
+    {
+      "nombre": "Sueño profundo",
+      "tipo": "hechizo",
+      "nivel": "V",
+      "descripcion": "Induce un sueño muy profundo en múltiples objetivos, más poderoso que el hechizo de menor nivel.",
+      "potencia": 5
+    },
+    {
+      "nombre": "Telequinesis",
+      "tipo": "hechizo",
+      "nivel": "V",
+      "descripcion": "Permite mover objetos y criaturas con la mente. Solo si te lo enseñan.",
+      "potencia": 5
+    },
+
+    {
+      "nombre": "Guardián de la fe",
+      "tipo": "hechizo",
+      "nivel": "VI",
+      "descripcion": "Creas una entidad guardiana que proporciona bonificaciones defensivas a ti y a aliados cercanos.",
+      "potencia": 5
+    },
+    {
+      "nombre": "Deseo (recarga de hechizos)",
+      "tipo": "hechizo",
+      "nivel": "VI",
+      "descripcion": "Rellena tus cantidades de hechizos; debes seleccionar qué potencia(s) de hechizos quieres rellenar.",
+      "potencia": 5
+    }
+  ]
+}

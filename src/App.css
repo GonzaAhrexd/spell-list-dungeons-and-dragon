@@ -1,0 +1,118 @@
+@import url('https://fonts.googleapis.com/css2?family=Uncial+Antiqua&family=Montserrat:ital,wght@0,300;0,600;1,400&display=swap');
+
+:root{
+	--bg-dark: #060306;
+	--accent-1: #caa34a; /* golden ink */
+	--parchment: #f3e6cf;
+	--parchment-dark: #e8d6b8;
+	--card-shadow: 0 6px 14px rgba(0,0,0,0.6);
+}
+
+/* Mobile-first viewport: center and constrain width to a phone size */
+.app-viewport{
+	background: linear-gradient(180deg, #0b0710 0%, #08030a 55%);
+	min-height: 100vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-family: 'Montserrat', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+	-webkit-font-smoothing: antialiased;
+	color: #f3e6cf;
+}
+
+.mobile-shell{
+	border-radius: 18px;
+	background: radial-gradient(1200px 400px at 10% 10%, rgba(255,220,120,0.03), transparent), rgba(7,3,8,0.6);
+	box-shadow: 0 20px 40px rgba(0,0,0,0.7), inset 0 1px 0 rgba(255,255,255,0.02);
+	padding: 18px;
+	backdrop-filter: blur(4px);
+}
+
+.title{
+	font-family: 'Uncial Antiqua', serif;
+	font-size: 32px;
+	color: var(--parchment);
+	letter-spacing: 1px;
+	text-shadow: 0 2px 8px rgba(0,0,0,0.7);
+	margin: 0;
+}
+
+.subtitle{
+	font-size: 12px;
+	color: #f0d8a0;
+	margin-top: 6px;
+}
+
+.parchment{
+	background: linear-gradient(180deg, var(--parchment) 0%, var(--parchment-dark) 100%);
+	border-radius: 12px;
+	box-shadow: var(--card-shadow);
+	border: 2px solid rgba(30,20,10,0.12);
+	padding: 12px;
+}
+
+.levels{
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	gap: 10px;
+}
+
+.level-card{
+	position: relative;
+	background: linear-gradient(180deg, rgba(255,255,255,0.92), rgba(245,235,210,0.98));
+	border-radius: 10px;
+	color: #2b1f0f;
+	padding: 12px 8px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	min-height: 58px;
+	border: 1px solid rgba(120,90,50,0.12);
+	box-shadow: inset 0 -4px 6px rgba(0,0,0,0.06), 0 6px 18px rgba(0,0,0,0.45);
+	transition: transform .14s ease, box-shadow .14s ease;
+	touch-action: manipulation;
+}
+
+.level-card:active{transform: translateY(1px) scale(.998);}
+
+.level-card .level-label{
+	font-weight: 700;
+	font-size: 16px;
+}
+
+.level-card .level-rune{
+	position: absolute;
+	right: 8px;
+	top: 6px;
+	color: var(--accent-1);
+	font-size: 14px;
+	opacity: 0.9;
+}
+
+.level-card.selected{
+	outline: 3px solid rgba(202,163,74,0.14);
+	box-shadow: 0 10px 22px rgba(0,0,0,0.6), inset 0 2px 0 rgba(255,235,190,0.18);
+	transform: translateY(-4px) scale(1.01);
+}
+
+/* Make sure the UI is strictly mobile-sized: hide on larger viewports and keep centered on small screens */
+@media (min-width: 460px){
+	.app-viewport{padding: 24px}
+	.mobile-shell{max-width:420px}
+}
+
+@media (min-width: 780px){
+	/* For desktop, display a warning card that app is optimized for mobile */
+	body > * {opacity: 0.98}
+	.mobile-shell::after{
+		content: "Optimizado solo para móvil";
+		display: block;
+		margin-top: 10px;
+		font-size: 12px;
+		color: rgba(240,220,180,0.9);
+		text-align: center;
+	}
+}
+
+/* small a11y tweaks */
+.level-card:focus{box-shadow: 0 0 0 3px rgba(202,163,74,0.16); outline: none}
