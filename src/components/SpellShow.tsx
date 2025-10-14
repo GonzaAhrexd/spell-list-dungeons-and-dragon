@@ -45,7 +45,7 @@ function SpellShow({ spell, onClose }: SpellShowProps) {
         <footer className="mt-4 flex gap-3">
           <button
             className={`flex-1 cursor-pointer use-button rounded-md py-3 font-semibold text-white flex items-center justify-center gap-2 transition-transform duration-150 ${isUsing ? 'scale-95 bg-emerald-700' : 'bg-emerald-700 hover:bg-emerald-600'}`}
-            onClick={() => {
+            onClick={async() => {
               if (isUsing) return
               // comprobar disponibilidad según potencia
               const p = spell.potencia ?? 1
@@ -53,7 +53,7 @@ function SpellShow({ spell, onClose }: SpellShowProps) {
               if (!available) return
               setIsUsing(true)
               try {
-                spendSpell(spell.potencia ?? 1, spell.name ?? 'Desconocido')
+                await  spendSpell(spell.potencia ?? 1, spell.name ?? 'Desconocido')
               } catch (e) {
                 console.error('spendSpell error', e)
               }

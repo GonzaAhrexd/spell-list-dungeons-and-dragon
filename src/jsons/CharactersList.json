@@ -1,0 +1,74 @@
+{
+  "grupos": [
+    {
+      "nombre": "Grupo B",
+      "personajes": [
+        {
+          "jugador": "Gonza Ebel",
+          "personaje": "Bertok",
+          "clase": "Bardo",
+          "subclase": "Persuasión"
+        },
+        {
+          "jugador": "Gonza Azcona",
+          "personaje": "Grishnak",
+          "clase": "Paladín",
+          "subclase": "Juramento de los No-Muertos"
+        },
+        {
+          "jugador": "Gonza Acevedo",
+          "personaje": "Tyran",
+          "clase": "Pícaro",
+          "subclase": "Asesino"
+        },
+        {
+          "jugador": "Franco",
+          "personaje": "Marim de Garlim",
+          "clase": "Bardo",
+          "subclase": "Colegio de la Espada"
+        },
+        {
+          "jugador": "Matias",
+          "personaje": "Kel'Abrakar",
+          "clase": "Hechicero",
+          "subclase": "Nicromante"
+        }
+      ]
+    },
+    {
+      "nombre": "Grupo A",
+      "personajes": [
+        {
+          "jugador": "Ezequiel",
+          "personaje": "Thormund Marshwood",
+          "clase": "Guerrero",
+          "subclase": "Rúnico"
+        },
+        {
+          "jugador": "Farley",
+          "personaje": "Fauzin",
+          "clase": "Guerrero",
+          "subclase": "Arcano"
+        },
+        {
+          "jugador": "Julian",
+          "personaje": "Kael",
+          "clase": "Paladín",
+          "subclase": "Juramento de la Conquista"
+        },
+        {
+          "jugador": "Pablo",
+          "personaje": "Pearce",
+          "clase": "Explorador",
+          "subclase": "Cazador"
+        },
+        {
+          "jugador": "Lucas",
+          "personaje": "Thorin",
+          "clase": "Bárbaro",
+          "subclase": null
+        }
+      ]
+    }
+  ]
+}

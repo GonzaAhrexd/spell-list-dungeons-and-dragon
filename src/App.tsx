@@ -2,7 +2,7 @@ import { useState } from 'react'
 import './App.css'
 import SpellList from './components/SpellList'
 import { SpendProvider } from './context/spellSpend';
-import Consumptions from './components/Consumptions';
+import Consumptions from './components/Consumptions/Consumptions';
 import HeaderApp from './components/HeaderApp';
 import SpellsMenu from './components/SpellsMenu';
 
@@ -36,8 +36,8 @@ function App() {
         <main className="mobile-shell w-full max-w-[420px] mx-auto">
           <HeaderApp />
             <div className='flex justify-between'>
-              <button className='w-full cursor-pointer mr-1 mb-2 level-card relative flex items-center justify-center py-4 px-3 text-center text-sm font-medium shadow-inner' onClick={handleSpellsMenu}>Hechizos</button>
-              <button className='w-full cursor-pointer mb-2 level-card relative flex items-center justify-center py-4 px-3 text-center text-sm font-medium shadow-inner' onClick={handleConsumptionMenu}>Consumo</button>
+              <button className='w-full cursor-pointer mr-1 mb-2 level-card relative flex items-center justify-center py-4 px-3 text-center text-sm font-bold shadow-inner' onClick={handleSpellsMenu}>Hechizos</button>
+              <button className='w-full cursor-pointer mb-2 level-card relative flex items-center justify-center py-4 px-3 text-center text-sm font-bold shadow-inner' onClick={handleConsumptionMenu}>Consumo</button>
             </div>
 
           {!showingSpellList && showConsumptionMenu &&

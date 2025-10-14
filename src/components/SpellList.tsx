@@ -1,9 +1,9 @@
 import { useState } from 'react'
-import spellData from '../spell-list.json'
 import SpellShow from './SpellShow'
 import { useContext } from 'react'
 import { SpendContext } from '../context/spellSpend';
 
+import spellData from '../jsons/spell-list.json'
 
 type JSONSpell = {
   nombre: string;
