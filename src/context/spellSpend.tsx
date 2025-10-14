@@ -1,8 +1,6 @@
 // @ts-ignore
 import { createContext, ReactNode, useState, useContext, useEffect } from 'react';
 
-
-
 export const SpendContext = createContext<{
     potencia1: number;
     potencia2: number;
@@ -10,10 +8,9 @@ export const SpendContext = createContext<{
     potencia4: number;
     potencia5: number;
     potencia6: number;
-    historialHechizos: Array<{nombre: string, potencia: number, timestamp: number}>;
+    historialHechizos: Array<{ nombre: string; potencia: number; timestamp: number }>;
     spendSpell: (potencia: number, nombre: string) => void;
     resetSpells: () => void;
-
 }>({
     potencia1: 100000,
     potencia2: 4,
@@ -27,69 +24,84 @@ export const SpendContext = createContext<{
 });
 
 export const SpendProvider = ({ children }: { children: ReactNode }) => {
-    const [potencia1, setPotencia1] = useState(1000);
-    const [potencia2, setPotencia2] = useState(4);
-    const [potencia3, setPotencia3] = useState(3);
-    const [potencia4, setPotencia4] = useState(3);
-    const [potencia5, setPotencia5] = useState(2);
-    const [potencia6, setPotencia6] = useState(1);
-    const [historialHechizos, setHistorialHechizos] = useState<Array<{nombre: string, potencia: number, timestamp: number}>>([]);
-    // resetFlag removed: not used currently
+    // Función para cargar desde localStorage
+    const loadFromLocalStorage = (key: string, defaultValue: any) => {
+        try {
+            const stored = localStorage.getItem(key);
+            return stored ? JSON.parse(stored) : defaultValue;
+        } catch {
+            return defaultValue;
+        }
+    };
+
+    const [potencia1, setPotencia1] = useState(() => loadFromLocalStorage('potencia1', 1000));
+    const [potencia2, setPotencia2] = useState(() => loadFromLocalStorage('potencia2', 4));
+    const [potencia3, setPotencia3] = useState(() => loadFromLocalStorage('potencia3', 3));
+    const [potencia4, setPotencia4] = useState(() => loadFromLocalStorage('potencia4', 3));
+    const [potencia5, setPotencia5] = useState(() => loadFromLocalStorage('potencia5', 2));
+    const [potencia6, setPotencia6] = useState(() => loadFromLocalStorage('potencia6', 1));
+    const [historialHechizos, setHistorialHechizos] = useState<Array<{ nombre: string; potencia: number; timestamp: number }>>(
+        () => loadFromLocalStorage('historialHechizos', [])
+    );
+
+    // Sincroniza con localStorage cada vez que cambian
+    useEffect(() => {
+        localStorage.setItem('potencia1', JSON.stringify(potencia1));
+        localStorage.setItem('potencia2', JSON.stringify(potencia2));
+        localStorage.setItem('potencia3', JSON.stringify(potencia3));
+        localStorage.setItem('potencia4', JSON.stringify(potencia4));
+        localStorage.setItem('potencia5', JSON.stringify(potencia5));
+        localStorage.setItem('potencia6', JSON.stringify(potencia6));
+        localStorage.setItem('historialHechizos', JSON.stringify(historialHechizos));
+    }, [potencia1, potencia2, potencia3, potencia4, potencia5, potencia6, historialHechizos]);
 
     const spendSpell = (potencia: number, nombre: string) => {
+        console.log('[SpendContext] spendSpell', potencia, nombre);
 
-        console.log(potencia)
-        console.log('[SpendContext] spendSpell called for potencia', potencia)
+        const registrarHechizo = (nivel: number) =>
+            setHistorialHechizos((h) => [...h, { nombre, potencia: nivel, timestamp: Date.now() }]);
+
         switch (potencia) {
             case 1:
-                setHistorialHechizos(prev => [...prev, {nombre: nombre, potencia: 1, timestamp: Date.now()}]);
-                // Potencia 1 considerada ilimitada / trucos — no decrementar
-                console.log('[SpendContext] potencia 1 no se decrementa')
-                // Hazle el log del historial de hechizos
-                console.log(historialHechizos)
+                registrarHechizo(1);
                 break;
             case 2:
-                setPotencia2(prev => {
-                    const next = Math.max(0, prev - 1)
-                    console.log('[SpendContext] potencia2:', prev, '->', next)
-                    setHistorialHechizos(h => [...h, {nombre: nombre, potencia: 2, timestamp: Date.now()}]);
-                    return next
-                })
+                setPotencia2((prev: any) => {
+                    const next = Math.max(0, prev - 1);
+                    registrarHechizo(2);
+                    return next;
+                });
                 break;
             case 3:
-                setPotencia3(prev => {
-                    const next = Math.max(0, prev - 1)
-                    console.log('[SpendContext] potencia3:', prev, '->', next)
-                    setHistorialHechizos(h => [...h, {nombre: nombre, potencia: 3, timestamp: Date.now()}]);
-                    return next
-                })
+                setPotencia3((prev: any) => {
+                    const next = Math.max(0, prev - 1);
+                    registrarHechizo(3);
+                    return next;
+                });
                 break;
             case 4:
-                setPotencia4(prev => {
-                    const next = Math.max(0, prev - 1)
-                    console.log('[SpendContext] potencia4:', prev, '->', next)
-                    setHistorialHechizos(h => [...h, {nombre: nombre, potencia: 4, timestamp: Date.now()}]);
-                    return next
-                })
+                setPotencia4((prev: any) => {
+                    const next = Math.max(0, prev - 1);
+                    registrarHechizo(4);
+                    return next;
+                });
                 break;
             case 5:
-                setPotencia5(prev => {
-                    const next = Math.max(0, prev - 1)
-                    console.log('[SpendContext] potencia5:', prev, '->', next)
-                    setHistorialHechizos(h => [...h, {nombre: nombre, potencia: 5, timestamp: Date.now()}]);
-                    return next
-                })
+                setPotencia5((prev: any) => {
+                    const next = Math.max(0, prev - 1);
+                    registrarHechizo(5);
+                    return next;
+                });
                 break;
             case 6:
-                setPotencia6(prev => {
-                    const next = Math.max(0, prev - 1)
-                    console.log('[SpendContext] potencia6:', prev, '->', next)
-                    setHistorialHechizos(h => [...h, {nombre: nombre, potencia: 6, timestamp: Date.now()}]);
-                    return next
-                })
+                setPotencia6((prev: any) => {
+                    const next = Math.max(0, prev - 1);
+                    registrarHechizo(6);
+                    return next;
+                });
                 break;
             default:
-                console.warn('[SpendContext] potencia desconocida', potencia)
+                console.warn('[SpendContext] potencia desconocida', potencia);
                 break;
         }
     };
@@ -102,7 +114,13 @@ export const SpendProvider = ({ children }: { children: ReactNode }) => {
         setPotencia5(2);
         setPotencia6(1);
         setHistorialHechizos([]);
-        // reset complete
+        localStorage.removeItem('potencia1');
+        localStorage.removeItem('potencia2');
+        localStorage.removeItem('potencia3');
+        localStorage.removeItem('potencia4');
+        localStorage.removeItem('potencia5');
+        localStorage.removeItem('potencia6');
+        localStorage.removeItem('historialHechizos');
     };
 
     return (

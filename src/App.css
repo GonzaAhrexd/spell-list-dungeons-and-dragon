@@ -105,7 +105,6 @@
 	/* For desktop, display a warning card that app is optimized for mobile */
 	body > * {opacity: 0.98}
 	.mobile-shell::after{
-		content: "Optimizado solo para móvil";
 		display: block;
 		margin-top: 10px;
 		font-size: 12px;

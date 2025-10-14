@@ -40,6 +40,8 @@ function Consumptions() {
   const displayCount = (c: number, max: number) => (max === Infinity ? '∞' : `${c}/${max}`)
 
   return (
+                <section className="parchment p-4">
+
     <div className="bg-parchment/95 backdrop-blur-sm rounded-xl shadow-lg p-3">
       <header className="flex items-center justify-between mb-3">
         <h4 className="text-sm font-bold text-black">Consumibles de hechizos</h4>
@@ -75,7 +77,7 @@ function Consumptions() {
                 </div>
               </div>
 
-              {/* <div className="w-16">
+              <div className="w-16">
                 {(() => {
                   const max = maxMap[item.p]
                   const disabled = isFinite(max) && item.count <= 0
@@ -90,12 +92,13 @@ function Consumptions() {
                     </button>
                   )
                 })()}
-              </div> */}
+              </div>
             </div>
           )
         })}
       </nav>
     </div>
+    </section>
   )
 }
 

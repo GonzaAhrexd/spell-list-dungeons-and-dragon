@@ -27,8 +27,7 @@ function SpellShow({ spell, onClose }: SpellShowProps) {
       {/* Backdrop */}
       <div className="backdrop absolute inset-0 bg-black/60" onClick={() => onClose && onClose()} aria-hidden />
 
-      {/* Modal sheet (mobile bottom sheet) */}
-      <article className="modal-sheet relative w-full max-w-[420px] bg-white rounded-2xl shadow-2xl p-4 pb-6 text-black backdrop-blur-sm">
+      <article className="modal-sheet relative w-full  max-w-[420px] bg-white rounded-2xl shadow-2xl p-4 pb-6 text-black backdrop-blur-sm">
         <header className="flex items-start justify-between">
           <div>
             <h3 className="text-xl font-bold">{spell.name}</h3>
@@ -45,46 +44,46 @@ function SpellShow({ spell, onClose }: SpellShowProps) {
 
         <footer className="mt-4 flex gap-3">
           <button
-            className={`flex-1 use-button rounded-md py-3 font-semibold text-white flex items-center justify-center gap-2 transition-transform duration-150 ${isUsing ? 'scale-95 bg-emerald-700' : 'bg-emerald-700 hover:bg-emerald-600'}`}
+            className={`flex-1 cursor-pointer use-button rounded-md py-3 font-semibold text-white flex items-center justify-center gap-2 transition-transform duration-150 ${isUsing ? 'scale-95 bg-emerald-700' : 'bg-emerald-700 hover:bg-emerald-600'}`}
             onClick={() => {
-                if (isUsing) return
-                // comprobar disponibilidad según potencia
-                const p = spell.potencia ?? 1
-                const available = p === 1 || (p === 2 ? potencia2 > 0 : p === 3 ? potencia3 > 0 : p === 4 ? potencia4 > 0 : p === 5 ? potencia5 > 0 : p === 6 ? potencia6 > 0 : false)
-                if (!available) return
-                setIsUsing(true)
-                try {
-                  spendSpell(spell.potencia ?? 1, spell.name ?? 'Desconocido')
-                } catch (e) {
-                  console.error('spendSpell error', e)
-                }
+              if (isUsing) return
+              // comprobar disponibilidad según potencia
+              const p = spell.potencia ?? 1
+              const available = p === 1 || (p === 2 ? potencia2 > 0 : p === 3 ? potencia3 > 0 : p === 4 ? potencia4 > 0 : p === 5 ? potencia5 > 0 : p === 6 ? potencia6 > 0 : false)
+              if (!available) return
+              setIsUsing(true)
+              try {
+                spendSpell(spell.potencia ?? 1, spell.name ?? 'Desconocido')
+              } catch (e) {
+                console.error('spendSpell error', e)
+              }
 
-                setTimeout(() => {
-                  setIsUsing(false)
-                  onClose && onClose()
-                }, 420)
+              setTimeout(() => {
+                setIsUsing(false)
+                onClose && onClose()
+              }, 420)
             }}
             disabled={isUsing || !(spell.potencia === 1 || (spell.potencia === 2 ? potencia2 > 0 : spell.potencia === 3 ? potencia3 > 0 : spell.potencia === 4 ? potencia4 > 0 : spell.potencia === 5 ? potencia5 > 0 : spell.potencia === 6 ? potencia6 > 0 : false))}
           >
-          {isUsing ? (
-  <>
-    <span className="animate-pulse">●</span>
-    Usando...
-  </>
-) : (
-  (spell.potencia === 1) ||
-  (spell.potencia === 2 && potencia2 > 0) ||
-  (spell.potencia === 3 && potencia3 > 0) ||
-  (spell.potencia === 4 && potencia4 > 0) ||
-  (spell.potencia === 5 && potencia5 > 0) ||
-  (spell.potencia === 6 && potencia6 > 0)
-    ? 'Utilizar'
-    : 'Agotado'
-)}
+            {isUsing ? (
+              <>
+                <span className="animate-pulse">●</span>
+                Usando...
+              </>
+            ) : (
+              (spell.potencia === 1) ||
+                (spell.potencia === 2 && potencia2 > 0) ||
+                (spell.potencia === 3 && potencia3 > 0) ||
+                (spell.potencia === 4 && potencia4 > 0) ||
+                (spell.potencia === 5 && potencia5 > 0) ||
+                (spell.potencia === 6 && potencia6 > 0)
+                ? 'Utilizar'
+                : 'Agotado'
+            )}
           </button>
 
           <button
-            className="w-28 rounded-md py-3 font-medium bg-transparent border border-black/10"
+            className="w-28 cursor-pointer rounded-md py-3 font-medium bg-transparent border border-black/10"
             onClick={() => onClose && onClose()}
           >
             Cerrar
