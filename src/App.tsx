@@ -6,6 +6,7 @@ import Consumptions from './components/Consumptions/Consumptions';
 import HeaderApp from './components/HeaderApp';
 import SpellsMenu from './components/SpellsMenu';
 
+import ChangeCharacter from './components/ChangeCharacter';
 function App() {
   // Niveles: Trucos (Truco), I - VI
   const [selectedLevel, setSelectedLevel] = useState<string | null>(null)
@@ -13,6 +14,10 @@ function App() {
 
   const [showSpellsMenu, setShowSpellsMenu] = useState(true);
   const [showConsumptionMenu, setShowConsumptionMenu] = useState(false);
+
+
+
+
 
   const handleSelectedLevel = (level: string) => {
     setSelectedLevel(level);
@@ -50,8 +55,7 @@ function App() {
           {showingSpellList &&
               <SpellList level={selectedLevel} onBack={() => { setShowingSpellList(false); setSelectedLevel(null);}}/>
           }
-
-
+          <ChangeCharacter />
         </main>
       </div>
     </SpendProvider>

@@ -1,5 +1,6 @@
 // @ts-ignore
 import { createContext, ReactNode, useState, useContext, useEffect } from 'react';
+import personajesData from '../jsons/CharactersList.json'
 
 export const SpendContext = createContext<{
     potencia1: number;
@@ -8,7 +9,9 @@ export const SpendContext = createContext<{
     potencia4: number;
     potencia5: number;
     potencia6: number;
+    selectedCharacter: string;
     historialHechizos: Array<{ nombre: string; potencia: number; timestamp: number }>;
+    handleSelectCharacter: (character: string) => void;
     spendSpell: (potencia: number, nombre: string) => void;
     resetSpells: () => void;
 }>({
@@ -18,9 +21,11 @@ export const SpendContext = createContext<{
     potencia4: 3,
     potencia5: 2,
     potencia6: 1,
+    selectedCharacter: "Grishnak",
     historialHechizos: [],
-    spendSpell: () => {},
-    resetSpells: () => {},
+    handleSelectCharacter: () => { },
+    spendSpell: () => { },
+    resetSpells: () => { },
 });
 
 export const SpendProvider = ({ children }: { children: ReactNode }) => {
@@ -40,6 +45,8 @@ export const SpendProvider = ({ children }: { children: ReactNode }) => {
     const [potencia4, setPotencia4] = useState(() => loadFromLocalStorage('potencia4', 3));
     const [potencia5, setPotencia5] = useState(() => loadFromLocalStorage('potencia5', 2));
     const [potencia6, setPotencia6] = useState(() => loadFromLocalStorage('potencia6', 1));
+    const [selectedCharacter, setSelectedCharacter] = useState(() => loadFromLocalStorage('selectedCharacter', "Grishnak"));
+
     const [historialHechizos, setHistorialHechizos] = useState<Array<{ nombre: string; potencia: number; timestamp: number }>>(
         () => loadFromLocalStorage('historialHechizos', [])
     );
@@ -53,7 +60,8 @@ export const SpendProvider = ({ children }: { children: ReactNode }) => {
         localStorage.setItem('potencia5', JSON.stringify(potencia5));
         localStorage.setItem('potencia6', JSON.stringify(potencia6));
         localStorage.setItem('historialHechizos', JSON.stringify(historialHechizos));
-    }, [potencia1, potencia2, potencia3, potencia4, potencia5, potencia6, historialHechizos]);
+        localStorage.setItem('selectedCharacter', JSON.stringify(selectedCharacter));
+    }, [potencia1, potencia2, potencia3, potencia4, potencia5, potencia6, historialHechizos, selectedCharacter]);
 
     const spendSpell = (potencia: number, nombre: string) => {
         console.log('[SpendContext] spendSpell', potencia, nombre);
@@ -107,13 +115,22 @@ export const SpendProvider = ({ children }: { children: ReactNode }) => {
     };
 
     const resetSpells = () => {
-        setPotencia1(1000);
-        setPotencia2(4);
-        setPotencia3(3);
-        setPotencia4(3);
-        setPotencia5(2);
-        setPotencia6(1);
-        setHistorialHechizos([]);
+
+        console.log("THis works")
+
+        const { personajes } = personajesData; // data es tu JSON completo
+        const characterData = personajes.find(p => p.personaje === selectedCharacter);
+
+        if (characterData) {
+            setPotencia1(1000); // Potencia 1 se considera ilimitada
+            setPotencia2(characterData.limitePotencias ? characterData.limitePotencias["2"] : 4);
+            setPotencia3(characterData.limitePotencias ? characterData.limitePotencias["3"] : 3);
+            setPotencia4(characterData.limitePotencias ? characterData.limitePotencias["4"] : 2);
+            setPotencia5(characterData.limitePotencias ? characterData.limitePotencias["5"] : 1);
+            setPotencia6(characterData.limitePotencias ? characterData.limitePotencias["6"] : 1);
+            setHistorialHechizos([]);
+        }
+
         localStorage.removeItem('potencia1');
         localStorage.removeItem('potencia2');
         localStorage.removeItem('potencia3');
@@ -122,6 +139,20 @@ export const SpendProvider = ({ children }: { children: ReactNode }) => {
         localStorage.removeItem('potencia6');
         localStorage.removeItem('historialHechizos');
     };
+
+    const handleSelectCharacter = (character: string) => {
+
+        setSelectedCharacter(character);
+        
+        localStorage.setItem('selectedCharacter', JSON.stringify(character));
+
+        // Haz un temporizador para asegurarte de que el estado se ha actualizado antes de reiniciar
+        setTimeout(() => {
+            resetSpells();
+        }, 1000);
+
+        window.location.reload();
+    }
 
     return (
         <SpendContext.Provider
@@ -133,6 +164,8 @@ export const SpendProvider = ({ children }: { children: ReactNode }) => {
                 potencia5,
                 potencia6,
                 historialHechizos,
+                selectedCharacter,
+                handleSelectCharacter,
                 spendSpell,
                 resetSpells,
             }}

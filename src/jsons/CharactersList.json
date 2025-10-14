@@ -1,74 +1,91 @@
 {
-  "grupos": [
-    {
-      "nombre": "Grupo B",
       "personajes": [
         {
           "jugador": "Gonza Ebel",
+          "grupo": "B",
           "personaje": "Bertok",
           "clase": "Bardo",
-          "subclase": "Persuasión"
+          "subclase": "Persuasión",
+          "limitePotencias": {
+            "1": 100000,
+            "2": 4,
+            "3": 3,
+            "4": 3,
+            "5": 2,
+            "6": 1
+          }
         },
         {
           "jugador": "Gonza Azcona",
+          "grupo": "B",
           "personaje": "Grishnak",
           "clase": "Paladín",
-          "subclase": "Juramento de los No-Muertos"
+          "subclase": "Juramento de los No-Muertos",
+          "limitePotencias": {
+            "1": 100000,
+            "2": 10,
+            "3": 3,
+            "4": 3,
+            "5": 2,
+            "6": 1
+          }
         },
         {
           "jugador": "Gonza Acevedo",
+          "grupo": "B",
           "personaje": "Tyran",
           "clase": "Pícaro",
           "subclase": "Asesino"
         },
         {
           "jugador": "Franco",
+          "grupo": "B",
           "personaje": "Marim de Garlim",
           "clase": "Bardo",
           "subclase": "Colegio de la Espada"
         },
         {
           "jugador": "Matias",
+          "grupo": "B",
           "personaje": "Kel'Abrakar",
           "clase": "Hechicero",
           "subclase": "Nicromante"
-        }
-      ]
-    },
-    {
-      "nombre": "Grupo A",
-      "personajes": [
+        },
         {
           "jugador": "Ezequiel",
+          "grupo": "A",
           "personaje": "Thormund Marshwood",
           "clase": "Guerrero",
           "subclase": "Rúnico"
         },
         {
           "jugador": "Farley",
+          "grupo": "A",
           "personaje": "Fauzin",
           "clase": "Guerrero",
           "subclase": "Arcano"
         },
         {
           "jugador": "Julian",
+          "grupo": "A",
           "personaje": "Kael",
           "clase": "Paladín",
           "subclase": "Juramento de la Conquista"
         },
         {
           "jugador": "Pablo",
+          "grupo": "A",
           "personaje": "Pearce",
           "clase": "Explorador",
           "subclase": "Cazador"
         },
         {
           "jugador": "Lucas",
+          "grupo": "A",
           "personaje": "Thorin",
           "clase": "Bárbaro",
           "subclase": null
         }
       ]
     }
-  ]
-}
+  
