@@ -1,16 +1,12 @@
-import { useContext } from "react";
-import { SpendContext } from "../context/spellSpend";
-function ChangeCharacter() {
-    const { handleSelectCharacter } = useContext(SpendContext);
 
-    const handleChange = (character: string) => {
-        handleSelectCharacter(character);
-    }
+type ChangeCharacterProps = {
+    setSeeSelectCharacter: (value: boolean) => void;
+}
 
-
+function ChangeCharacter({setSeeSelectCharacter}: ChangeCharacterProps) {
 
     return (
-          <div className='cursor-pointer w-full bg-amber-300' onClick={() => handleChange("Grishnak")}>Seleccionar Grishnak</div>
+          <div className='cursor-pointer w-full flex flex-col items-center justify-center rounded-lg border mt-2 ' onClick={() => setSeeSelectCharacter(true)}>Cambiar personaje</div>
   )
 }
 

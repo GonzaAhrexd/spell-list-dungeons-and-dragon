@@ -7,6 +7,7 @@ import HeaderApp from './components/HeaderApp';
 import SpellsMenu from './components/SpellsMenu';
 
 import ChangeCharacter from './components/ChangeCharacter';
+import SelectCharacter from './components/SelectCharacterPage/SelectCharacter';
 function App() {
   // Niveles: Trucos (Truco), I - VI
   const [selectedLevel, setSelectedLevel] = useState<string | null>(null)
@@ -14,7 +15,7 @@ function App() {
 
   const [showSpellsMenu, setShowSpellsMenu] = useState(true);
   const [showConsumptionMenu, setShowConsumptionMenu] = useState(false);
-
+  const [seeSelectCharacter, setSeeSelectCharacter] = useState(false);
 
 
 
@@ -38,25 +39,34 @@ function App() {
   return (
     <SpendProvider>
       <div className="app-viewport min-h-screen flex items-center justify-center p-4">
-        <main className="mobile-shell w-full max-w-[420px] mx-auto">
-          <HeaderApp />
-            <div className='flex justify-between'>
-              <button className='w-full cursor-pointer mr-1 mb-2 level-card relative flex items-center justify-center py-4 px-3 text-center text-sm font-bold shadow-inner' onClick={handleSpellsMenu}>Hechizos</button>
-              <button className='w-full cursor-pointer mb-2 level-card relative flex items-center justify-center py-4 px-3 text-center text-sm font-bold shadow-inner' onClick={handleConsumptionMenu}>Consumo</button>
-            </div>
+        {!seeSelectCharacter &&
+          <>
+            <main className="mobile-shell w-full max-w-[420px] mx-auto">
+              <HeaderApp />
+              <div className='flex justify-between'>
+                <button className='w-full cursor-pointer mr-1 mb-2 level-card relative flex items-center justify-center py-4 px-3 text-center text-sm font-bold shadow-inner' onClick={handleSpellsMenu}>Hechizos</button>
+                <button className='w-full cursor-pointer mb-2 level-card relative flex items-center justify-center py-4 px-3 text-center text-sm font-bold shadow-inner' onClick={handleConsumptionMenu}>Consumo</button>
+              </div>
 
-          {!showingSpellList && showConsumptionMenu &&
-            <Consumptions />
-          }
-          {!showingSpellList && showSpellsMenu &&
-            <SpellsMenu selectedLevel={selectedLevel} handleSelectedLevel={handleSelectedLevel} />
-          }
+              {!showingSpellList && showConsumptionMenu &&
+                <Consumptions />
+              }
+              {!showingSpellList && showSpellsMenu &&
+                <SpellsMenu selectedLevel={selectedLevel} handleSelectedLevel={handleSelectedLevel} />
+              }
 
-          {showingSpellList &&
-              <SpellList level={selectedLevel} onBack={() => { setShowingSpellList(false); setSelectedLevel(null);}}/>
-          }
-          <ChangeCharacter />
-        </main>
+              {showingSpellList &&
+                <SpellList level={selectedLevel} onBack={() => { setShowingSpellList(false); setSelectedLevel(null); }} />
+              }
+              <ChangeCharacter setSeeSelectCharacter={setSeeSelectCharacter} />
+            </main>
+          </>
+        }
+        {seeSelectCharacter &&
+          <main className="mobile-shell w-full max-w-[420px] mx-auto">
+            <SelectCharacter />
+          </main>
+        }
       </div>
     </SpendProvider>
   )

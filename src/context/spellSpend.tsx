@@ -119,6 +119,7 @@ export const SpendProvider = ({ children }: { children: ReactNode }) => {
         console.log("THis works")
 
         const { personajes } = personajesData; // data es tu JSON completo
+        console.log("Selected: " + selectedCharacter)
         const characterData = personajes.find(p => p.personaje === selectedCharacter);
 
         if (characterData) {
@@ -147,11 +148,10 @@ export const SpendProvider = ({ children }: { children: ReactNode }) => {
         localStorage.setItem('selectedCharacter', JSON.stringify(character));
 
         // Haz un temporizador para asegurarte de que el estado se ha actualizado antes de reiniciar
-        setTimeout(() => {
             resetSpells();
-        }, 1000);
+    
 
-        window.location.reload();
+        // window.location.reload();
     }
 
     return (
