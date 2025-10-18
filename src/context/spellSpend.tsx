@@ -2,6 +2,23 @@
 import { createContext, ReactNode, useState, useContext, useEffect } from 'react';
 import personajesData from '../jsons/CharactersList.json'
 
+type Character = {
+    jugador: string;
+    grupo: string;
+    personaje: string;
+    clase: string;
+    subclase: string;
+    limitePotencias: {
+        "1": number;
+        "2": number;
+        "3": number;
+        "4": number;
+        "5": number;
+        "6": number;
+    };
+}
+
+
 export const SpendContext = createContext<{
     potencia1: number;
     potencia2: number;
@@ -9,7 +26,7 @@ export const SpendContext = createContext<{
     potencia4: number;
     potencia5: number;
     potencia6: number;
-    selectedCharacter: string;
+    selectedCharacter: Character;
     historialHechizos: Array<{ nombre: string; potencia: number; timestamp: number }>;
     handleSelectCharacter: (character: string) => void;
     spendSpell: (potencia: number, nombre: string) => void;
@@ -21,7 +38,22 @@ export const SpendContext = createContext<{
     potencia4: 3,
     potencia5: 2,
     potencia6: 1,
-    selectedCharacter: "Grishnak",
+    selectedCharacter: {
+        jugador: "",
+        grupo: "",
+        personaje: "",
+        clase: "",
+        subclase: "",
+        limitePotencias: {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0,
+        },
+
+    },
     historialHechizos: [],
     handleSelectCharacter: () => { },
     spendSpell: () => { },
@@ -117,10 +149,14 @@ export const SpendProvider = ({ children }: { children: ReactNode }) => {
     const resetSpells = () => {
 
         console.log("THis works")
+        console.log("Selected: " + selectedCharacter.personaje)
 
         const { personajes } = personajesData; // data es tu JSON completo
-        console.log("Selected: " + selectedCharacter)
-        const characterData = personajes.find(p => p.personaje === selectedCharacter);
+
+
+        const characterData = personajes.find(p => p.personaje === selectedCharacter.personaje);
+
+        console.log(characterData)
 
         if (characterData) {
             setPotencia1(1000); // Potencia 1 se considera ilimitada
@@ -141,17 +177,17 @@ export const SpendProvider = ({ children }: { children: ReactNode }) => {
         localStorage.removeItem('historialHechizos');
     };
 
-    const handleSelectCharacter = (character: string) => {
-
-        setSelectedCharacter(character);
-        
-        localStorage.setItem('selectedCharacter', JSON.stringify(character));
-
-        // Haz un temporizador para asegurarte de que el estado se ha actualizado antes de reiniciar
+    useEffect(() => {
+        if (selectedCharacter && typeof selectedCharacter === 'object' && selectedCharacter.personaje) {
             resetSpells();
-    
+        }
+    }, [selectedCharacter]);
 
-        // window.location.reload();
+    const handleSelectCharacter = (character: string) => {
+        const selected = personajesData.personajes.find(p => p.personaje === character);
+        if (selected) {
+            setSelectedCharacter(selected);
+        }
     }
 
     return (

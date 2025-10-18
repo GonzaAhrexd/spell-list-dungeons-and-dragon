@@ -3,10 +3,9 @@ import { SpendContext } from '../../context/spellSpend'
 import { useState } from 'react';
 import SpellLog from './SpellLog';
 function Consumptions() {
-  const { potencia1, potencia2, potencia3, potencia4, potencia5, potencia6, historialHechizos, spendSpell, resetSpells } = useContext(SpendContext)
+  const { potencia1, potencia2, potencia3, potencia4, potencia5, potencia6, historialHechizos, selectedCharacter, spendSpell, resetSpells } = useContext(SpendContext)
 
   const [seeHistorial, setSeeHistorial] = useState(false);
-
 
   const maxMap: Record<number, number> = {
     1: Infinity,
@@ -32,7 +31,7 @@ function Consumptions() {
     return v
   }
 
-  const displayCount = (c: number, max: number) => (max === Infinity ? '∞' : `${c}/${max}`)
+  const displayCount = (c: number, max: number) => (max == Infinity ? '∞' : `${c}/${max}`)
 
   if(!seeHistorial){
   return (
@@ -54,13 +53,15 @@ function Consumptions() {
 
         <nav className="flex flex-col gap-3">
           {list.map(item => {
-            const max = maxMap[item.p]
+            // @ts-ignore
+            const max = selectedCharacter.limitePotencias[item.p ] || 0
             const percent = pct(item.count, max)
             return (
               <div key={item.p} className="flex items-center gap-3">
                 <div className="w-28">
                   <div className="text-xs font-semibold text-black">Potencia {item.p}</div>
-                  <div className="text-[13px] text-gray-700">{displayCount(item.count, max)}</div>
+                  {/* @ts-ignore */}
+                  <div className="text-[13px] text-gray-700">{displayCount(item.count, selectedCharacter.limitePotencias[item.p])}</div>
                 </div>
 
                 <div className="flex-1">

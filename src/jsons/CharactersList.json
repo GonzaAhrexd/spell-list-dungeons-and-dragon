@@ -7,7 +7,7 @@
           "clase": "Bardo",
           "subclase": "Persuasión",
           "limitePotencias": {
-            "1": 100000,
+            "1": "Infinity",
             "2": 4,
             "3": 3,
             "4": 3,
@@ -22,12 +22,12 @@
           "clase": "Paladín",
           "subclase": "Juramento de los No-Muertos",
           "limitePotencias": {
-            "1": 100000,
-            "2": 10,
+            "1": "Infinity",
+            "2": 4,
             "3": 3,
             "4": 3,
             "5": 2,
-            "6": 1
+            "6": 2
           }
         },
         {
@@ -37,19 +37,36 @@
           "clase": "Pícaro",
           "subclase": "Asesino"
         },
+
         {
           "jugador": "Franco",
           "grupo": "B",
           "personaje": "Marim de Garlim",
           "clase": "Bardo",
-          "subclase": "Colegio de la Espada"
+          "subclase": "Colegio de la Espada",
+          "limitePotencias": {
+            "1": "Infinity",
+            "2": 4,
+            "3": 2,
+            "4": 2,
+            "5": 2,
+            "6": 2
+          }
         },
         {
           "jugador": "Matias",
           "grupo": "B",
           "personaje": "Kel'Abrakar",
           "clase": "Hechicero",
-          "subclase": "Nicromante"
+          "subclase": "Nicromante",
+          "limitePotencias": {
+            "1":  "Infinity",
+            "2": 5,
+            "3": 4,
+            "4": 3,
+            "5": 3,
+            "6": 3
+          }
         },
         {
           "jugador": "Ezequiel",
@@ -63,14 +80,30 @@
           "grupo": "A",
           "personaje": "Fauzin",
           "clase": "Guerrero",
-          "subclase": "Arcano"
+          "subclase": "Arcano",
+          "limitePotencias": {
+            "1":  "Infinity",
+            "2": 3,
+            "3": 3,
+            "4": 3,
+            "5": 2,
+            "6": 2
+          }
         },
         {
           "jugador": "Julian",
           "grupo": "A",
           "personaje": "Kael",
           "clase": "Paladín",
-          "subclase": "Juramento de la Conquista"
+          "subclase": "Juramento de la Conquista",
+          "limitePotencias": {
+            "1":  "Infinity",
+            "2": 4,
+            "3": 3,
+            "4": 3,
+            "5": 2,
+            "6": 2
+          }
         },
         {
           "jugador": "Pablo",
@@ -84,7 +117,7 @@
           "grupo": "C",
           "personaje": "Thorin",
           "clase": "Bárbaro",
-          "subclase": null
+          "subclase": "Sin subclase seleccionada"
         }
       ]
     }

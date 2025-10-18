@@ -1,7 +1,6 @@
-
 function DropdownMenu({ characterList, grupo, handleSelection }: { characterList: any[], grupo: string, handleSelection: (char: String) => void }) {
     return (
-        <div className='grid grid-cols-1 gap-4'>
+        <div className='grid grid-cols-1 gap-4 w-full'>
             {characterList.filter(char => char.grupo === grupo).map(char => (
                 <div key={char.personaje} className='cursor-pointer w-full flex flex-col items-center justify-center rounded-lg border p-4' onClick={() => {
                     handleSelection(char.personaje);

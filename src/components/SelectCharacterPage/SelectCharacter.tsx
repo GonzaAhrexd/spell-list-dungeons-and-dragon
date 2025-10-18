@@ -1,10 +1,13 @@
-
 import personajes from '../../jsons/CharactersList.json'
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { ArrowDownIcon, ArrowUpIcon } from '@heroicons/react/24/solid';
 import DropdownMenu from './DropdownMenu';
+import { useContext } from 'react';
+import { SpendContext } from '../../context/spellSpend'
+
+
 type limitePotencias = {
-    "1": number;
+    "1": number | string;
     "2": number;
     "3": number;
     "4": number;
@@ -28,10 +31,21 @@ function SelectCharacter() {
     // Haz que se ordene por el grupo alfabeticamente ( A primero, B segundo)
     characterList.sort((a, b) => a.grupo.localeCompare(b.grupo));
 
-    const [isDropdown, setIsDropdown] = useState(false);
+    const [openGroup, setOpenGroup] = useState<string | null>(null);
+
+
+    const { handleSelectCharacter, resetSpells } = useContext(SpendContext);
+
+    useEffect(() => {
+        if (openGroup) {
+            resetSpells();
+        }
+    }, [openGroup]);
 
     const handleSelection = (char: String) => {
-        localStorage.setItem('selectedCharacter', JSON.stringify(char));
+
+        handleSelectCharacter(char.toString());
+        setOpenGroup(null); // Close the dropdown after selection
         window.location.reload();
     }
 
@@ -44,11 +58,14 @@ function SelectCharacter() {
             <div key={grupo} className='mb-4'>
               <div className='flex flex-row items-center justify-center'>
                 <h2 className='text-xl font-bold mb-2 text-center'>Grupo  {grupo}</h2> 
-                <button className='flex flex-row items-center justify-center' onClick={() => setIsDropdown(!isDropdown)}>{!isDropdown ? <ArrowDownIcon className='w-4 h-4' /> : <ArrowUpIcon className='w-4 h-4' />}</button>
+                <button className='flex flex-row items-center justify-center' onClick={() => setOpenGroup(openGroup === grupo ? null : grupo)}>
+                  {openGroup === grupo ? <ArrowUpIcon className='w-4 h-4' /> : <ArrowDownIcon className='w-4 h-4' />}
+                </button>
               </div>
                {
-                isDropdown && 
-                <DropdownMenu characterList={characterList} grupo={grupo} handleSelection={handleSelection} />
+                openGroup === grupo && (
+                  <DropdownMenu characterList={characterList} grupo={grupo} handleSelection={handleSelection} />
+                )
                }
             </div>
         ))}

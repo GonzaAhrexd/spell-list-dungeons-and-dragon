@@ -1,7 +1,8 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import './App.css'
 import SpellList from './components/SpellList'
-import { SpendProvider } from './context/spellSpend';
+import { SpendContext, SpendProvider } from './context/spellSpend';
+import { useContext } from 'react';
 import Consumptions from './components/Consumptions/Consumptions';
 import HeaderApp from './components/HeaderApp';
 import SpellsMenu from './components/SpellsMenu';
@@ -18,6 +19,7 @@ function App() {
   const [seeSelectCharacter, setSeeSelectCharacter] = useState(false);
 
 
+  // TODO: Detectar si se seleccionó el personaje o no
 
 
   const handleSelectedLevel = (level: string) => {
