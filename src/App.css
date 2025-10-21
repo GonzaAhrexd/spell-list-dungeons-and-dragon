@@ -1,5 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Uncial+Antiqua&family=Montserrat:ital,wght@0,300;0,600;1,400&display=swap');
 
+
+.antiqua-font{
+	font-family: 'Uncial Antiqua', serif;
+}
+
+body{
+	font-family: 'Uncial Antiqua', serif;
+}
+
 :root{
 	--bg-dark: #060306;
 	--accent-1: #caa34a; /* golden ink */
@@ -15,10 +24,18 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	font-family: 'Montserrat', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+	font-family: 'Uncial Antiqua', serif;
+	/* font-family: 'Montserrat', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; */
 	-webkit-font-smoothing: antialiased;
 	color: #f3e6cf;
 }
+
+
+.regular-font{
+		font-family: 'Montserrat', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+}
+
+
 
 .mobile-shell{
 	border-radius: 18px;
@@ -36,6 +53,8 @@
 	text-shadow: 0 2px 8px rgba(0,0,0,0.7);
 	margin: 0;
 }
+
+
 
 .subtitle{
 	font-size: 12px;
@@ -101,17 +120,6 @@
 	.mobile-shell{max-width:420px}
 }
 
-@media (min-width: 780px){
-	/* For desktop, display a warning card that app is optimized for mobile */
-	body > * {opacity: 0.98}
-	.mobile-shell::after{
-		display: block;
-		margin-top: 10px;
-		font-size: 12px;
-		color: rgba(240,220,180,0.9);
-		text-align: center;
-	}
-}
 
 /* small a11y tweaks */
 .level-card:focus{box-shadow: 0 0 0 3px rgba(202,163,74,0.16); outline: none}

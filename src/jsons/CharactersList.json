@@ -108,9 +108,17 @@
         {
           "jugador": "Pablo",
           "grupo": "A",
-          "personaje": "Pearce",
+          "personaje": "Pierce",
           "clase": "Explorador",
-          "subclase": "Cazador"
+          "subclase": "Cazador",
+           "limitePotencias": {
+            "1":  "Infinity",
+            "2": 4,
+            "3": 3,
+            "4": 3,
+            "5": 3,
+            "6": 2
+          }
         },
         {
           "jugador": "Lucas",

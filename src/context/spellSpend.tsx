@@ -71,13 +71,30 @@ export const SpendProvider = ({ children }: { children: ReactNode }) => {
         }
     };
 
+    const defaultCharacter: Character = {
+        jugador: "",
+        grupo: "",
+        personaje: "none",
+        clase: "",
+        subclase: "",
+        limitePotencias: {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0,
+        },
+    };
+
+
     const [potencia1, setPotencia1] = useState(() => loadFromLocalStorage('potencia1', 1000));
-    const [potencia2, setPotencia2] = useState(() => loadFromLocalStorage('potencia2', 4));
-    const [potencia3, setPotencia3] = useState(() => loadFromLocalStorage('potencia3', 3));
-    const [potencia4, setPotencia4] = useState(() => loadFromLocalStorage('potencia4', 3));
-    const [potencia5, setPotencia5] = useState(() => loadFromLocalStorage('potencia5', 2));
-    const [potencia6, setPotencia6] = useState(() => loadFromLocalStorage('potencia6', 1));
-    const [selectedCharacter, setSelectedCharacter] = useState(() => loadFromLocalStorage('selectedCharacter', "Grishnak"));
+    const [potencia2, setPotencia2] = useState(() => loadFromLocalStorage('potencia2', 0));
+    const [potencia3, setPotencia3] = useState(() => loadFromLocalStorage('potencia3', 0));
+    const [potencia4, setPotencia4] = useState(() => loadFromLocalStorage('potencia4', 0));
+    const [potencia5, setPotencia5] = useState(() => loadFromLocalStorage('potencia5', 0));
+    const [potencia6, setPotencia6] = useState(() => loadFromLocalStorage('potencia6', 0));
+    const [selectedCharacter, setSelectedCharacter] = useState(() => loadFromLocalStorage('selectedCharacter', defaultCharacter));
 
     const [historialHechizos, setHistorialHechizos] = useState<Array<{ nombre: string; potencia: number; timestamp: number }>>(
         () => loadFromLocalStorage('historialHechizos', [])
@@ -156,7 +173,6 @@ export const SpendProvider = ({ children }: { children: ReactNode }) => {
 
         const characterData = personajes.find(p => p.personaje === selectedCharacter.personaje);
 
-        console.log(characterData)
 
         if (characterData) {
             setPotencia1(1000); // Potencia 1 se considera ilimitada

@@ -284,6 +284,653 @@
           "potencia": 5
         }
       ]
+    },
+    {
+  "personaje": "Kael",
+  "spells": [
+    {
+      "nombre": "Sentido divino",
+      "tipo": "Rasgo de clase",
+      "nivel": "I",
+      "descripcion": "Detectas celestiales, infernales o no muertos en 18 m hasta 1 minuto.",
+      "potencia": 1
+    },
+    {
+      "nombre": "Manos curativas",
+      "tipo": "Rasgo de clase",
+      "nivel": "I",
+      "descripcion": "Tienes una reserva de curación: cura 3 a 6",
+      "potencia": 2
+    },
+    {
+      "nombre": "Mando",
+      "tipo": "Hechizo de juramento",
+      "nivel": "III",
+      "descripcion": "Das una orden (huir, soltar, caer…).",
+      "potencia": 5
+    },
+    {
+      "nombre": "Arma espiritual",
+      "tipo": "Hechizo de juramento",
+      "nivel": "III",
+      "descripcion": "Tu siguiente golpe causa +1d6 psíquico y puede asustar.",
+      "potencia": 3
+    },
+    {
+      "nombre": "Presencia conquistadora",
+      "tipo": "Canalizar Divinidad",
+      "nivel": "III",
+      "descripcion": "Acción: criaturas en 9 m quedan asustadas por 1 minuto.",
+      "potencia": 4
+    },
+    {
+      "nombre": "Persona dominada",
+      "tipo": "Hechizo de juramento",
+      "nivel": "V",
+      "descripcion": "Paraliza humanoides.",
+      "potencia": 3
+    },
+    {
+      "nombre": "Zona de verdad",
+      "tipo": "Hechizo de juramento",
+      "nivel": "V",
+      "descripcion": "Impide mentir a las criaturas en un área.",
+      "potencia": 4
+    },
+    {
+      "nombre": "Bestia Divina",
+      "tipo": "Hechizo de juramento",
+      "nivel": "IX",
+      "descripcion": "Invoca a un ser divino para ayudarte.",
+      "potencia": 5
+    },
+    {
+      "nombre": "Espíritu protector",
+      "tipo": "Hechizo de juramento",
+      "nivel": "IX",
+      "descripcion": "Hace huir de terror a los enemigos.",
+      "potencia": 4
+    },
+    {
+      "nombre": "Alma de acero",
+      "tipo": "Rasgo de clase",
+      "nivel": "X",
+      "descripcion": "Cuando una criatura te golpea, puede sufrir daño psíquico = tu modificador de Carisma. Eres inmune a ser encantado. Tu aura protege contra encanto.",
+      "potencia": 3
+    },
+    {
+      "nombre": "Castigo mejorado",
+      "tipo": "Rasgo de clase",
+      "nivel": "XI",
+      "descripcion": "Cada ataque con arma inflige +1d8 daño radiante.",
+      "potencia": 4
+    },
+    {
+      "nombre": "Bendecir",
+      "tipo": "Hechizo",
+      "nivel": "I",
+      "descripcion": "+1d4 a ataque y TS.",
+      "potencia": 2
+    },
+    {
+      "nombre": "Castigo envolvente",
+      "tipo": "Hechizo",
+      "nivel": "I",
+      "descripcion": "Fuerzas a un enemigo a pelear contigo.",
+      "potencia": 3
+    },
+    {
+      "nombre": "Curar heridas",
+      "tipo": "Hechizo",
+      "nivel": "I",
+      "descripcion": "Cura PV.",
+      "potencia": 2
+    },
+    {
+      "nombre": "Detectar mal y bien",
+      "tipo": "Hechizo",
+      "nivel": "I",
+      "descripcion": "Detecta criaturas sobrenaturales.",
+      "potencia": 3
+    },
+    {
+      "nombre": "Detectar veneno y enfermedad",
+      "tipo": "Hechizo",
+      "nivel": "I",
+      "descripcion": "Detecta contaminantes.",
+      "potencia": 3
+    },
+    {
+      "nombre": "Protección del mal y bien",
+      "tipo": "Hechizo",
+      "nivel": "I",
+      "descripcion": "Defensa contra tipos sobrenaturales.",
+      "potencia": 3
+    },
+    {
+      "nombre": "Purificar comida y bebida",
+      "tipo": "Hechizo",
+      "nivel": "I",
+      "descripcion": "Elimina veneno.",
+      "potencia": 2
+    },
+    {
+      "nombre": "Castigo divino",
+      "tipo": "Hechizo",
+      "nivel": "I",
+      "descripcion": "Dado de 12, más dado de 6.",
+      "potencia": 4
+    },
+    {
+      "nombre": "Ayuda",
+      "tipo": "Hechizo",
+      "nivel": "II",
+      "descripcion": "Aumenta PV máximos y actuales de 3 criaturas.",
+      "potencia": 3
+    },
+    {
+      "nombre": "Luz constante",
+      "tipo": "Hechizo",
+      "nivel": "II",
+      "descripcion": "Crea llama eterna.",
+      "potencia": 3
+    },
+    {
+      "nombre": "Menor restauración",
+      "tipo": "Hechizo",
+      "nivel": "II",
+      "descripcion": "Cura ceguera, sordera, parálisis o enfermedad, y vida 3-10",
+      "potencia": 3
+    },
+    {
+      "nombre": "Proteger de veneno",
+      "tipo": "Hechizo",
+      "nivel": "II",
+      "descripcion": "Neutraliza venenos.",
+      "potencia": 2
+    },
+    {
+      "nombre": "Castigo cegador",
+      "tipo": "Hechizo",
+      "nivel": "II",
+      "descripcion": "Próximo golpe ciega y añade dado de 8.",
+      "potencia": 4
+    },
+    {
+      "nombre": "Castigo atronador",
+      "tipo": "Hechizo",
+      "nivel": "II",
+      "descripcion": "Daño sónico, empuja 3 m.",
+      "potencia": 3
+    },
+    {
+      "nombre": "Castigo abrasador",
+      "tipo": "Hechizo",
+      "nivel": "II",
+      "descripcion": "Daño radiante, revela invisibles.",
+      "potencia": 3
     }
+  ]
+},
+{
+  "personaje": "Fauzin",
+  "spells": [
+    {
+      "nombre": "Ráfaga Ígnea",
+      "tipo": "Truco",
+      "nivel": "I",
+      "descripcion": "Lanzas un proyectil de fuego pequeño. Aumenta por nivel.",
+      "potencia": 1
+    },
+    {
+      "nombre": "Golpe de Piedra",
+      "tipo": "Truco",
+      "nivel": "I",
+      "descripcion": "Lanzas fragmentos de roca que causan daño.",
+      "potencia": 1
+    },
+    {
+      "nombre": "Llama Controlada",
+      "tipo": "Truco",
+      "nivel": "I",
+      "descripcion": "Manipulas pequeñas llamas: encender, apagar o mover fuego sin daño. Sirve para crear luz, o señales.",
+      "potencia": 1
+    },
+    {
+      "nombre": "Chispa",
+      "tipo": "Truco",
+      "nivel": "I",
+      "descripcion": "Enciende materiales inflamables o genera una pequeña descarga de calor. Ideal para encender antorchas, trampas o mechas.",
+      "potencia": 1
+    },
+    {
+      "nombre": "Cuchilla de Calor",
+      "tipo": "Truco",
+      "nivel": "I",
+      "descripcion": "Envuelve tu arma en calor.",
+      "potencia": 1
+    },
+    {
+      "nombre": "Empuje terrenal",
+      "tipo": "Truco",
+      "nivel": "I",
+      "descripcion": "Usas energía terrestre para empujar una criatura o derribarla.",
+      "potencia": 1
+    },
+    {
+      "nombre": "Armadura Ígnea",
+      "tipo": "Hechizo",
+      "nivel": "II",
+      "descripcion": "Tu cuerpo se envuelve en fuego durante 1 minuto. Los enemigos que te golpean cuerpo a cuerpo reciben daño de fuego.",
+      "potencia": 2
+    },
+    {
+      "nombre": "Arma Flamígera",
+      "tipo": "Hechizo",
+      "nivel": "II",
+      "descripcion": "Imbuyes tu arma con fuego puro. Durante 10 minutos, tus ataques infligen daño de fuego.",
+      "potencia": 2
+    },
+    {
+      "nombre": "Piedra Candente",
+      "tipo": "Hechizo",
+      "nivel": "II",
+      "descripcion": "Lanzas una roca al rojo vivo a 18 m.",
+      "potencia": 2
+    },
+    {
+      "nombre": "Bola de Fuego",
+      "tipo": "Hechizo",
+      "nivel": "III",
+      "descripcion": "Crea una explosión de fuego de 6m de radio.",
+      "potencia": 3
+    },
+    {
+      "nombre": "Manto de Magma",
+      "tipo": "Hechizo",
+      "nivel": "III",
+      "descripcion": "Recubres tu cuerpo en magma ardiente durante 1 minuto. Los enemigos que te toquen o golpeen reciben daño de fuego. Eres resistente a daño físico no mágico.",
+      "potencia": 3
+    },
+    {
+      "nombre": "Rugido de la Montaña",
+      "tipo": "Hechizo",
+      "nivel": "III",
+      "descripcion": "Golpeas el suelo, liberando energía sísmica. Radio: 6m. Criaturas pueden caer derribadas.",
+      "potencia": 3
+    },
+    {
+      "nombre": "Columna Ardiente",
+      "tipo": "Hechizo",
+      "nivel": "III",
+      "descripcion": "Una llamarada se eleva desde el suelo (3m ancho, 10m alto). Daño de fuego a las criaturas en el área. Puede usarse para bloquear visión o dividir enemigos.",
+      "potencia": 3
+    },
+    {
+      "nombre": "Muro de Magma",
+      "tipo": "Hechizo",
+      "nivel": "IV",
+      "descripcion": "Creas un muro de lava de hasta 3m de largo. Daña con fuego a quien lo atraviese. Persiste durante 1 minuto, iluminando la zona.",
+      "potencia": 4
+    },
+    {
+      "nombre": "Fuerza Pétrea",
+      "tipo": "Hechizo",
+      "nivel": "IV",
+      "descripcion": "Endureces tu piel con roca. Durante 1 minuto, ganas resistencia a daño físico. Al recibir daño cuerpo a cuerpo, devuelves daño 1-3.",
+      "potencia": 4
+    },
+    {
+      "nombre": "Erupción Controlada",
+      "tipo": "Hechizo",
+      "nivel": "IV",
+      "descripcion": "Desde tu posición, una grieta se abre lanzando fuego y piedra. En terreno queda prendido fuego hasta que se pierda concentración.",
+      "potencia": 4
+    },
+    {
+      "nombre": "Avatar de la Llama",
+      "tipo": "Hechizo",
+      "nivel": "V",
+      "descripcion": "Te transformas parcialmente en un elemental de fuego durante 1 minuto. Inmunidad a daño por fuego. Ataques cuerpo a cuerpo hacen daño de fuego. Puedes caminar por fuego o magma sin daño.",
+      "potencia": 5
+    },
+    {
+      "nombre": "Lluvia de Cenizas",
+      "tipo": "Hechizo",
+      "nivel": "V",
+      "descripcion": "Cae ceniza densa sobre un área de 18m. No hace daño, pero oscurece completamente la visión y asfixia si no hay respiración. Dura 1 minuto o hasta que el viento la disipe.",
+      "potencia": 5
+    },
+    {
+      "nombre": "Furia del Volcán",
+      "tipo": "Hechizo",
+      "nivel": "V",
+      "descripcion": "Provocas una erupción dirigida. Área de 6m radio. Las criaturas impactadas quedan prendidas fuego.",
+      "potencia": 5
+    },
+    {
+      "nombre": "Cuerpo de Magma",
+      "tipo": "Hechizo",
+      "nivel": "VI",
+      "descripcion": "Tu forma se vuelve de roca fundida durante 1 minuto. Inmunidad a daño físico y fuego. Tus golpes hacen daño de fuego. Criaturas cercanas sufren 1d6 fuego al inicio de su turno.",
+      "potencia": 6
+    },
+    {
+      "nombre": "Despertar del Volcán",
+      "tipo": "Hechizo",
+      "nivel": "VI",
+      "descripcion": "Abres una falla de magma en el suelo (radio 12m). Terreno se convierte en lava durante 1 minuto. Solo puede lanzarse en espacios abiertos o bajo tierra.",
+      "potencia": 6
+    }
+  ]
+},
+{
+  "personaje": "Pierce",
+  "spells": [
+    {
+      "nombre": "Todo o Nada",
+      "tipo": "Habilidad",
+      "nivel": "I",
+      "descripcion": "Lanza una moneda o dado de dos caras. Si acierta su elección, duplica su daño en el siguiente ataque. Si falla, recibe el doble de daño.",
+      "potencia": 1
+    },
+    {
+      "nombre": "Disparo Preciso",
+      "tipo": "Habilidad",
+      "nivel": "I",
+      "descripcion": "Ataque enfocado con el arco o ballesta. Añade daño perforante adicional si impacta.",
+      "potencia": 1
+    },
+    {
+      "nombre": "Vista del Águila",
+      "tipo": "Habilidad",
+      "nivel": "I",
+      "descripcion": "Puede distinguir criaturas o detalles lejanos incluso en condiciones adversas. Ventaja en Percepción a distancia.",
+      "potencia": 1
+    },
+    {
+      "nombre": "Marca del Acechador",
+      "tipo": "Habilidad",
+      "nivel": "II",
+      "descripcion": "Designa a una presa. Mientras esté marcada, sus ataques infligen daño adicional de corte o perforante.",
+      "potencia": 1
+    },
+    {
+      "nombre": "Instinto de Superviviente",
+      "tipo": "Habilidad",
+      "nivel": "II",
+      "descripcion": "Puede recuperar una pequeña cantidad de energía física o espiritual tras una caza exitosa o un descanso corto.",
+      "potencia": 1
+    },
+    {
+      "nombre": "Ráfaga de Flechas",
+      "tipo": "Habilidad",
+      "nivel": "III",
+      "descripcion": "Dispara dos proyectiles en rápida sucesión. Puede repartirlos entre dos objetivos.",
+      "potencia": 2
+    },
+    {
+      "nombre": "Reflejos Aviares",
+      "tipo": "Habilidad",
+      "nivel": "III",
+      "descripcion": "Reacciona con gran velocidad; puede esquivar un ataque cuerpo a cuerpo reduciendo el daño recibido.",
+      "potencia": 1
+    },
+    {
+      "nombre": "Emboscada del Viento",
+      "tipo": "Habilidad",
+      "nivel": "IV",
+      "descripcion": "Usa una ráfaga de aire para reposicionarse y atacar desde la espalda. Si sorprende al enemigo, causa daño adicional.",
+      "potencia": 2
+    },
+    {
+      "nombre": "Vigor del Cazador",
+      "tipo": "Habilidad",
+      "nivel": "IV",
+      "descripcion": "Puede recuperar una habilidad de potencia 2 o 3 una vez por descanso corto.",
+      "potencia": 1
+    },
+    {
+      "nombre": "Disparo Penetrante",
+      "tipo": "Habilidad",
+      "nivel": "V",
+      "descripcion": "Flecha cargada con energía espiritual que atraviesa al primer enemigo y puede impactar a otro detrás.",
+      "potencia": 3
+    },
+    {
+      "nombre": "Instinto del Depredador",
+      "tipo": "Habilidad",
+      "nivel": "V",
+      "descripcion": "Ventaja en Percepción o Sigilo durante persecuciones o rastreos.",
+      "potencia": 1
+    },
+    {
+      "nombre": "Trampa de Plumas",
+      "tipo": "Habilidad",
+      "nivel": "VI",
+      "descripcion": "Crea una pequeña zona mágica donde plumas etéreas se elevan y ralentizan a quien la cruza.",
+      "potencia": 2
+    },
+    {
+      "nombre": "Pulso Restaurador",
+      "tipo": "Habilidad",
+      "nivel": "VI",
+      "descripcion": "Mediante concentración, puede recuperar una habilidad de potencia 4 o menor una vez por día.",
+      "potencia": 1
+    },
+    {
+      "nombre": "Golpe del Cazador Alfa",
+      "tipo": "Habilidad",
+      "nivel": "VII",
+      "descripcion": "Ataque combinado cuerpo-ala. Causa daño físico y cortante de aire.",
+      "potencia": 3
+    },
+    {
+      "nombre": "Ala Protectora",
+      "tipo": "Habilidad",
+      "nivel": "VII",
+      "descripcion": "Puede desplegar sus alas para reducir daño de caída o desviar proyectiles ligeros.",
+      "potencia": 1
+    },
+    {
+      "nombre": "Disparo del Vendaval",
+      "tipo": "Habilidad",
+      "nivel": "VIII",
+      "descripcion": "Flecha acompañada de una ráfaga de viento que empuja o desequilibra al enemigo.",
+      "potencia": 3
+    },
+    {
+      "nombre": "Senda del Tengu",
+      "tipo": "Habilidad",
+      "nivel": "VIII",
+      "descripcion": "Aumenta su velocidad y precisión cuando lucha desde posiciones elevadas.",
+      "potencia": 1
+    },
+    {
+      "nombre": "Caza Lunar",
+      "tipo": "Habilidad",
+      "nivel": "IX",
+      "descripcion": "En penumbra o luz de luna, sus ataques se imbuyen con energía espiritual, infligiendo daño radiante o espectral.",
+      "potencia": 4
+    },
+    {
+      "nombre": "Resurgir del Halcón",
+      "tipo": "Habilidad",
+      "nivel": "IX",
+      "descripcion": "Cuando cae a menos de la mitad de su vida, puede recuperar una habilidad de potencia 2 o 3 automáticamente (una vez por combate).",
+      "potencia": 1
+    },
+    {
+      "nombre": "Flecha del Espíritu",
+      "tipo": "Habilidad",
+      "nivel": "X",
+      "descripcion": "Flecha espiritual pura que atraviesa defensas mágicas. Puede infligir daño de energía o viento.",
+      "potencia": 4
+    },
+    {
+      "nombre": "Instinto Letal",
+      "tipo": "Habilidad",
+      "nivel": "X",
+      "descripcion": "Al lograr un golpe crítico, puede realizar un ataque adicional inmediato.",
+      "potencia": 1
+    },
+    {
+      "nombre": "Sombras del Bosque",
+      "tipo": "Habilidad",
+      "nivel": "XI",
+      "descripcion": "Crea ilusiones breves de sí mismo para confundir enemigos y ganar ventaja en su siguiente ataque.",
+      "potencia": 5
+    },
+    {
+      "nombre": "Concentración del Acechador",
+      "tipo": "Habilidad",
+      "nivel": "XI",
+      "descripcion": "Una vez por día, puede entrar en un estado de calma total. Recupera una habilidad de potencia 3 o 4 y obtiene ventaja en su próximo ataque.",
+      "potencia": 1
+    },
+    {
+      "nombre": "Disparo del Juicio Final",
+      "tipo": "Habilidad",
+      "nivel": "XII",
+      "descripcion": "Flecha definitiva, envuelta en energía espiritual y viento cortante. Puede atravesar múltiples enemigos u obstáculos menores.",
+      "potencia": 6
+    },
+    {
+      "nombre": "Destino del Cazador",
+      "tipo": "Habilidad",
+      "nivel": "XII",
+      "descripcion": "Designa a un solo enemigo como su presa final. Todos sus ataques contra ese objetivo ignoran resistencias físicas durante varios turnos.",
+      "potencia": 1
+    }
+  ]
+ 
+ },
+ {
+  "personaje": "Marim de Garlim",
+  "spells": [
+    {
+      "nombre": "Luz",
+      "tipo": "Truco",
+      "nivel": "I",
+      "descripcion": "Crea luz brillante en un objeto o zona cercana.",
+      "potencia": 1
+    },
+    {
+      "nombre": "Voz de la Inspiración",
+      "tipo": "Truco",
+      "nivel": "I",
+      "descripcion": "Otorga bonificación narrativa a aliados cercanos en tiradas de habilidad.",
+      "potencia": 1
+    },
+    {
+      "nombre": "Encantar persona",
+      "tipo": "Hechizo",
+      "nivel": "I",
+      "descripcion": "Influye en la mente de un enemigo humanoide.",
+      "potencia": 2
+    },
+    {
+      "nombre": "Dormir",
+      "tipo": "Hechizo",
+      "nivel": "I",
+      "descripcion": "Hace que criaturas con poca vida caigan en sueño.",
+      "potencia": 4
+    },
+    {
+      "nombre": "Rayo de fuego",
+      "tipo": "Hechizo",
+      "nivel": "I",
+      "descripcion": "Ataque ofensivo básico de fuego.",
+      "potencia": 2
+    },
+    {
+      "nombre": "Estilo de Combate (Duelos)",
+      "tipo": "Habilidad",
+      "nivel": "II",
+      "descripcion": "Bonificación al ataque con espada ligera (habilidad del Colegio de la Espada).",
+      "potencia": 1
+    },
+    {
+      "nombre": "Imagen silenciosa",
+      "tipo": "Hechizo",
+      "nivel": "III",
+      "descripcion": "Crea ilusiones visuales para confundir enemigos.",
+      "potencia": 3
+    },
+    {
+      "nombre": "Arma mágica",
+      "tipo": "Hechizo",
+      "nivel": "III",
+      "descripcion": "Mejora un arma para hacer daño extra de energía mágica.",
+      "potencia": 2
+    },
+    {
+      "nombre": "Ataque adicional (Extra Attack)",
+      "tipo": "Habilidad",
+      "nivel": "V",
+      "descripcion": "Puede atacar dos veces cuando hace un ataque con acción (habilidad del Colegio de la Espada).",
+      "potencia": 1
+    },
+    {
+      "nombre": "Conjuro de espejo",
+      "tipo": "Hechizo",
+      "nivel": "V",
+      "descripcion": "Crea duplicados ilusorios de sí mismo para confundir enemigos.",
+      "potencia": 4
+    },
+    {
+      "nombre": "Invisibilidad",
+      "tipo": "Hechizo",
+      "nivel": "V",
+      "descripcion": "Hace invisible a un aliado o a sí mismo.",
+      "potencia": 3
+    },
+    {
+      "nombre": "Contraconjuro",
+      "tipo": "Hechizo",
+      "nivel": "VII",
+      "descripcion": "Cancela un hechizo enemigo.",
+      "potencia": 4
+    },
+    {
+      "nombre": "Conjuro de desintegración menor",
+      "tipo": "Hechizo",
+      "nivel": "VII",
+      "descripcion": "Ataque de daño concentrado a un objetivo.",
+      "potencia": 5
+    },
+    {
+      "nombre": "Maldición mayor",
+      "tipo": "Hechizo",
+      "nivel": "IX",
+      "descripcion": "Debilita significativamente a un enemigo.",
+      "potencia": 5
+    },
+    {
+      "nombre": "Explosión de energía",
+      "tipo": "Hechizo",
+      "nivel": "IX",
+      "descripcion": "Ataque ofensivo de gran área.",
+      "potencia": 6
+    },
+    {
+      "nombre": "Defensa con Espada",
+      "tipo": "Habilidad",
+      "nivel": "X",
+      "descripcion": "Puede usar reacción para añadir bonificación de CA tras ataque enemigo (habilidad del Colegio de la Espada).",
+      "potencia": 1
+    },
+    {
+      "nombre": "Inspiración definitiva",
+      "tipo": "Habilidad",
+      "nivel": "XII",
+      "descripcion": "Puede usar inspiración de forma más potente en varias tiradas (habilidad superior de Bardo).",
+      "potencia": 5
+    }
+  ]
+}
+
+
+
   ]
 }

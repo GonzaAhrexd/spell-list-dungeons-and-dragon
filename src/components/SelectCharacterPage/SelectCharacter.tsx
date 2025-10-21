@@ -1,6 +1,5 @@
 import personajes from '../../jsons/CharactersList.json'
 import { useState, useEffect } from 'react';
-import { ArrowDownIcon, ArrowUpIcon } from '@heroicons/react/24/solid';
 import DropdownMenu from './DropdownMenu';
 import { useContext } from 'react';
 import { SpendContext } from '../../context/spellSpend'
@@ -33,9 +32,9 @@ function SelectCharacter() {
 
     const [openGroup, setOpenGroup] = useState<string | null>(null);
 
-
     const { handleSelectCharacter, resetSpells } = useContext(SpendContext);
 
+    const [grupo, setGrupo] = useState<string >("");
     useEffect(() => {
         if (openGroup) {
             resetSpells();
@@ -54,25 +53,32 @@ function SelectCharacter() {
     
 
     <div className='w-full max-w-[420px] mx-auto'></div>
-        {Array.from(new Set(characterList.map(char => char.grupo))).map(grupo => (
-            <div key={grupo} className='mb-4'>
-              <div className='flex flex-row items-center justify-center'>
-                <h2 className='text-xl font-bold mb-2 text-center'>Grupo  {grupo}</h2> 
-                <button className='flex flex-row items-center justify-center' onClick={() => setOpenGroup(openGroup === grupo ? null : grupo)}>
-                  {openGroup === grupo ? <ArrowUpIcon className='w-4 h-4' /> : <ArrowDownIcon className='w-4 h-4' />}
-                </button>
+        <div className="character-selection">
+          <h2 className="text-2xl font-bold text-center mb-6">Selecciona tu personaje</h2>
+
+          <div className="grid grid-cols-3 gap-4">
+            {Array.from(new Set(characterList.map(char => char.grupo))).map(grupo => (
+              <> 
+              <div
+                key={grupo}
+                className={`group p-4 border rounded-lg shadow-md cursor-pointer transition-transform transform hover:scale-105`}
+                onClick={() => {
+                  setOpenGroup(openGroup === grupo ? null : grupo);
+                  setGrupo(grupo);
+                }}
+              >
+                <h2 className="text-lg font-semibold text-center mb-2">Grupo {grupo}</h2>
               </div>
-               {
-                openGroup === grupo && (
-                  <DropdownMenu characterList={characterList} grupo={grupo} handleSelection={handleSelection} />
-                )
-               }
-            </div>
-        ))}
-
-    
+            </>
+            ))}
+          </div>
+            {openGroup === grupo && (
+              <div className="mt-2">
+                <DropdownMenu characterList={characterList} grupo={grupo} handleSelection={handleSelection} />
+              </div>
+            )}
+        </div>
     </div>
-
 
   )
 }

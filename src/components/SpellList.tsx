@@ -36,7 +36,7 @@ function SpellList({ level, onBack }: SpellListProps) {
   const closeSpell = () => setSelectedSpell(null)
 
 
-  const { potencia2, potencia3, potencia4, potencia5, potencia6 } = useContext(SpendContext)
+  const { potencia2, potencia3, potencia4, potencia5, potencia6, selectedCharacter } = useContext(SpendContext)
 
 
   const handlePotencia = (p: number) => {
@@ -61,16 +61,20 @@ function SpellList({ level, onBack }: SpellListProps) {
 
   const data = spellData as SpellData;
 
-  // Esto busca el personaje "Bertok"
-  const personajeBertok = data.personajes.find(p => p.personaje === "Bertok");
+  // Esto busca el personaje actual en el JSON de hechizos
+  const characterSpells = data.personajes.find(p => p.personaje === selectedCharacter.personaje);
 
+  
   // Si existe, extraés sus hechizos
-  const spells = personajeBertok ? personajeBertok.spells : []; const matched = spells.filter((spell: JSONSpell) => {
+  const spells = characterSpells ? characterSpells.spells : []; const matched = spells.filter((spell: JSONSpell) => {
     // level prop is 'Trucos' when user selects tricks; in JSON tricks have nivel === null
     if (level === 'Trucos') return spell.nivel === null
     return spell.nivel === level
   })
+  
+  console.log(spells)
 
+  
   return (
     <section className="parchment p-4 mt-4">
       <div className="spell-list text-black">
@@ -88,7 +92,10 @@ function SpellList({ level, onBack }: SpellListProps) {
         <div className="content">
           <h2 className="text-lg font-bold">Hechizos — Nivel: {level}</h2>
           <p className="mt-2 text-sm opacity-80">Pulsa un hechizo para ver más detalles.</p>
-
+          {/* Si la lista está vacía mostrar un mensaje */}
+          {matched.length === 0 && (
+            <p className="mt-2 text-sm text-gray-500">No hay hechizos disponibles para este nivel.</p>
+          )}
           {/* Agrupar por potencia y mostrar secciones separadas */}
           {(() => {
             const groups = matched.reduce((acc: Record<number, JSONSpell[]>, s) => {

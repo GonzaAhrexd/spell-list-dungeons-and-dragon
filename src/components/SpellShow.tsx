@@ -2,6 +2,7 @@
 
 import { useContext, useState } from 'react'
 import { SpendContext } from '../context/spellSpend';
+import SpellAnimation  from './SpellAnimation'
 
 type Spell = {
   name?: string;
@@ -39,13 +40,14 @@ function SpellShow({ spell, onClose }: SpellShowProps) {
         </header>
 
         <section className="mt-3 text-sm leading-relaxed">
-          <p className="description text-sm">{spell.description}</p>
+          <p className="description text-lg regular-font">{spell.description}</p>
         </section>
 
         <footer className="mt-4 flex gap-3">
+          {isUsing && <SpellAnimation onComplete={() => setIsUsing(false)} />}
           <button
             className={`flex-1 cursor-pointer use-button rounded-md py-3 font-semibold text-white flex items-center justify-center gap-2 transition-transform duration-150 ${isUsing ? 'scale-95 bg-emerald-700' : 'bg-emerald-700 hover:bg-emerald-600'}`}
-            onClick={async() => {
+            onClick={async () => {
               if (isUsing) return
               // comprobar disponibilidad según potencia
               const p = spell.potencia ?? 1
@@ -53,9 +55,8 @@ function SpellShow({ spell, onClose }: SpellShowProps) {
               if (!available) return
               setIsUsing(true)
               try {
-                await  spendSpell(spell.potencia ?? 1, spell.name ?? 'Desconocido')
+                await spendSpell(spell.potencia ?? 1, spell.name ?? 'Desconocido')
               } catch (e) {
-                console.error('spendSpell error', e)
               }
 
               setTimeout(() => {

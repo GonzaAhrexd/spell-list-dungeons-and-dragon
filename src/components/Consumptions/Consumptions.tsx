@@ -7,6 +7,7 @@ function Consumptions() {
 
   const [seeHistorial, setSeeHistorial] = useState(false);
 
+
   const maxMap: Record<number, number> = {
     1: Infinity,
     2: 4,
