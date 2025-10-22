@@ -928,7 +928,642 @@
       "potencia": 5
     }
   ]
+}, 
+{
+  "personaje": "Kel'Abrakar",
+  "spells": [
+    {
+      "nombre": "Toque helado",
+      "tipo": "Truco",
+      "nivel": "I",
+      "descripcion": "Mano espectral que inflige daño necrótico y bloquea curación.",
+      "potencia": 1
+    },
+    {
+      "nombre": "Rayo de escarcha",
+      "tipo": "Truco",
+      "nivel": "I",
+      "descripcion": "Proyectil helado que ralentiza al enemigo.",
+      "potencia": 1
+    },
+    {
+      "nombre": "Mano de mago",
+      "tipo": "Truco",
+      "nivel": "I",
+      "descripcion": "Crea una mano invisible que manipula objetos.",
+      "potencia": 1
+    },
+    {
+      "nombre": "Prestidigitación",
+      "tipo": "Truco",
+      "nivel": "I",
+      "descripcion": "Pequeños efectos mágicos inofensivos.",
+      "potencia": 1
+    },
+    {
+      "nombre": "Ilusión menor",
+      "tipo": "Truco",
+      "nivel": "I",
+      "descripcion": "Crea un sonido o imagen ilusoria.",
+      "potencia": 1
+    },
+    {
+      "nombre": "Descarga de fuego",
+      "tipo": "Truco",
+      "nivel": "I",
+      "descripcion": "Proyectil ígneo que quema.",
+      "potencia": 1
+    },
+    {
+      "nombre": "Falsa vida",
+      "tipo": "Hechizo",
+      "nivel": "I",
+      "descripcion": "Te imbuyes de energía necrótica, ganando una vitalidad temporal.",
+      "potencia": 2
+    },
+    {
+      "nombre": "Rayo enfermizo",
+      "tipo": "Hechizo",
+      "nivel": "I",
+      "descripcion": "Rayo verdoso de energía tóxica que debilita al objetivo.",
+      "potencia": 2
+    },
+    {
+      "nombre": "Armadura de mago",
+      "tipo": "Hechizo",
+      "nivel": "I",
+      "descripcion": "Cubre al lanzador con un campo de energía que mejora su defensa.",
+      "potencia": 2
+    },
+    {
+      "nombre": "Escudo",
+      "tipo": "Hechizo",
+      "nivel": "I",
+      "descripcion": "Barrera mágica instantánea que desvía ataques.",
+      "potencia": 2
+    },
+    {
+      "nombre": "Detectar magia",
+      "tipo": "Hechizo",
+      "nivel": "I",
+      "descripcion": "Percibes auras mágicas cercanas.",
+      "potencia": 2
+    },
+    {
+      "nombre": "Misil mágico",
+      "tipo": "Hechizo",
+      "nivel": "I",
+      "descripcion": "Proyectiles arcanos que buscan al enemigo.",
+      "potencia": 2
+    },
+    {
+      "nombre": "Dormir",
+      "tipo": "Hechizo",
+      "nivel": "I",
+      "descripcion": "Adormece criaturas en un área.",
+      "potencia": 2
+    },
+    {
+      "nombre": "Disfrazarse",
+      "tipo": "Hechizo",
+      "nivel": "I",
+      "descripcion": "Altera tu apariencia física.",
+      "potencia": 2
+    },
+    {
+      "nombre": "Servant@ invisible",
+      "tipo": "Hechizo",
+      "nivel": "I",
+      "descripcion": "Invocas una entidad invisible que realiza tareas menores.",
+      "potencia": 2
+    },
+    {
+      "nombre": "Reaprovechamiento de Vida",
+      "tipo": "Habilidad",
+      "nivel": "II",
+      "descripcion": "Cuando matas a una criatura con un hechizo, recuperas parte de tu vitalidad. Si es un hechizo de necromancia, recuperas más vida.",
+      "potencia": 3
+    },
+    {
+      "nombre": "Toque vampírico",
+      "tipo": "Hechizo",
+      "nivel": "III",
+      "descripcion": "Canalizas energía necrótica en un toque que drena la vida del enemigo.",
+      "potencia": 3
+    },
+    {
+      "nombre": "Inmovilizar persona",
+      "tipo": "Hechizo",
+      "nivel": "III",
+      "descripcion": "Paraliza a una criatura humana o similar.",
+      "potencia": 3
+    },
+    {
+      "nombre": "Ver invisibilidad",
+      "tipo": "Hechizo",
+      "nivel": "III",
+      "descripcion": "Percibes criaturas invisibles.",
+      "potencia": 3
+    },
+    {
+      "nombre": "Sugestión",
+      "tipo": "Hechizo",
+      "nivel": "III",
+      "descripcion": "Siembras una orden o pensamiento en la mente de otro.",
+      "potencia": 3
+    },
+    {
+      "nombre": "Tela de araña",
+      "tipo": "Hechizo",
+      "nivel": "III",
+      "descripcion": "Crea una red viscosa que inmoviliza.",
+      "potencia": 3
+    },
+    {
+      "nombre": "Nube apestosa",
+      "tipo": "Hechizo",
+      "nivel": "III",
+      "descripcion": "Nube tóxica que provoca náuseas.",
+      "potencia": 3
+    },
+    {
+      "nombre": "Espejismo menor",
+      "tipo": "Hechizo",
+      "nivel": "III",
+      "descripcion": "Ilusión visual pequeña o engañosa.",
+      "potencia": 3
+    },
+    {
+      "nombre": "Rayo ardiente",
+      "tipo": "Hechizo",
+      "nivel": "III",
+      "descripcion": "Tres rayos de fuego dirigidos.",
+      "potencia": 3
+    },
+    {
+      "nombre": "Agrandar/Reducir",
+      "tipo": "Hechizo",
+      "nivel": "III",
+      "descripcion": "Altera el tamaño de una criatura u objeto.",
+      "potencia": 3
+    },
+    {
+      "nombre": "Látigo de almas",
+      "tipo": "Hechizo",
+      "nivel": "III",
+      "descripcion": "Proyectas un látigo espectral que alcanza varios enemigos, drenando parte de su energía vital. Los cuerpos afectados sienten el frío de la tumba, debilitándose por un tiempo breve.",
+      "potencia": 3
+    },
+    {
+      "nombre": "Explosión cadavérica",
+      "tipo": "Hechizo",
+      "nivel": "III",
+      "descripcion": "Haces que un cadáver cercano estalle en fragmentos de hueso y energía oscura, dañando con energía necrótica a los enemigos alrededor. Si la explosión mata, parte de esa fuerza vuelve a ti.",
+      "potencia": 3
+    },
+    {
+      "nombre": "Animar muertos",
+      "tipo": "Hechizo",
+      "nivel": "V",
+      "descripcion": "Levantas esqueletos o zombis bajo tu mando.",
+      "potencia": 4
+    },
+    {
+      "nombre": "Contraconjuro",
+      "tipo": "Hechizo",
+      "nivel": "V",
+      "descripcion": "Interrumpes un hechizo ajeno en el momento de lanzarse.",
+      "potencia": 4
+    },
+    {
+      "nombre": "Disipar magia",
+      "tipo": "Hechizo",
+      "nivel": "V",
+      "descripcion": "Destruyes efectos mágicos en curso.",
+      "potencia": 4
+    },
+    {
+      "nombre": "Bola de fuego",
+      "tipo": "Hechizo",
+      "nivel": "V",
+      "descripcion": "Explosión ígnea devastadora en un área.",
+      "potencia": 4
+    },
+    {
+      "nombre": "Relámpago",
+      "tipo": "Hechizo",
+      "nivel": "V",
+      "descripcion": "Descargas eléctricas concentradas en línea recta.",
+      "potencia": 4
+    },
+    {
+      "nombre": "Vuelo",
+      "tipo": "Hechizo",
+      "nivel": "V",
+      "descripcion": "Otorgas la capacidad de volar.",
+      "potencia": 4
+    },
+    {
+      "nombre": "Ralentizar",
+      "tipo": "Hechizo",
+      "nivel": "V",
+      "descripcion": "Ralentiza movimientos, ataques y reflejos.",
+      "potencia": 4
+    },
+    {
+      "nombre": "Velocidad",
+      "tipo": "Hechizo",
+      "nivel": "V",
+      "descripcion": "Acelera a tus aliados, dándoles reflejos sobrenaturales.",
+      "potencia": 4
+    },
+    {
+      "nombre": "Imagen mayor",
+      "tipo": "Hechizo",
+      "nivel": "V",
+      "descripcion": "Ilusión detallada que puede incluir sonido, olor y movimiento.",
+      "potencia": 4
+    },
+    {
+      "nombre": "Forma gaseosa",
+      "tipo": "Hechizo",
+      "nivel": "V",
+      "descripcion": "Conviertes un cuerpo en una nube intangible.",
+      "potencia": 4
+    },
+    {
+      "nombre": "Miedo",
+      "tipo": "Hechizo",
+      "nivel": "V",
+      "descripcion": "Las criaturas cercanas huyen aterrorizadas.",
+      "potencia": 4
+    },
+    {
+      "nombre": "Polimorfar",
+      "tipo": "Hechizo",
+      "nivel": "VII",
+      "descripcion": "Cambias la forma de una criatura.",
+      "potencia": 5
+    },
+    {
+      "nombre": "Confusión",
+      "tipo": "Hechizo",
+      "nivel": "VII",
+      "descripcion": "Distorsiona la mente de varias criaturas.",
+      "potencia": 5
+    },
+    {
+      "nombre": "Dominar persona",
+      "tipo": "Hechizo",
+      "nivel": "VII",
+      "descripcion": "Controlas la voluntad de un ser humanoide.",
+      "potencia": 5
+    },
+    {
+      "nombre": "Muro de hielo",
+      "tipo": "Hechizo",
+      "nivel": "VII",
+      "descripcion": "Invocas un muro congelado.",
+      "potencia": 5
+    },
+    {
+      "nombre": "Creación",
+      "tipo": "Hechizo",
+      "nivel": "VII",
+      "descripcion": "Materializas objetos a partir de sombras.",
+      "potencia": 5
+    },
+    {
+      "nombre": "Invocación sombría",
+      "tipo": "Hechizo",
+      "nivel": "VII",
+      "descripcion": "Manipulas energía oscura para imitar otros conjuros.",
+      "potencia": 5
+    },
+    {
+      "nombre": "Piel pétrea",
+      "tipo": "Hechizo",
+      "nivel": "VII",
+      "descripcion": "Endurece la carne, volviéndola resistente.",
+      "potencia": 5
+    },
+    {
+      "nombre": "Sombra de la muerte",
+      "tipo": "Hechizo",
+      "nivel": "VII",
+      "descripcion": "Extiendes una sombra que corroe la vitalidad de todo lo que toca.",
+      "potencia": 5
+    },
+    {
+      "nombre": "Esencia corrompida",
+      "tipo": "Hechizo",
+      "nivel": "VIII",
+      "descripcion": "Lanzas un torrente de energía necrótica pura que penetra armaduras y defensas. Las criaturas vivas pierden parte de su fuerza vital y sus heridas dejan un rastro oscuro que sigue drenando lentamente su vigor. Los muertos vivientes se fortalecen brevemente.",
+      "potencia": 5
+    },
+    {
+      "nombre": "Círculo de muerte",
+      "tipo": "Hechizo",
+      "nivel": "IX",
+      "descripcion": "Ola de energía que roba la vida a todos los que te rodean.",
+      "potencia": 6
+    },
+    {
+      "nombre": "Dedos de la muerte",
+      "tipo": "Hechizo",
+      "nivel": "IX",
+      "descripcion": "Energía concentrada que inflige destrucción necrótica instantánea.",
+      "potencia": 6
+    },
+    {
+      "nombre": "Clonar",
+      "tipo": "Hechizo",
+      "nivel": "IX",
+      "descripcion": "Creas una réplica de tu cuerpo para eludir la muerte.",
+      "potencia": 6
+    },
+    {
+      "nombre": "Simulacro",
+      "tipo": "Hechizo",
+      "nivel": "IX",
+      "descripcion": "Generas una copia semiconsciente de ti hecha de hielo y magia.",
+      "potencia": 6
+    },
+    {
+      "nombre": "Desintegrar",
+      "tipo": "Hechizo",
+      "nivel": "IX",
+      "descripcion": "Destruye por completo materia viva o inerte.",
+      "potencia": 6
+    },
+    {
+      "nombre": "Telequinesis",
+      "tipo": "Hechizo",
+      "nivel": "IX",
+      "descripcion": "Controlas objetos y enemigos con la mente.",
+      "potencia": 6
+    },
+    {
+      "nombre": "Nube mortal",
+      "tipo": "Hechizo",
+      "nivel": "IX",
+      "descripcion": "Nube venenosa que causa una muerte lenta.",
+      "potencia": 6
+    },
+    {
+      "nombre": "Deseo",
+      "tipo": "Hechizo",
+      "nivel": "IX",
+      "descripcion": "Altera la realidad a tu voluntad.",
+      "potencia": 6
+    },
+    {
+      "nombre": "Prisión arcana",
+      "tipo": "Hechizo",
+      "nivel": "IX",
+      "descripcion": "Encierra criaturas dentro de una celda mágica.",
+      "potencia": 6
+    },
+    {
+      "nombre": "Detener el tiempo",
+      "tipo": "Hechizo",
+      "nivel": "IX",
+      "descripcion": "El flujo temporal se detiene para todos excepto para ti.",
+      "potencia": 6
+    },
+    {
+      "nombre": "Legión inmortal",
+      "tipo": "Hechizo",
+      "nivel": "X",
+      "descripcion": "Convocas a las sombras de los muertos caídos en el área. Durante un tiempo limitado, un ejército de espíritus espectrales te obedece, atacando a todos los enemigos cercanos.",
+      "potencia": 6
+    },
+    {
+      "nombre": "Corazón de la tumba",
+      "tipo": "Hechizo",
+      "nivel": "XII",
+      "descripcion": "Canalizas la energía de todos los muertos en kilómetros a la redonda. Las criaturas vivas sienten su fuerza drenarse lentamente, mientras los cadáveres cercanos se alzan sin control.",
+      "potencia": 6
+    }
+  ]
+},
+{
+  "personaje": "Grishnak",
+  "spells": [
+    {
+      "nombre": "Luz sagrada",
+      "tipo": "Hechizo",
+      "nivel": "I",
+      "descripcion": "Creas una luz pura que ilumina el área.",
+      "potencia": 1
+    },
+    {
+      "nombre": "Imposición de manos",
+      "tipo": "Hechizo",
+      "nivel": "I",
+      "descripcion": "Canalizas energía divina para curar heridas o neutralizar veneno.",
+      "potencia": 1
+    },
+    {
+      "nombre": "Juramento de venganza",
+      "tipo": "Habilidad",
+      "nivel": "I",
+      "descripcion": "Imbuyes tu juramento en un enemigo; tus ataques contra él son más precisos.",
+      "potencia": 1
+    },
+    {
+      "nombre": "Sello protector",
+      "tipo": "Hechizo",
+      "nivel": "I",
+      "descripcion": "Bendices un escudo o aliado, otorgando resistencia temporal.",
+      "potencia": 1
+    },
+    {
+      "nombre": "Luz purificadora",
+      "tipo": "Hechizo",
+      "nivel": "I",
+      "descripcion": "Limpia enfermedades o venenos menores.",
+      "potencia": 1
+    },
+    {
+      "nombre": "Arma bendita",
+      "tipo": "Hechizo",
+      "nivel": "I",
+      "descripcion": "Tu arma brilla con energía divina y causa daño radiante adicional.",
+      "potencia": 1
+    },
+    {
+      "nombre": "Bendecir",
+      "tipo": "Hechizo",
+      "nivel": "II",
+      "descripcion": "Aumenta la precisión o poder de ataque de aliados cercanos.",
+      "potencia": 2
+    },
+    {
+      "nombre": "Curar heridas",
+      "tipo": "Hechizo",
+      "nivel": "II",
+      "descripcion": "Restaura parte de los puntos de vida de un aliado.",
+      "potencia": 2
+    },
+    {
+      "nombre": "Castigo divino",
+      "tipo": "Hechizo",
+      "nivel": "II",
+      "descripcion": "Tu siguiente golpe descarga energía divina sobre el enemigo.",
+      "potencia": 2
+    },
+    {
+      "nombre": "Infligir heridas",
+      "tipo": "Hechizo",
+      "nivel": "II",
+      "descripcion": "Un toque canaliza energía necrótica que daña gravemente al enemigo.",
+      "potencia": 2
+    },
+    {
+      "nombre": "Toque de la tumba",
+      "tipo": "Hechizo",
+      "nivel": "II",
+      "descripcion": "Tu arma se impregna de energía de ultratumba; el próximo golpe drena vitalidad y la transfiere a ti.",
+      "potencia": 2
+    },
+    {
+      "nombre": "Protección contra el bien y el mal",
+      "tipo": "Hechizo",
+      "nivel": "III",
+      "descripcion": "Bendices una criatura para protegerla de demonios, muertos vivientes y espíritus.",
+      "potencia": 2
+    },
+    {
+      "nombre": "Revivir a los caídos",
+      "tipo": "Hechizo",
+      "nivel": "III",
+      "descripcion": "Devuelves la vida a un aliado que murió recientemente.",
+      "potencia": 3
+    },
+    {
+      "nombre": "Aura del sepulcro",
+      "tipo": "Hechizo",
+      "nivel": "III",
+      "descripcion": "Una neblina oscura rodea tu cuerpo, drenando energía vital tuya y de los enemigos y fortaleciendo a los muertos vivientes aliados.",
+      "potencia": 3
+    },
+    {
+      "nombre": "Marcha de los muertos",
+      "tipo": "Hechizo",
+      "nivel": "III",
+      "descripcion": "Levantas a los cadáveres cercanos para que combatan como guerreros espectrales bajo tu mando por un corto tiempo.",
+      "potencia": 3
+    },
+    {
+      "nombre": "Golpe cegador",
+      "tipo": "Hechizo",
+      "nivel": "IV",
+      "descripcion": "Tu próximo ataque deja ciego al objetivo con energía luminosa.",
+      "potencia": 2
+    },
+    {
+      "nombre": "Sello profano",
+      "tipo": "Hechizo",
+      "nivel": "IV",
+      "descripcion": "Creas una marca en el suelo; si un enemigo la cruza, estalla liberando energía necrótica.",
+      "potencia": 3
+    },
+    {
+      "nombre": "Purificar espíritu",
+      "tipo": "Hechizo",
+      "nivel": "IV",
+      "descripcion": "Limpia un alma poseída o corrompida.",
+      "potencia": 4
+    },
+    {
+      "nombre": "Castigo profano",
+      "tipo": "Hechizo",
+      "nivel": "V",
+      "descripcion": "Tu siguiente ataque canaliza energía necrótica en lugar de radiante, destruyendo carne y alma.",
+      "potencia": 4
+    },
+    {
+      "nombre": "Bendición del sepulcro",
+      "tipo": "Hechizo",
+      "nivel": "V",
+      "descripcion": "Cuando un aliado muere, su espíritu se alza y continúa combatiendo como espectro por un breve tiempo.",
+      "potencia": 4
+    },
+    {
+      "nombre": "Pacto eterno",
+      "tipo": "Hechizo",
+      "nivel": "VI",
+      "descripcion": "Une tu espíritu al de un aliado; ambos comparten dolor y curación.",
+      "potencia": 4
+    },
+    {
+      "nombre": "Despertar del osario",
+      "tipo": "Hechizo",
+      "nivel": "VI",
+      "descripcion": "Haces surgir esqueletos y espectros guerreros del suelo para ayudarte en combate durante un breve tiempo. Máximo de 6, todos poseen un punto de vida.",
+      "potencia": 5
+    },
+    {
+      "nombre": "Sello del juicio final",
+      "tipo": "Hechizo",
+      "nivel": "VII",
+      "descripcion": "Creas un campo sagrado que inflige daño radiante o necrótico continuo a enemigos en su interior.",
+      "potencia": 5
+    },
+    {
+      "nombre": "Escudo de fe",
+      "tipo": "Hechizo",
+      "nivel": "VII",
+      "descripcion": "También otorga resistencia a daño necrótico.",
+      "potencia": 2
+    },
+    {
+      "nombre": "Mano del olvido",
+      "tipo": "Hechizo",
+      "nivel": "VIII",
+      "descripcion": "Una mano espectral surge del vacío y aplasta la voluntad del enemigo, causando daño necrótico y borrando parte de su memoria. Causa hipnosis.",
+      "potencia": 5
+    },
+    {
+      "nombre": "Despertar del osario",
+      "tipo": "Hechizo",
+      "nivel": "IX",
+      "descripcion": "Puedes invocar una horda más grande de muertos temporales. Máximo de 8, todos tienen 5 puntos de vida.",
+      "potencia": 5
+    },
+    {
+      "nombre": "Pacto eterno",
+      "tipo": "Hechizo",
+      "nivel": "IX",
+      "descripcion": "Si uno de los dos muere, el otro puede mantenerlo “medio vivo” durante unos segundos para un último ataque.",
+      "potencia": 4
+    },
+    {
+      "nombre": "Camino sombrío",
+      "tipo": "Hechizo",
+      "nivel": "X",
+      "descripcion": "Puedes moverte libremente entre planos cercanos por unos segundos. Teletransportación.",
+      "potencia": 4
+    },
+    {
+      "nombre": "Juicio de las almas",
+      "tipo": "Hechizo",
+      "nivel": "XI",
+      "descripcion": "Invocas espíritus vengadores que imitan tus ataques durante un corto periodo, duplicando tu ofensiva.",
+      "potencia": 6
+    },
+    {
+      "nombre": "Apoteosis del olvido",
+      "tipo": "Hechizo",
+      "nivel": "XII",
+      "descripcion": "Canalizas la esencia del más allá; los enemigos cercanos sienten cómo su alma se disuelve lentamente, mientras tus aliados muertos vivientes se fortalecen y vuelven a la vida con furia durante 10 minutos.",
+      "potencia": 6
+    }
+  ]
 }
+
+
 
 
 
