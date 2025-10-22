@@ -1561,6 +1561,32 @@
       "potencia": 6
     }
   ]
+},
+{
+  "personaje": "Tyran",
+  "spells": [
+    {
+      "nombre": "Risa hiriente",
+      "tipo": "truco",
+      "nivel": null,
+      "descripcion": "Emite una risa escalofriante que distrae a los enemigos cercanos.",
+      "potencia": 1
+    },
+    {
+      "nombre": "Ataque Furtivo (A distancia)",
+      "tipo": "Habilidad",
+      "nivel": "I",
+      "descripcion": "Salta hacía el enemigo con su arma generando daño extra.",
+      "potencia": 1
+    },
+    {
+      "nombre": "Ataque Furtivo (Cuerpo a Cuerpo)",
+      "tipo": "Habilidad",
+      "nivel": "I",
+      "descripcion": "Ataque a distancia desde un angulo crítico, genera daño extra.",
+      "potencia": 1
+    }
+  ]
 }
 
 
