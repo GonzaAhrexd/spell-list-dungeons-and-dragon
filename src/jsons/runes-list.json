@@ -1,0 +1,94 @@
+{
+    "personajes": [
+        {
+            "personaje": "Thormund Marshwood",
+            "runas": [
+                {
+                    "nombre": "Runa de la Guardia",
+                    "nivel": "III",
+                    "tipoRuna": "Básica"
+                },
+                {
+                    "nombre": "Runa de Golpe",
+                    "nivel": "III",
+                    "tipoRuna": "Básica"
+                },
+                {
+                    "nombre": "Runa de Protección",
+                    "nivel": "III",
+                    "tipoRuna": "Básica"
+                },
+                {
+                    "nombre": "Runa de Precisión",
+                    "nivel": "III",
+                    "tipoRuna": "Básica"
+                },
+                {
+                    "nombre": "Runa del Fuego",
+                    "nivel": "III",
+                    "tipoRuna": "Armónica"
+                },
+                {
+                    "nombre": "Runa del Rayo",
+                    "nivel": "III",
+                    "tipoRuna": "Armónica"
+                },
+                {
+                    "nombre": "Runa del Mar",
+                    "nivel": "III",
+                    "tipoRuna": "Armónica"
+                },
+                {
+                    "nombre": "Runa de la Tierra",
+                    "nivel": "III",
+                    "tipoRuna": "Armónica"
+                },
+                {
+                    "nombre": "Runa de Impacto",
+                    "nivel": "IV",
+                    "tipoRuna": "Básica"
+                },
+                {
+                    "nombre": "Runa de Resistencia",
+                    "nivel": "V",
+                    "tipoRuna": "Básica"
+                },
+                {
+                    "nombre": "Runa de Furia",
+                    "nivel": "VI",
+                    "tipoRuna": "Básica"
+                },
+                {
+                    "nombre": "Runa de Esquiva",
+                    "nivel": "VII",
+                    "tipoRuna": "Básica"
+                },
+                {
+                    "nombre": "Runa de la Piedra",
+                    "nivel": "VIII",
+                    "tipoRuna": "Básica"
+                },
+                {
+                    "nombre": "Runa de Poder",
+                    "nivel": "IX",
+                    "tipoRuna": "Básica"
+                },
+                {
+                    "nombre": "Runa del Centinela",
+                    "nivel": "X",
+                    "tipoRuna": "Básica"
+                },
+                {
+                    "nombre": "Runa de Dominio",
+                    "nivel": "XI",
+                    "tipoRuna": "Básica"
+                },
+                {
+                    "nombre": "Runa del Coloso",
+                    "nivel": "XII",
+                    "tipoRuna": "Básica"
+                }
+            ]
+        }
+    ]
+}

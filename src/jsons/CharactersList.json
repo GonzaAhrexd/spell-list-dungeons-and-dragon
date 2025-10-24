@@ -73,8 +73,52 @@
           "grupo": "A",
           "personaje": "Thormund Marshwood",
           "clase": "Guerrero",
-          "subclase": "Rúnico"
-        },
+          "subclase": "Rúnico",
+          "runasPorNivel": {
+            "3": {
+              "runasTotales": 4,
+              "runasActivas": 2
+            },
+            "4": {
+              "runasTotales": 5,
+              "runasActivas": 2
+            },
+            "5": {
+              "runasTotales": 6,
+              "runasActivas": 2
+            },
+            "6": {
+              "runasTotales": 7,
+              "runasActivas": 3
+          },
+          "7": {
+              "runasTotales": 8,
+              "runasActivas": 3
+            },
+          "8": {
+              "runasTotales": 9,
+              "runasActivas": 3
+          },
+          "9": {
+              "runasTotales": 10,
+              "runasActivas": 4 
+          },
+          "10": {
+              "runasTotales": 11,
+              "runasActivas": 4
+          },
+          "11": {
+              "runasTotales": 12,
+              "runasActivas": 4
+          },
+
+          "12": {
+              "runasTotales": 13,
+              "runasActivas": 5
+          }
+
+        }
+      },
         {
           "jugador": "Farley",
           "grupo": "A",

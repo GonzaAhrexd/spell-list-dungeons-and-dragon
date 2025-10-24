@@ -8,6 +8,9 @@ type Character = {
     personaje: string;
     clase: string;
     subclase: string;
+    runasPorNivel?: {
+        [key: number]: {runasTotales: number, runasActivas: number};
+    }
     limitePotencias: {
         "1": number;
         "2": number;
@@ -26,11 +29,17 @@ export const SpendContext = createContext<{
     potencia4: number;
     potencia5: number;
     potencia6: number;
+    runasActivas: number;
+    nivelActual: number;
     selectedCharacter: Character;
     historialHechizos: Array<{ nombre: string; potencia: number; timestamp: number }>;
+    resetRunesSpend: () => void;
+    spendRune: () => void;
     handleSelectCharacter: (character: string) => void;
     spendSpell: (potencia: number, nombre: string) => void;
     resetSpells: () => void;
+    levelUp: () => void;
+    levelDown: () => void;
 }>({
     potencia1: 100000,
     potencia2: 4,
@@ -38,6 +47,8 @@ export const SpendContext = createContext<{
     potencia4: 3,
     potencia5: 2,
     potencia6: 1,
+    runasActivas: 0,
+    nivelActual: 1,
     selectedCharacter: {
         jugador: "",
         grupo: "",
@@ -55,9 +66,13 @@ export const SpendContext = createContext<{
 
     },
     historialHechizos: [],
+    resetRunesSpend: () => { },
+    spendRune: () => { },
     handleSelectCharacter: () => { },
     spendSpell: () => { },
     resetSpells: () => { },
+    levelUp: () => { },
+    levelDown: () => { }
 });
 
 export const SpendProvider = ({ children }: { children: ReactNode }) => {
@@ -94,8 +109,9 @@ export const SpendProvider = ({ children }: { children: ReactNode }) => {
     const [potencia4, setPotencia4] = useState(() => loadFromLocalStorage('potencia4', 0));
     const [potencia5, setPotencia5] = useState(() => loadFromLocalStorage('potencia5', 0));
     const [potencia6, setPotencia6] = useState(() => loadFromLocalStorage('potencia6', 0));
+    const [runasActivas, setRunasActivas] = useState(() => loadFromLocalStorage('runasActivas', 0));
     const [selectedCharacter, setSelectedCharacter] = useState(() => loadFromLocalStorage('selectedCharacter', defaultCharacter));
-
+    const [nivelActual, setNivelActual] = useState(() => loadFromLocalStorage('nivelActual', 1));
     const [historialHechizos, setHistorialHechizos] = useState<Array<{ nombre: string; potencia: number; timestamp: number }>>(
         () => loadFromLocalStorage('historialHechizos', [])
     );
@@ -108,9 +124,11 @@ export const SpendProvider = ({ children }: { children: ReactNode }) => {
         localStorage.setItem('potencia4', JSON.stringify(potencia4));
         localStorage.setItem('potencia5', JSON.stringify(potencia5));
         localStorage.setItem('potencia6', JSON.stringify(potencia6));
+        localStorage.setItem('nivelActual', JSON.stringify(nivelActual));
         localStorage.setItem('historialHechizos', JSON.stringify(historialHechizos));
         localStorage.setItem('selectedCharacter', JSON.stringify(selectedCharacter));
-    }, [potencia1, potencia2, potencia3, potencia4, potencia5, potencia6, historialHechizos, selectedCharacter]);
+        localStorage.setItem('runasActivas', JSON.stringify(runasActivas));
+    }, [potencia1, potencia2, potencia3, potencia4, potencia5, potencia6, historialHechizos, selectedCharacter, nivelActual, runasActivas]);
 
     const spendSpell = (potencia: number, nombre: string) => {
         console.log('[SpendContext] spendSpell', potencia, nombre);
@@ -165,14 +183,8 @@ export const SpendProvider = ({ children }: { children: ReactNode }) => {
 
     const resetSpells = () => {
 
-        console.log("THis works")
-        console.log("Selected: " + selectedCharacter.personaje)
-
         const { personajes } = personajesData; // data es tu JSON completo
-
-
         const characterData = personajes.find(p => p.personaje === selectedCharacter.personaje);
-
 
         if (characterData) {
             setPotencia1(1000); // Potencia 1 se considera ilimitada
@@ -190,8 +202,18 @@ export const SpendProvider = ({ children }: { children: ReactNode }) => {
         localStorage.removeItem('potencia4');
         localStorage.removeItem('potencia5');
         localStorage.removeItem('potencia6');
+        localStorage.removeItem('nivelActual');
         localStorage.removeItem('historialHechizos');
     };
+
+    const levelUp = () => {
+        setNivelActual((prev: any) => prev + 1);
+    }
+
+    const levelDown = () => {
+
+        setNivelActual((prev: any) => Math.max(1, prev - 1));
+    }
 
     useEffect(() => {
         if (selectedCharacter && typeof selectedCharacter === 'object' && selectedCharacter.personaje) {
@@ -203,8 +225,18 @@ export const SpendProvider = ({ children }: { children: ReactNode }) => {
         const selected = personajesData.personajes.find(p => p.personaje === character);
         if (selected) {
             setSelectedCharacter(selected);
+            setNivelActual(1);        
         }
     }
+
+    const resetRunesSpend = () => {
+        setRunasActivas(selectedCharacter?.runasPorNivel?.[nivelActual]?.runasActivas || 0);
+    };
+
+
+    const spendRune = () => {
+        setRunasActivas((prev: any) => Math.max(0, prev - 1));
+    };
 
     return (
         <SpendContext.Provider
@@ -217,6 +249,12 @@ export const SpendProvider = ({ children }: { children: ReactNode }) => {
                 potencia6,
                 historialHechizos,
                 selectedCharacter,
+                nivelActual,
+                runasActivas,
+                resetRunesSpend,
+                spendRune,
+                levelUp,
+                levelDown,
                 handleSelectCharacter,
                 spendSpell,
                 resetSpells,

@@ -2,7 +2,8 @@
 import { SpendContext } from "../context/spellSpend"
 import { useContext } from "react"
 import spellData from '../jsons/spell-list.json'
- 
+import runesData from '../jsons/runes-list.json'
+ import { useState } from 'react'
 type SpellsMenuProps = {
     selectedLevel: string | null;
     handleSelectedLevel: (level: string) => void;
@@ -15,6 +16,9 @@ function SpellsMenu({selectedLevel, handleSelectedLevel}: SpellsMenuProps) {
     //   const levels = ['I', 'II', 'III', 'IV', 'V', 'VI', 'IX']
 
     const { selectedCharacter } = useContext(SpendContext);
+
+    const [isRunicMode, ] = useState(selectedCharacter.subclase === "Rúnico");
+    
 
     // Obtene los levels en base a lo que hay en spellData para el personaje seleccionado
     const data = spellData as {
@@ -30,14 +34,45 @@ function SpellsMenu({selectedLevel, handleSelectedLevel}: SpellsMenuProps) {
             }>;
         }[];
     };
+
+    const runicData = runesData as {
+        personajes: {
+            personaje: string;
+            runas: Array<{
+                nombre: string;
+                nivel: string;
+                tipoRuna: string;
+                descripcion: string;
+            }>;
+        }[];
+    };
+
+    const characterRunes = runicData.personajes.find(p => p.personaje === selectedCharacter.personaje);
+
+
     const characterSpells = data.personajes.find(p => p.personaje === selectedCharacter.personaje);
     const spells = characterSpells ? characterSpells.spells : [];
-    const levelsSet = new Set<string>();
-    spells.forEach(spell => {
+    let levelsSet: any
+    
+
+    if(isRunicMode) {
+        levelsSet = new Set<string>();
+        characterRunes?.runas.forEach(rune => {
+            if (rune.nivel) {
+                // @ts-ignore
+                levelsSet.add(rune.nivel);
+            }
+        }
+        );
+    }
+    else{
+        levelsSet = new Set<string>();
+        spells.forEach(spell => {
         if (spell.nivel) {
             levelsSet.add(spell.nivel);
         }
     });
+}   
 
     const romanToNumber = (roman: string): number => {
         const romanNumerals: { [key: string]: number } = {
@@ -59,7 +94,7 @@ function SpellsMenu({selectedLevel, handleSelectedLevel}: SpellsMenuProps) {
 
 
 
-    const levels = Array.from(levelsSet).sort((a, b) => {
+    const levels = Array.from(levelsSet).sort((a: any, b: any) => {
         if (romanToNumber(a) < romanToNumber(b)) return -1;
         return romanToNumber(a) - romanToNumber(b);
     });
@@ -80,7 +115,7 @@ function SpellsMenu({selectedLevel, handleSelectedLevel}: SpellsMenuProps) {
                 <span className="level-rune " aria-hidden>✦</span>
             </button>
             <div className="levels grid grid-cols-2 gap-3">
-                {levels.map((level) => (
+                {levels.map((level: any) => (
                     <button
                         key={level}
                         onClick={() => handleSelectedLevel(level)}
