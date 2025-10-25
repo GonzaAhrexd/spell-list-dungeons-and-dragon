@@ -10,7 +10,7 @@ import SpellsMenu from './SpellsMenu';
 import ChangeCharacter from './ChangeCharacter';
 import SelectCharacter from './SelectCharacterPage/SelectCharacter';
 import RunesLog from './RunesLog/RunesLog';
-
+import RunesList from './RunesList'
 
 function MainPage() {
 
@@ -85,6 +85,10 @@ function MainPage() {
               }
               {showRunesSettings &&
                 <RunesLog />
+              }
+              {
+                showRunesList && !showRunesSettings &&
+                <RunesList level={selectedLevel} onBack={() => { setShowRunesList(false); setSelectedLevel(null); }} /> 
               }
               {showingSpellList &&
                 <SpellList level={selectedLevel} onBack={() => { setShowingSpellList(false); setSelectedLevel(null); }} />
