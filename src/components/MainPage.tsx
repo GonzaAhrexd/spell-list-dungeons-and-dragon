@@ -10,7 +10,7 @@ import SpellsMenu from './SpellsMenu';
 import ChangeCharacter from './ChangeCharacter';
 import SelectCharacter from './SelectCharacterPage/SelectCharacter';
 import RunesLog from './RunesLog/RunesLog';
-import RunesList from './RunesList'
+import RunesList from './runesList'
 
 function MainPage() {
 

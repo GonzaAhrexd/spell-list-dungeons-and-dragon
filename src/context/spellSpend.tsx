@@ -33,13 +33,17 @@ export const SpendContext = createContext<{
     nivelActual: number;
     selectedCharacter: Character;
     historialHechizos: Array<{ nombre: string; potencia: number; timestamp: number }>;
+    armonicRunes: Array<{ level: number; runeName: string; disponible: boolean }>;
     resetRunesSpend: () => void;
     spendRune: () => void;
     handleSelectCharacter: (character: string) => void;
-    spendSpell: (potencia: number, nombre: string) => void;
+    spendSpell: (potencia: number, nombre: string, decrease?: boolean) => void;
     resetSpells: () => void;
     levelUp: () => void;
     levelDown: () => void;
+    setArmonicRunes: (runes: Array<{ level: number; runeName: string }>) => void;
+    resetArmonicRunes: () => void;
+    useArmonicRune: (runeName: string) => void;
 }>({
     potencia1: 100000,
     potencia2: 4,
@@ -49,6 +53,7 @@ export const SpendContext = createContext<{
     potencia6: 1,
     runasActivas: 0,
     nivelActual: 1,
+    armonicRunes: [],
     selectedCharacter: {
         jugador: "",
         grupo: "",
@@ -72,7 +77,10 @@ export const SpendContext = createContext<{
     spendSpell: () => { },
     resetSpells: () => { },
     levelUp: () => { },
-    levelDown: () => { }
+    levelDown: () => { },
+    setArmonicRunes: () => { },
+    resetArmonicRunes: () => { },
+    useArmonicRune: () => { }
 });
 
 export const SpendProvider = ({ children }: { children: ReactNode }) => {
@@ -115,6 +123,7 @@ export const SpendProvider = ({ children }: { children: ReactNode }) => {
     const [historialHechizos, setHistorialHechizos] = useState<Array<{ nombre: string; potencia: number; timestamp: number }>>(
         () => loadFromLocalStorage('historialHechizos', [])
     );
+    const [armonicRunes, setArmonicRunesHook] = useState(() => loadFromLocalStorage('armonicRunes', []));
 
     // Sincroniza con localStorage cada vez que cambian
     useEffect(() => {
@@ -128,10 +137,12 @@ export const SpendProvider = ({ children }: { children: ReactNode }) => {
         localStorage.setItem('historialHechizos', JSON.stringify(historialHechizos));
         localStorage.setItem('selectedCharacter', JSON.stringify(selectedCharacter));
         localStorage.setItem('runasActivas', JSON.stringify(runasActivas));
-    }, [potencia1, potencia2, potencia3, potencia4, potencia5, potencia6, historialHechizos, selectedCharacter, nivelActual, runasActivas]);
+        localStorage.setItem('armonicRunes', JSON.stringify(armonicRunes));
+    }, [potencia1, potencia2, potencia3, potencia4, potencia5, potencia6, historialHechizos, selectedCharacter, nivelActual, runasActivas, armonicRunes]);
 
-    const spendSpell = (potencia: number, nombre: string) => {
-        console.log('[SpendContext] spendSpell', potencia, nombre);
+    const spendSpell = (potencia: number, nombre: string, decrease?:boolean  ) => {
+
+        const shouldDecrease = decrease !== undefined ? decrease : true;
 
         const registrarHechizo = (nivel: number) =>
             setHistorialHechizos((h) => [...h, { nombre, potencia: nivel, timestamp: Date.now() }]);
@@ -142,35 +153,35 @@ export const SpendProvider = ({ children }: { children: ReactNode }) => {
                 break;
             case 2:
                 setPotencia2((prev: any) => {
-                    const next = Math.max(0, prev - 1);
+                    const next = Math.max(0, prev + (shouldDecrease ? - 1 : + 1));
                     registrarHechizo(2);
                     return next;
                 });
                 break;
             case 3:
                 setPotencia3((prev: any) => {
-                    const next = Math.max(0, prev - 1);
+                    const next = Math.max(0, prev + (shouldDecrease ? - 1 : + 1));
                     registrarHechizo(3);
                     return next;
                 });
                 break;
             case 4:
                 setPotencia4((prev: any) => {
-                    const next = Math.max(0, prev - 1);
+                    const next = Math.max(0, prev + (shouldDecrease ? - 1 : + 1));
                     registrarHechizo(4);
                     return next;
                 });
                 break;
             case 5:
                 setPotencia5((prev: any) => {
-                    const next = Math.max(0, prev - 1);
+                    const next = Math.max(0, prev + (shouldDecrease ? - 1 : + 1));
                     registrarHechizo(5);
                     return next;
                 });
                 break;
             case 6:
                 setPotencia6((prev: any) => {
-                    const next = Math.max(0, prev - 1);
+                    const next = Math.max(0, prev + (shouldDecrease ? - 1 : + 1));
                     registrarHechizo(6);
                     return next;
                 });
@@ -180,6 +191,9 @@ export const SpendProvider = ({ children }: { children: ReactNode }) => {
                 break;
         }
     };
+
+  
+
 
     const resetSpells = () => {
 
@@ -238,6 +252,26 @@ export const SpendProvider = ({ children }: { children: ReactNode }) => {
         setRunasActivas((prev: any) => Math.max(0, prev - 1));
     };
 
+    const setArmonicRunes = (runes: Array<{ level: number; runeName: string }>) => {
+        setArmonicRunesHook(runes.map(rune => ({ ...rune, disponible: true })));
+    };  
+
+    const useArmonicRune = (runeName: string) => {
+        setArmonicRunesHook((prevRunes: Array<{ level: number; runeName: string; disponible: boolean }>) =>
+            prevRunes.map((rune) =>
+                rune.runeName === runeName && rune.disponible
+                    ? { ...rune, disponible: false }
+                    : rune
+            )
+        );
+    }
+
+    const resetArmonicRunes = () => {
+        // Pon todos las runas armónicas como disponibles
+        // @ts-ignore
+        setArmonicRunesHook(armonicRunes.map(rune => ({ ...rune, disponible: true })));
+    }; 
+
     return (
         <SpendContext.Provider
             value={{
@@ -251,6 +285,7 @@ export const SpendProvider = ({ children }: { children: ReactNode }) => {
                 selectedCharacter,
                 nivelActual,
                 runasActivas,
+                armonicRunes,
                 resetRunesSpend,
                 spendRune,
                 levelUp,
@@ -258,6 +293,9 @@ export const SpendProvider = ({ children }: { children: ReactNode }) => {
                 handleSelectCharacter,
                 spendSpell,
                 resetSpells,
+                setArmonicRunes,
+                resetArmonicRunes,
+                useArmonicRune
             }}
         >
             {children}

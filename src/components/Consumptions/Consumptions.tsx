@@ -75,22 +75,40 @@ function Consumptions() {
                   </div>
                 </div>
 
-                <div className="w-16">
+                  {item.p > 1 && 
+                <div className="w-16 ">
                   {(() => {
                     const max = maxMap[item.p]
                     const disabled = isFinite(max) && item.count <= 0
                     return (
                       <button
-                        className={`w-full cursor-pointer text-xs px-2 py-1 rounded text-white ${disabled ? 'bg-gray-400 cursor-not-allowed' : 'bg-amber-600 hover:bg-amber-500'}`}
-                        onClick={() => !disabled && spendSpell && spendSpell(item.p, `Manual ${item.p}`)}
+                        className={`w-1/2 cursor-pointer text-xs px-2 py-1 rounded text-white ${disabled ? 'bg-gray-400 cursor-not-allowed' : 'bg-amber-600 hover:bg-amber-500'}`}
+                        onClick={() => !disabled && spendSpell && spendSpell(item.p, `Manual ${item.p}`, true)}
                         aria-label={`Usar hechizo potencia ${item.p}`}
                         disabled={disabled}
                       >
-                        {disabled ? 'Agotado' : 'Usar'}
+                        {disabled ? 'x' : '-'}
+                      </button>
+                    )
+                  })()}
+                 
+                  {(() => {
+                    const max = maxMap[item.p]
+                    const disabled = isFinite(max) && item.count == max
+                    return (
+                      <button
+                        className={`w-1/2 cursor-pointer text-xs px-2 py-1 rounded text-white ${disabled ? 'bg-gray-400 cursor-not-allowed' : 'bg-amber-600 hover:bg-amber-500'}`}
+                        onClick={() => !disabled && spendSpell && spendSpell(item.p, `Manual ${item.p}`, false)}
+                        aria-label={`Usar hechizo potencia ${item.p}`}
+                        disabled={disabled}
+                      >
+                        {disabled ? 'x' : '+'}
                       </button>
                     )
                   })()}
                 </div>
+                }
+                
               </div>
             )
           })}

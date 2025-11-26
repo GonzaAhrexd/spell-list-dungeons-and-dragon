@@ -38,7 +38,8 @@ function RunesList({level, onBack}: RunesListProps) {
   const characterRunes = data.personajes.find(p => p.personaje === selectedCharacter.personaje);
 
   const runes = characterRunes ? characterRunes.runas : []; const matched = runes.filter((rune: RunesSpell) => {
-    // level prop is 'Trucos' when user selects tricks; in JSON tricks have nivel === null
+      // Quita las runas armónicas
+  if (rune.tipoRuna === 'Armónica') return false
     if (level === 'Trucos') return rune.nivel === null
     return rune.nivel === level
   })
@@ -65,7 +66,7 @@ function RunesList({level, onBack}: RunesListProps) {
         </div>
 
         <div className="content">
-          <h2 className="text-lg font-bold">Hechizos — Nivel: {level}</h2>
+          <h2 className="text-lg font-bold">Runas — Nivel: {level}</h2>
           <p className="mt-2 text-sm opacity-80">Pulsa un hechizo para ver más detalles.</p>
           {/* Si la lista está vacía mostrar un mensaje */}
           {matched.length === 0 && (
