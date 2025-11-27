@@ -10,11 +10,11 @@ function Consumptions() {
 
   const maxMap: Record<number, number> = {
     1: Infinity,
-    2: 4,
-    3: 3,
-    4: 3,
-    5: 2,
-    6: 1,
+    2: selectedCharacter?.limitePotencias[2] || 0,
+    3: selectedCharacter?.limitePotencias[3] || 0,
+    4: selectedCharacter?.limitePotencias[4] || 0,
+    5: selectedCharacter?.limitePotencias[5] || 0,
+    6: selectedCharacter?.limitePotencias[6] || 0,
   }
 
   const list = [
