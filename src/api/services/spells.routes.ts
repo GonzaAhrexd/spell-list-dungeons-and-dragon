@@ -4,3 +4,10 @@ export const getSpells = () => {
     return axios.get('/spells');
 }
 
+export const addNewSpell = (spellData: any) => {
+    return axios.post('/spells', spellData);
+}
+
+export const getSpellsByUser = (username: string) => {
+    return axios.get(`/spells/${username}`);
+}

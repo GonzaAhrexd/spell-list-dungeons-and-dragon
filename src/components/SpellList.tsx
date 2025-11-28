@@ -1,10 +1,11 @@
-import { useState } from 'react'
+import {  useState } from 'react'
 import SpellShow from './SpellShow'
 import { useContext } from 'react'
 import { SpendContext } from '../context/spellSpend';
 
 import spellData from '../jsons/spell-list.json'
-
+import { getSpellsByUser } from '../api/services/spells.routes'
+import { useEffect } from 'react'
 type JSONSpell = {
   nombre: string;
   tipo: string;
@@ -31,6 +32,8 @@ type SpellListProps = {
 
 function SpellList({ level, onBack }: SpellListProps) {
   const [selectedSpell, setSelectedSpell] = useState<JSONSpell | null>(null)
+  const [spellsState, setSpellsState] = useState<JSONSpell[]>([])
+  const [isLoading, setIsLoading] = useState(false)
 
   const openSpell = (spell: JSONSpell) => setSelectedSpell(spell)
   const closeSpell = () => setSelectedSpell(null)
@@ -58,21 +61,58 @@ function SpellList({ level, onBack }: SpellListProps) {
     }
   }
 
-
   const data = spellData as SpellData;
+
+  // const data = spellData as SpellData;
 
   // Esto busca el personaje actual en el JSON de hechizos
   const characterSpells = data.personajes.find(p => p.personaje === selectedCharacter.personaje);
 
-  
+  useEffect(() => {
+    // initialize from local JSON
+    const initial = characterSpells ? characterSpells.spells : []
+    setSpellsState(initial)
+
+    let mounted = true
+    const fetchBackend = async () => {
+      setIsLoading(true)
+      try {
+        const resp = await getSpellsByUser(selectedCharacter.personaje)
+        const backend = Array.isArray(resp.data) ? resp.data as JSONSpell[] : []
+        if (!mounted) return
+        setSpellsState(prev => {
+          const names = new Set(prev.map(s => s.nombre))
+          const toAdd = backend.filter(b => !names.has(b.nombre))
+          return [...prev, ...toAdd]
+        })
+      } catch (err) {
+        console.error('Error loading backend spells', err)
+      } finally {
+        if (mounted) setIsLoading(false)
+      }
+    }
+    fetchBackend()
+    return () => { mounted = false }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedCharacter.personaje])
+
   // Si existe, extraés sus hechizos
-  const spells = characterSpells ? characterSpells.spells : []; const matched = spells.filter((spell: JSONSpell) => {
+  const spells = spellsState; 
+  const matched = spells.filter((spell: JSONSpell) => {
     // level prop is 'Trucos' when user selects tricks; in JSON tricks have nivel === null
     if (level === 'Trucos') return spell.nivel === null
     return spell.nivel === level
   })
   
-  console.log(spells)
+  console.log('spellsState', spells)
+
+  if (isLoading) {
+    return (
+      <section className="parchment p-4 mt-4">
+        <div className="text-black">Cargando hechizos...</div>
+      </section>
+    )
+  }
 
   
   return (

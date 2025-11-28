@@ -12,7 +12,9 @@ import SelectCharacter from './SelectCharacterPage/SelectCharacter';
 import RunesLog from './RunesLog/RunesLog';
 import RunesList from './runesList'
 
-import { getSpells } from '../api/services/spells.routes';
+import {  getSpellsByUser } from '../api/services/spells.routes';
+import AddSpell from './AddSpell/AddSpell';
+import AddSpellScreen from './AddSpell/AddSpellScreen';
 
 function MainPage() {
 
@@ -21,28 +23,24 @@ function MainPage() {
 
   const [selectedLevel, setSelectedLevel] = useState<string | null>(null)
   const [showingSpellList, setShowingSpellList] = useState(false);
-  
+
   const [showSpellsMenu, setShowSpellsMenu] = useState(true);
   const [showConsumptionMenu, setShowConsumptionMenu] = useState(false);
   const [seeSelectCharacter, setSeeSelectCharacter] = useState(selectedCharacter.personaje === "none");
+  const [addNewSpell, setAddNewSpell] = useState(false);
+  const [isRunicMode,] = useState(selectedCharacter.subclase === "Rúnico");
 
-  const [isRunicMode, ] = useState(selectedCharacter.subclase === "Rúnico");
-
-  const [canUseSpells] = useState(selectedCharacter?.limitePotencias );
+  const [canUseSpells] = useState(selectedCharacter?.limitePotencias);
   const [showRunesSettings, setShowRunesSettings] = useState(false);
   const [showRunesList, setShowRunesList] = useState(false);
+
   const handleSelectedLevel = (level: string) => {
-
-
     setSelectedLevel(level);
-    if(!isRunicMode){
+    if (!isRunicMode) {
       setShowingSpellList(true);
-    }else{
+    } else {
       setShowRunesList(true);
     }
-
-
-
   }
 
   const handleSpellsMenu = () => {
@@ -67,7 +65,7 @@ function MainPage() {
   useEffect(() => {
     const spellsFounded = async () => {
       try {
-        const response = await getSpells();
+        const response = await getSpellsByUser(selectedCharacter.personaje);
         console.log("Spells fetched:", response.data);
       } catch (error) {
         console.error("Error fetching spells:", error);
@@ -78,45 +76,54 @@ function MainPage() {
 
 
   return (
- <div className="app-viewport min-h-screen flex items-center justify-center p-4">
-        {!seeSelectCharacter &&
-          <>
-            <main className="mobile-shell w-full max-w-[420px] mx-auto">
-              <HeaderApp />
-              <div className='flex justify-between'>
-                <button className='antiqua-font w-full cursor-pointer mr-1 mb-2 level-card relative flex items-center justify-center py-4 px-3 text-center text-sm font-bold shadow-inner' onClick={handleSpellsMenu}>{canUseSpells ? "Hechizos" : isRunicMode ? "Runas" : "Habilidades"} </button>
-                { canUseSpells && <button className='antiqua-font w-full cursor-pointer mb-2 level-card relative flex items-center justify-center py-4 px-3 text-center text-sm font-bold shadow-inner' onClick={handleConsumptionMenu}>Consumo</button>}
-                { isRunicMode && <button className='antiqua-font w-full cursor-pointer mb-2 level-card relative flex items-center justify-center py-4 px-3 text-center text-sm font-bold shadow-inner' onClick={handleRunasLog}>Gestionar runas</button>}
-              </div>
-
-              {!showingSpellList && showConsumptionMenu &&
-                <Consumptions />
-              }
-              {!showingSpellList && !showRunesList && showSpellsMenu &&
-                <SpellsMenu selectedLevel={selectedLevel} handleSelectedLevel={handleSelectedLevel} />
-              }
-              {showRunesSettings &&
-                <RunesLog />
-              }
-              {
-                showRunesList && !showRunesSettings &&
-                <RunesList level={selectedLevel} onBack={() => { setShowRunesList(false); setSelectedLevel(null); }} /> 
-              }
-              {showingSpellList &&
-                <SpellList level={selectedLevel} onBack={() => { setShowingSpellList(false); setSelectedLevel(null); }} />
-              }
-              <ChangeCharacter setSeeSelectCharacter={setSeeSelectCharacter} />
-            </main>
-          </>
-        }
-        {(seeSelectCharacter)  &&
+    <div className="app-viewport min-h-screen flex items-center justify-center p-4">
+      {!seeSelectCharacter && !addNewSpell &&
+        <>
           <main className="mobile-shell w-full max-w-[420px] mx-auto">
-            <SelectCharacter />
-          </main>
-        }
-      </div>
+            <HeaderApp />
+            <div className='flex justify-between'>
+              <button className='antiqua-font w-full cursor-pointer mr-1 mb-2 level-card relative flex items-center justify-center py-4 px-3 text-center text-sm font-bold shadow-inner' onClick={handleSpellsMenu}>{canUseSpells ? "Hechizos" : isRunicMode ? "Runas" : "Habilidades"} </button>
+              {canUseSpells && <button className='antiqua-font w-full cursor-pointer mb-2 level-card relative flex items-center justify-center py-4 px-3 text-center text-sm font-bold shadow-inner' onClick={handleConsumptionMenu}>Consumo</button>}
+              {isRunicMode && <button className='antiqua-font w-full cursor-pointer mb-2 level-card relative flex items-center justify-center py-4 px-3 text-center text-sm font-bold shadow-inner' onClick={handleRunasLog}>Gestionar runas</button>}
+            </div>
 
-)
+            {!showingSpellList && showConsumptionMenu &&
+              <Consumptions />
+            }
+            {!showingSpellList && !showRunesList && showSpellsMenu &&
+              <SpellsMenu selectedLevel={selectedLevel} handleSelectedLevel={handleSelectedLevel} />
+            }
+            {showRunesSettings &&
+              <RunesLog />
+            }
+            {
+              showRunesList && !showRunesSettings &&
+              <RunesList level={selectedLevel} onBack={() => { setShowRunesList(false); setSelectedLevel(null); }} />
+            }
+            {showingSpellList &&
+              <SpellList level={selectedLevel} onBack={() => { setShowingSpellList(false); setSelectedLevel(null); }} />
+            }
+
+            <ChangeCharacter setSeeSelectCharacter={setSeeSelectCharacter} />
+            <AddSpell setAddSpell={setAddNewSpell} />
+          </main>
+        </>
+      }
+
+      {(addNewSpell) &&
+        <main className="mobile-shell w-full max-w-[420px] mx-auto">
+          <AddSpellScreen setAddSpell={setAddNewSpell}/>
+        </main>
+      }
+
+      {(seeSelectCharacter) &&
+        <main className="mobile-shell w-full max-w-[420px] mx-auto">
+          <SelectCharacter />
+        </main>
+      }
+    </div>
+
+  )
 }
 
 export default MainPage
