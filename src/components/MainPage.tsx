@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import SpellList from './SpellList'
 import { SpendContext } from '../context/spellSpend';
@@ -11,6 +11,8 @@ import ChangeCharacter from './ChangeCharacter';
 import SelectCharacter from './SelectCharacterPage/SelectCharacter';
 import RunesLog from './RunesLog/RunesLog';
 import RunesList from './runesList'
+
+import { getSpells } from '../api/services/spells.routes';
 
 function MainPage() {
 
@@ -60,9 +62,19 @@ function MainPage() {
     setShowingSpellList(false);
     setShowSpellsMenu(false);
     setShowRunesSettings(true);
-
-
   }
+
+  useEffect(() => {
+    const spellsFounded = async () => {
+      try {
+        const response = await getSpells();
+        console.log("Spells fetched:", response.data);
+      } catch (error) {
+        console.error("Error fetching spells:", error);
+      }
+    };
+    spellsFounded();
+  }, []);
 
 
   return (
