@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'  
+import { useState } from 'react'  
 import { useContext } from 'react'
 import { SpendContext } from '../context/spellSpend';
 
@@ -44,11 +44,7 @@ function RunesList({level, onBack}: RunesListProps) {
     return rune.nivel === level
   })
 
-  useEffect(() => {
-    console.log(selectedRunes)
-  }, [selectedRunes])
 
-  console.log(matched)
     
 
   return (

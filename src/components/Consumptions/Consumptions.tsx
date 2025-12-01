@@ -2,8 +2,9 @@ import { useContext } from 'react'
 import { SpendContext } from '../../context/spellSpend'
 import { useState } from 'react';
 import SpellLog from './SpellLog';
+import Swal from 'sweetalert2';
 function Consumptions() {
-  const { potencia1, potencia2, potencia3, potencia4, potencia5, potencia6, historialHechizos, selectedCharacter, spendSpell, resetSpells } = useContext(SpendContext)
+  const { potencia1, potencia2, potencia3, potencia4, potencia5, potencia6, historialHechizos, selectedCharacter, nivelActual, levelUp, levelDown, spendSpell,  resetSpells } = useContext(SpendContext)
 
   const [seeHistorial, setSeeHistorial] = useState(false);
 
@@ -32,6 +33,46 @@ function Consumptions() {
     return v
   }
 
+
+   const levelingDown = () => {
+      Swal.fire({
+        title: '¿Bajar de nivel?',
+        text: `¿Estás seguro de que querés bajar al nivel anterior?`,
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonText: 'Sí, bajar nivel',
+        cancelButtonText: 'Cancelar',
+      }).then((result) => {
+        if (result.isConfirmed && nivelActual > 1) {
+          levelDown();
+        } else {
+          Swal.fire({
+            title: 'No se puede bajar más',
+            text: `Ya estás en el nivel más bajo.`,
+            icon: 'info',
+            confirmButtonText: 'Aceptar',
+          });
+        }
+      });
+    };
+  
+    const levelingUp = () => {
+      Swal.fire({
+        title: '¿Subir de nivel?',
+        text: `¿Estás seguro de que querés subir al siguiente nivel?`,
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonText: 'Sí, subir nivel',
+        cancelButtonText: 'Cancelar',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          levelUp();
+        }
+      });
+    };
+
+
+
   const displayCount = (c: number, max: number) => (max == Infinity ? '∞' : `${c}/${max}`)
 
   if(!seeHistorial){
@@ -51,7 +92,15 @@ function Consumptions() {
             </button>
           </div>
         </header>
-
+  <header className="flex items-center justify-around mb-3">
+              <div className="cursor-pointer text-3xl font-bold text-black" onClick={() => levelingDown()}>
+                -
+              </div>
+              <h4 className="text-3xl font-bold text-black">Nivel {nivelActual}</h4>
+              <div className="cursor-pointer text-3xl font-bold text-black" onClick={() => levelingUp()}>
+                +
+              </div>
+            </header>
         <nav className="flex flex-col gap-3">
           {list.map(item => {
             // @ts-ignore

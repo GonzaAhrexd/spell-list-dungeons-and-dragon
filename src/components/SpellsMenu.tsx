@@ -5,17 +5,21 @@ import spellData from '../jsons/spell-list.json'
 import runesData from '../jsons/runes-list.json'
  import { useState } from 'react'
 import { getSpellsByUser } from "../api/services/spells.routes"
+
+import romanToNumber from "../functions/RomanToNumber"
+
 type SpellsMenuProps = {
     selectedLevel: string | null;
     handleSelectedLevel: (level: string) => void;
 }
+
 function SpellsMenu({selectedLevel, handleSelectedLevel}: SpellsMenuProps) {
 
 
     
 
 
-    const { selectedCharacter } = useContext(SpendContext);
+    const { selectedCharacter, nivelActual } = useContext(SpendContext);
     const isRunicMode = selectedCharacter.subclase === "Rúnico";
     const [isLoading, setIsLoading] = useState(true);
     const [spellsState, setSpellsState] = useState<any[]>([]);
@@ -112,29 +116,6 @@ function SpellsMenu({selectedLevel, handleSelectedLevel}: SpellsMenuProps) {
         });
 }   
 
-    const romanToNumber = (roman: string): number => {
-        const romanNumerals: { [key: string]: number } = {
-            'I': 1,
-            'II': 2,
-            'III': 3,
-            'IV': 4,
-            'V': 5,
-            'VI': 6,
-            'VII': 7,
-            'VIII': 8,
-            'IX': 9,
-            'X': 10,
-            'XI': 11,
-            'XII': 12,
-            'XIII': 13,
-            'XIV': 14,
-            'XV': 15
-        };
-        return romanNumerals[roman] || 0;   
-        };
-
-
-
     const levels = Array.from(levelsSet).sort((a: any, b: any) => {
         if (romanToNumber(a) < romanToNumber(b)) return -1;
         return romanToNumber(a) - romanToNumber(b);
@@ -155,7 +136,7 @@ function SpellsMenu({selectedLevel, handleSelectedLevel}: SpellsMenuProps) {
                 aria-pressed={selectedLevel === "Trucos"}
             >
                 <span className="level-label antiqua-font">Trucos</span>
-                <span className="level-rune " aria-hidden>✦</span>
+                <span className="level-rune" aria-hidden>✦</span>
             </button>
             <div className="levels grid grid-cols-2 gap-3">
                 {levels.map((level: any) => (
@@ -167,7 +148,7 @@ function SpellsMenu({selectedLevel, handleSelectedLevel}: SpellsMenuProps) {
                         aria-pressed={selectedLevel === level}
                     >
                         <span className="level-label antiqua-font">{level}</span>
-                        <span className="level-rune" aria-hidden>✦</span>
+                        <span className="level-rune" aria-hidden>{romanToNumber(level) <= nivelActual ? "✦" : "🛇"}</span>
                     </button>
                 ))}
             </div>

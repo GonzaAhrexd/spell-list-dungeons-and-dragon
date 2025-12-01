@@ -3,10 +3,11 @@
 import { useContext, useState } from 'react'
 import { SpendContext } from '../context/spellSpend';
 import SpellAnimation  from './SpellAnimation'
+import romanToNumber from '../functions/RomanToNumber';
 
 type Spell = {
-  name?: string;
-  level?: string | number;
+  name: string;
+  level: string;
   potencia: number | undefined;
   description?: string;
 }
@@ -18,7 +19,7 @@ type SpellShowProps = {
 
 function SpellShow({ spell, onClose }: SpellShowProps) {
 
-  const { spendSpell, potencia2, potencia3, potencia4, potencia5, potencia6 } = useContext(SpendContext)
+  const { spendSpell, potencia2, potencia3, potencia4, potencia5, potencia6, nivelActual } = useContext(SpendContext)
   const [isUsing, setIsUsing] = useState(false)
 
   if (!spell) return null
@@ -63,8 +64,8 @@ function SpellShow({ spell, onClose }: SpellShowProps) {
                 setIsUsing(false)
                 onClose && onClose()
               }, 420)
-            }}
-            disabled={isUsing || !(spell.potencia === 1 || (spell.potencia === 2 ? potencia2 > 0 : spell.potencia === 3 ? potencia3 > 0 : spell.potencia === 4 ? potencia4 > 0 : spell.potencia === 5 ? potencia5 > 0 : spell.potencia === 6 ? potencia6 > 0 : false))}
+            }}          
+            disabled={isUsing || romanToNumber(spell?.level) > nivelActual || !(spell.potencia === 1 || (spell.potencia === 2 ? potencia2 > 0 : spell.potencia === 3 ? potencia3 > 0 : spell.potencia === 4 ? potencia4 > 0 : spell.potencia === 5 ? potencia5 > 0 : spell.potencia === 6 ? potencia6 > 0 : false))}
           >
             {isUsing ? (
               <>
@@ -72,6 +73,7 @@ function SpellShow({ spell, onClose }: SpellShowProps) {
                 Usando...
               </>
             ) : (
+              (romanToNumber(spell?.level) > nivelActual) ? 'Nivel insuficiente' : 
               (spell.potencia === 1) ||
                 (spell.potencia === 2 && potencia2 > 0) ||
                 (spell.potencia === 3 && potencia3 > 0) ||

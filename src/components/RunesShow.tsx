@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react"
 import { SpendContext } from "../context/spellSpend"
 import SpellAnimation from "./SpellAnimation";
-
+import romanToNumber from "../functions/RomanToNumber";
 type RunesShowProps = {
   rune?: any | null;
   onClose?: () => void;
@@ -9,7 +9,7 @@ type RunesShowProps = {
 
 function RunesShow({ rune, onClose }: RunesShowProps) {
 
-  const { runasActivas, spendRune } = useContext(SpendContext)
+  const { runasActivas, spendRune, nivelActual } = useContext(SpendContext)
   const [isUsing, setIsUsing] = useState(false)
 
   useEffect(() => {
@@ -61,7 +61,7 @@ function RunesShow({ rune, onClose }: RunesShowProps) {
                 onClose && onClose()
               }, 420)
             }}
-            disabled={isUsing || runasActivas <= 0}
+            disabled={isUsing || runasActivas <= 0 || romanToNumber(rune.nivel) > nivelActual}
           >
             {isUsing ? (
               <>
@@ -69,6 +69,7 @@ function RunesShow({ rune, onClose }: RunesShowProps) {
                 Usando...
               </>
             ) : (
+              (romanToNumber(rune.nivel) > nivelActual) ? 'Nivel insuficiente' :
               (runasActivas > 0)
                 ? 'Utilizar'
                 : 'Agotado'
