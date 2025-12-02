@@ -35,7 +35,7 @@ function SpellShow({ spell, onClose }: SpellShowProps) {
 
   if (!spell) return null
 
-  const isSelectivo = typeof spell.potencia === 'number' && spell.potencia >= 1 && spell.potencia < 4
+  const isSelectivo = typeof spell.potencia === 'number' && spell.potencia >= 1 && spell.potencia < 4 && spell.tipo !== 'truco';
 
   return (
     <div className="spell-modal fixed inset-0 z-50 flex items-center justify-center px-4">
@@ -88,7 +88,7 @@ function SpellShow({ spell, onClose }: SpellShowProps) {
                         className={`flex-1 cursor-pointer use-button mx-2 rounded-md py-3 font-semibold text-white ${disponible ? 'bg-amber-600 hover:bg-amber-500' : 'bg-gray-400 cursor-not-allowed'}`}
                         onClick={() => {
                           if (!disponible) return
-                          console.log(`Usando Selectivo: ${spell.name} - potencia seleccionada: ${selectedPotencia}`)
+                         
                          
                           setIsUsing(true)
                           try {

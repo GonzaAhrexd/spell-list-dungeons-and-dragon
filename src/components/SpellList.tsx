@@ -138,7 +138,7 @@ function SpellList({ level, onBack }: SpellListProps) {
           )}
           {/* Mostrar hechizos 'Selectivo' (potencia 1-3) primero, luego agrupar por potencia y mostrar secciones separadas */}
           {(() => {
-            const isSelectivo = (s: JSONSpell) => typeof s.potencia === 'number' && s.potencia >= 1 && s.potencia < 4
+            const isSelectivo = (s: JSONSpell) => typeof s.potencia === 'number' && s.potencia >= 1 && s.potencia < 4 && s.tipo !== 'truco'
 
             const selectivos = matched.filter(isSelectivo)
             const others = matched.filter(s => !isSelectivo(s))

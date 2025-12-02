@@ -113,8 +113,8 @@ function AddSpellScreen({ setAddSpell }: SetSpellProps) {
                     <div>
                         <label className="block text-sm font-semibold text-amber-950 mb-1">Tipo</label>
                         <select className="mt-1 w-full rounded-lg px-3 py-2 bg-white/80 border border-black/10 text-black focus:ring-amber-500" {...register('tipo', { required: true })}>
-                            <option value="Ofensivo">Hechizo</option>
-                            <option value="Defensivo">Habilidad</option>
+                            <option value="Hechizo">Hechizo</option>
+                            <option value="Habilidad">Habilidad</option>
                         </select>
                     </div>
 
