@@ -8,7 +8,7 @@ import { getSpellsByUser } from '../api/services/spells.routes'
 import { useEffect } from 'react'
 type JSONSpell = {
   nombre: string;
-  tipo: string;
+  tipo: "truco" | "hechizo" | "bendición";
   nivel: string | null;
   descripcion: string;
   potencia: number;
@@ -136,9 +136,14 @@ function SpellList({ level, onBack }: SpellListProps) {
           {matched.length === 0 && (
             <p className="mt-2 text-sm text-gray-500">No hay hechizos disponibles para este nivel.</p>
           )}
-          {/* Agrupar por potencia y mostrar secciones separadas */}
+          {/* Mostrar hechizos 'Selectivo' (potencia 1-3) primero, luego agrupar por potencia y mostrar secciones separadas */}
           {(() => {
-            const groups = matched.reduce((acc: Record<number, JSONSpell[]>, s) => {
+            const isSelectivo = (s: JSONSpell) => typeof s.potencia === 'number' && s.potencia >= 1 && s.potencia < 4
+
+            const selectivos = matched.filter(isSelectivo)
+            const others = matched.filter(s => !isSelectivo(s))
+
+            const groups = others.reduce((acc: Record<number, JSONSpell[]>, s) => {
               const p = typeof s.potencia === 'number' ? s.potencia : 1
               if (!acc[p]) acc[p] = []
               acc[p].push(s)
@@ -151,6 +156,25 @@ function SpellList({ level, onBack }: SpellListProps) {
 
             return (
               <div className="potencia-groups mt-4 space-y-4">
+                {selectivos.length > 0 && (
+                  <section className="potencia-group">
+                    <h4 className="potencia-title text-sm font-semibold mb-2">Selectivo</h4>
+                    <ul className="spell-grid grid grid-cols-1 gap-2">
+                      {selectivos.map(spell => (
+                        <li key={spell.nombre} className="spell-item">
+                          <button
+                            className="spell-button cursor-pointer w-full text-xs text-left px-3 py-2 rounded-lg bg-white/90 dark:bg-black/10 shadow-sm"
+                            onClick={() => openSpell(spell)}
+                            aria-label={`Abrir hechizo ${spell.nombre}`}
+                          >
+                            {spell.nombre}
+                          </button>
+                        </li>
+                      ))}
+                    </ul>
+                  </section>
+                )}
+
                 {potencias.map(p => (
                   <section key={p} className="potencia-group">
                     <h4 className="potencia-title text-sm font-semibold mb-2">Potencia {p} {handlePotencia(p) && <span className="text-red-500">Agotado</span>}</h4>
@@ -181,6 +205,7 @@ function SpellList({ level, onBack }: SpellListProps) {
               level: selectedSpell.nivel ?? 'Truco',
               description: selectedSpell.descripcion,
               potencia: selectedSpell.potencia,
+              tipo: selectedSpell.tipo
             }}
             onClose={closeSpell}
           />

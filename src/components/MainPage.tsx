@@ -16,6 +16,7 @@ import {  getSpellsByUser } from '../api/services/spells.routes';
 import AddSpell from './AddSpell/AddSpell';
 import AddSpellScreen from './AddSpell/AddSpellScreen';
 
+
 function MainPage() {
 
 
@@ -81,6 +82,7 @@ function MainPage() {
         <>
           <main className="mobile-shell w-full max-w-[420px] mx-auto">
             <HeaderApp />
+            
             <div className='flex justify-between'>
               <button className='antiqua-font w-full cursor-pointer mr-1 mb-2 level-card relative flex items-center justify-center py-4 px-3 text-center text-sm font-bold shadow-inner' onClick={handleSpellsMenu}>{canUseSpells ? "Hechizos" : isRunicMode ? "Runas" : "Habilidades"} </button>
               {canUseSpells && <button className='antiqua-font w-full cursor-pointer mb-2 level-card relative flex items-center justify-center py-4 px-3 text-center text-sm font-bold shadow-inner' onClick={handleConsumptionMenu}>Consumo</button>}
