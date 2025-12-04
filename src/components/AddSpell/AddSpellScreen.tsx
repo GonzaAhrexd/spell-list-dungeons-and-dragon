@@ -30,8 +30,6 @@ function AddSpellScreen({ setAddSpell }: SetSpellProps) {
     const numberToRoman = (number: number): string => {
         const romanNumbers = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII', 'XIII', 'XIV', 'XV']
 
-        console.log(romanNumbers[number - 1])
-
 
         if (number < 1 || number > 15) {
             return '';
@@ -50,7 +48,12 @@ function AddSpellScreen({ setAddSpell }: SetSpellProps) {
             title: 'Hechizo agregado',
             text: `Hechizo "${data.nombre}" registrado correctamente.`,
             icon: 'success',
-            confirmButtonText: 'Aceptar'
+            confirmButtonText: 'Aceptar',
+                background: '#0E090C',
+            color: '#f1f5f9',
+            customClass: {
+              confirmButton: 'antiqua-font w-full cursor-pointer mb-2 level-card relative flex items-center justify-center py-4 px-3 text-center text-sm font-bold shadow-inner'
+            }
         });
         
         await addNewSpell(data);
@@ -113,8 +116,8 @@ function AddSpellScreen({ setAddSpell }: SetSpellProps) {
                     <div>
                         <label className="block text-sm font-semibold text-amber-950 mb-1">Tipo</label>
                         <select className="mt-1 w-full rounded-lg px-3 py-2 bg-white/80 border border-black/10 text-black focus:ring-amber-500" {...register('tipo', { required: true })}>
-                            <option value="Hechizo">Hechizo</option>
-                            <option value="Habilidad">Habilidad</option>
+                            <option value="hechizo">Hechizo</option>
+                            <option value="habilidad">Habilidad</option>
                         </select>
                     </div>
 

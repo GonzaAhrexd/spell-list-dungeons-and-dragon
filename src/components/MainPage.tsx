@@ -1,26 +1,25 @@
-import { useEffect, useState } from 'react'
-
-import SpellList from './SpellList'
+// REACT
+import { useState, useContext, useEffect } from 'react'
+// Contexto
 import { SpendContext } from '../context/spellSpend';
-import { useContext } from 'react';
+// Componentes
+import SpellList from './SpellList'
 import Consumptions from './Consumptions/Consumptions';
 import HeaderApp from './HeaderApp';
 import SpellsMenu from './SpellsMenu';
-
 import ChangeCharacter from './ChangeCharacter';
 import SelectCharacter from './SelectCharacterPage/SelectCharacter';
 import RunesLog from './RunesLog/RunesLog';
 import RunesList from './runesList'
+import AdminManager from './AdminManager';
 
-import {  getSpellsByUser } from '../api/services/spells.routes';
-import AddSpell from './AddSpell/AddSpell';
-import AddSpellScreen from './AddSpell/AddSpellScreen';
-
+import { pingServer } from '../api/services/ping.routes';
+import Swal from 'sweetalert2';
 
 function MainPage() {
 
 
-  const { selectedCharacter } = useContext(SpendContext);
+  const { selectedCharacter  } = useContext(SpendContext);
 
   const [selectedLevel, setSelectedLevel] = useState<string | null>(null)
   const [showingSpellList, setShowingSpellList] = useState(false);
@@ -28,7 +27,6 @@ function MainPage() {
   const [showSpellsMenu, setShowSpellsMenu] = useState(true);
   const [showConsumptionMenu, setShowConsumptionMenu] = useState(false);
   const [seeSelectCharacter, setSeeSelectCharacter] = useState(selectedCharacter.personaje === "none");
-  const [addNewSpell, setAddNewSpell] = useState(false);
   const [isRunicMode,] = useState(selectedCharacter.subclase === "Rúnico");
 
   const [canUseSpells] = useState(selectedCharacter?.limitePotencias);
@@ -61,24 +59,49 @@ function MainPage() {
     setShowingSpellList(false);
     setShowSpellsMenu(false);
     setShowRunesSettings(true);
-  }
+  } 
+
+  // Haz una verificación del estado del servidor
+
+  const [isOnline, setIsOnline] = useState(false);
 
   useEffect(() => {
-    const spellsFounded = async () => {
+    const checkServerStatus = async () => {
       try {
-        const response = await getSpellsByUser(selectedCharacter.personaje);
-        console.log("Spells fetched:", response.data);
-      } catch (error) {
-        console.error("Error fetching spells:", error);
+        await pingServer();
+        setIsOnline(true);
+      } catch {
+        setIsOnline(false);
       }
     };
-    spellsFounded();
+
+    checkServerStatus();
   }, []);
+
+  const handleServer = () => {
+    Swal.fire({
+      title: 'Estado del servidor',
+      text: isOnline ? 'El servidor está activo y funcionando correctamente. 🟢' : 'El servidor está inactivo, pueden haber retrasos en cargar los hechizos locales, y los hechizos de la base de datos NO están disponibles. 🔴',
+      icon: isOnline ? 'success' : 'error',
+      confirmButtonText: 'Cerrar',
+      background: '#0E090C',
+      color: '#f1f5f9',
+      customClass: {
+        confirmButton: 'antiqua-font w-full cursor-pointer mb-2 level-card relative flex items-center justify-center py-4 px-3 text-center text-sm font-bold shadow-inner',
+    }
+  })
+
+
+  }
+
 
 
   return (
     <div className="app-viewport min-h-screen flex items-center justify-center p-4">
-      {!seeSelectCharacter && !addNewSpell &&
+      {selectedCharacter.personaje === "Game Master" && !seeSelectCharacter && 
+        <AdminManager setSeeSelectCharacter={setSeeSelectCharacter} />
+      }
+      {!seeSelectCharacter && selectedCharacter.personaje !== "Game Master" && 
         <>
           <main className="mobile-shell w-full max-w-[420px] mx-auto">
             <HeaderApp />
@@ -107,18 +130,13 @@ function MainPage() {
             }
 
             <ChangeCharacter setSeeSelectCharacter={setSeeSelectCharacter} />
-            <AddSpell setAddSpell={setAddNewSpell} />
+          <div className='antiqua-font cursor-pointer w-full flex flex-col items-center justify-center rounded-lg border mt-2' onClick={() => handleServer()}>Estado del servidor: {isOnline ? "Activo 🟢" : "Inactivo 🔴"}</div>
           </main>
         </>
       }
 
-      {(addNewSpell) &&
-        <main className="mobile-shell w-full max-w-[420px] mx-auto">
-          <AddSpellScreen setAddSpell={setAddNewSpell}/>
-        </main>
-      }
 
-      {(seeSelectCharacter) &&
+      {(seeSelectCharacter ) &&
         <main className="mobile-shell w-full max-w-[420px] mx-auto">
           <SelectCharacter />
         </main>

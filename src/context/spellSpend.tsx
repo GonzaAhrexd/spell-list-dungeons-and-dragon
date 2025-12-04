@@ -110,7 +110,6 @@ export const SpendProvider = ({ children }: { children: ReactNode }) => {
         },
     };
 
-
     const [potencia1, setPotencia1] = useState(() => loadFromLocalStorage('potencia1', 1000));
     const [potencia2, setPotencia2] = useState(() => loadFromLocalStorage('potencia2', 0));
     const [potencia3, setPotencia3] = useState(() => loadFromLocalStorage('potencia3', 0));
@@ -236,6 +235,28 @@ export const SpendProvider = ({ children }: { children: ReactNode }) => {
     }, [selectedCharacter]);
 
     const handleSelectCharacter = (character: string) => {
+        console.log(character)
+        if(character === "Game Master"){
+            setSelectedCharacter({
+                jugador: "Game Master",
+                grupo: "GM",
+                personaje: "Game Master",
+                clase: "GM",
+                subclase: "GM",
+                limitePotencias: {
+                    "1": 1000,
+                    "2": 1000,
+                    "3": 1000,
+                    "4": 1000,
+                    "5": 1000,
+                    "6": 1000,
+                },
+            });
+            setNivelActual(1);  
+            return;
+        }
+
+
         const selected = personajesData.personajes.find(p => p.personaje === character);
         if (selected) {
             setSelectedCharacter(selected);

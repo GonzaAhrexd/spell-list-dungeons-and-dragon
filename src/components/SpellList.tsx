@@ -1,11 +1,14 @@
-import {  useState } from 'react'
-import SpellShow from './SpellShow'
-import { useContext } from 'react'
+// REACT
+import { useEffect, useState, useContext } from 'react'
+// Contexto
 import { SpendContext } from '../context/spellSpend';
-
+// Componentes
+import SpellShow from './SpellShow'
+// Json
 import spellData from '../jsons/spell-list.json'
+// API
 import { getSpellsByUser } from '../api/services/spells.routes'
-import { useEffect } from 'react'
+
 type JSONSpell = {
   nombre: string;
   tipo: "truco" | "hechizo" | "bendición";
@@ -104,7 +107,6 @@ function SpellList({ level, onBack }: SpellListProps) {
     return spell.nivel === level
   })
   
-  console.log('spellsState', spells)
 
   if (isLoading) {
     return (
