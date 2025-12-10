@@ -1,15 +1,18 @@
-import { useState } from 'react'  
+import { useEffect, useState } from 'react'  
 import { useContext } from 'react'
 import { SpendContext } from '../context/spellSpend';
 
 import runesData from '../jsons/runes-list.json'
 import RunesShow from './RunesShow';
 
+// API 
+import { getSpellsByUser } from '../api/services/spells.routes';
+
 type RunesSpell = {
     nombre: string;
     nivel: string;
     tipoRuna: string;
-
+    descripcion?: string;
 }
 
 type Runes =  { 
@@ -27,6 +30,8 @@ type RunesListProps = {
 function RunesList({level, onBack}: RunesListProps) {
 
   const [selectedRunes, setSelectedRunes] = useState(null)
+  const [runes, setRunes] = useState<RunesSpell[]>([])
+  const [loading, setLoading] = useState(true)
 
   const openRune = (rune: any) => setSelectedRunes(rune)
   const closeRune = () => setSelectedRunes(null)
@@ -36,11 +41,40 @@ function RunesList({level, onBack}: RunesListProps) {
   const data = runesData as Runes 
 
   const characterRunes = data.personajes.find(p => p.personaje === selectedCharacter.personaje);
+  const jsonRunes = characterRunes ? characterRunes.runas : [];
 
-  const runes = characterRunes ? characterRunes.runas : []; const matched = runes.filter((rune: RunesSpell) => {
+  useEffect(() => {
+    const fetchAndMergeRunes = async () => {
+      if (!selectedCharacter?.personaje) return;
+      
+      try {
+        setLoading(true);
+        const response = await getSpellsByUser(selectedCharacter.personaje);
+        // Filtrar solo las runas del backend (los que tienen tipoRuna definido)
+        const backendRunes = response.data.filter((spell: any) => spell.tipoRuna && spell.tipoRuna !== '' && spell.tipoRuna !== 'Armónica');
+        
+        // Combinar runas del JSON con las del backend, evitando duplicados por nombre
+        const names = new Set(jsonRunes.map(r => r.nombre));
+        const newBackendRunes = backendRunes.filter((r: any) => !names.has(r.nombre));
+        const mergedRunes = [...jsonRunes, ...newBackendRunes];
+        
+        setRunes(mergedRunes);
+      } catch (error) {
+        console.error('Error al cargar las runas:', error);
+        // Si hay error, usa solo las runas del JSON
+        setRunes(jsonRunes);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchAndMergeRunes();
+  }, [selectedCharacter]);
+
+  const matched = runes.filter((rune: RunesSpell) => {
       // Quita las runas armónicas
   if (rune.tipoRuna === 'Armónica') return false
-    if (level === 'Trucos') return rune.nivel === null
+    if (level === 'Trucos') return rune.nivel === null || rune.nivel === ''
     return rune.nivel === level
   })
 
@@ -64,12 +98,13 @@ function RunesList({level, onBack}: RunesListProps) {
         <div className="content">
           <h2 className="text-lg font-bold">Runas — Nivel: {level}</h2>
           <p className="mt-2 text-sm opacity-80">Pulsa un hechizo para ver más detalles.</p>
-          {/* Si la lista está vacía mostrar un mensaje */}
-          {matched.length === 0 && (
+          
+          {loading ? (
+            <p className="mt-2 text-sm text-gray-500">Cargando runas...</p>
+          ) : matched.length === 0 ? (
             <p className="mt-2 text-sm text-gray-500">No hay hechizos disponibles para este nivel.</p>
-          )}
-          {/* Agrupar por potencia y mostrar secciones separadas */}
-          {(() => {
+          ) : (
+            (() => {
             const groups = matched.reduce((acc: Record<number, RunesSpell[]>, s) => {
               const p = typeof s.tipoRuna === 'number' ? s.tipoRuna : 1
               if (!acc[p]) acc[p] = []
@@ -103,7 +138,8 @@ function RunesList({level, onBack}: RunesListProps) {
                 ))}
               </div>
             )
-          })()}
+          })())
+          }
         </div>
           { selectedRunes && (
             <RunesShow

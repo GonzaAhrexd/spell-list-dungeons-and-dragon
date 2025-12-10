@@ -58,7 +58,15 @@ function SpellsMenu({selectedLevel, handleSelectedLevel}: SpellsMenuProps) {
 
     useEffect(() => {
         // Initialize spells from local JSON for the selected character
-        const initial = characterSpells ? characterSpells.spells : [];
+        let initial 
+        if(isRunicMode){ 
+            initial =  characterRunes ? characterRunes.runas : [];
+        } else {
+            initial =  characterSpells ? characterSpells.spells : [];
+        }
+
+        console.log(initial)
+
         setSpellsState(initial);
 
         // Fetch backend spells for the user and append to local spells
@@ -67,6 +75,9 @@ function SpellsMenu({selectedLevel, handleSelectedLevel}: SpellsMenuProps) {
             setIsLoading(true);
             try {
                 const response = await getSpellsByUser(selectedCharacter.personaje);
+
+                // console.log(response.data)
+
                 if (!mounted) return;
                 const backendSpells = Array.isArray(response.data) ? response.data : [];
                 // Merge backend spells with existing local spellsState safely
@@ -76,6 +87,8 @@ function SpellsMenu({selectedLevel, handleSelectedLevel}: SpellsMenuProps) {
                     const newOnes = backendSpells.filter((s: any) => !names.has(s.nombre));
                     return [...prev, ...newOnes];
                 });
+
+                
             } catch (error) {
                 console.error("Error fetching spells:", error);
             } finally {
@@ -99,7 +112,7 @@ function SpellsMenu({selectedLevel, handleSelectedLevel}: SpellsMenuProps) {
 
     if(isRunicMode) {
         levelsSet = new Set<string>();
-        characterRunes?.runas.forEach(rune => {
+        spellsState.forEach(rune => {
             if (rune.nivel) {
                 // @ts-ignore
                 levelsSet.add(rune.nivel);

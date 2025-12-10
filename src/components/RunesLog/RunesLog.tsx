@@ -96,7 +96,7 @@ function RunesLog() {
                 <div className="w-28">
                   <div className="text-xs font-semibold text-black">Usos</div>
                   <div className="text-[13px] text-gray-700">
-                    {runasActivas}/{runasActivas}
+                    {runasActivas}/{runasMaximasPorCombate}
                   </div>
                 </div>
 

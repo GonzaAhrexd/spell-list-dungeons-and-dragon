@@ -36,26 +36,26 @@ function ExpandableSpell({ data }: ExpandableSpellProps) {
     const onSubmit = async (values: Row) => {
         if (!values.nombre || values.nombre.trim() === '') return alert('El nombre es obligatorio')
         try {
-                console.log(values)
-                Swal.fire({
-                    title: '¿Estás seguro de guardar los cambios?',
-                    icon: 'question',
-                    showCancelButton: true,
-                    // Agrega para poner la contraseaña
-                    input: 'password',
-                    inputPlaceholder: 'Contraseña',
-                    confirmButtonText: 'Sí, guardar',
-                    cancelButtonText: 'Cancelar',
-                }).then(async (result) => {
-                    if (result.isConfirmed) {
+            console.log(values)
+            Swal.fire({
+                title: '¿Estás seguro de guardar los cambios?',
+                icon: 'question',
+                showCancelButton: true,
+                // Agrega para poner la contraseaña
+                input: 'password',
+                inputPlaceholder: 'Contraseña',
+                confirmButtonText: 'Sí, guardar',
+                cancelButtonText: 'Cancelar',
+            }).then(async (result) => {
+                if (result.isConfirmed) {
 
-                        values.pass = result.value;
-                        await editSpell(values);
-                        Swal.fire('Guardado', 'Los cambios fueron guardados.', 'success');
-                        window.location.reload();
-                    }
-                
-                })
+                    values.pass = result.value;
+                    await editSpell(values);
+                    Swal.fire('Guardado', 'Los cambios fueron guardados.', 'success');
+                    window.location.reload();
+                }
+
+            })
 
 
         } catch (err) {
@@ -83,8 +83,8 @@ function ExpandableSpell({ data }: ExpandableSpellProps) {
             background: '#0E090C',
             color: '#f1f5f9',
             customClass: {
-              confirmButton: 'antiqua-font w-full cursor-pointer mb-2 level-card relative flex items-center justify-center py-4 px-3 text-center text-sm font-bold shadow-inner',
-              cancelButton: 'antiqua-font w-full cursor-pointer mb-2 level-card relative flex items-center justify-center py-4 px-3 text-center text-sm font-bold shadow-inner',
+                confirmButton: 'antiqua-font w-full cursor-pointer mb-2 level-card relative flex items-center justify-center py-4 px-3 text-center text-sm font-bold shadow-inner',
+                cancelButton: 'antiqua-font w-full cursor-pointer mb-2 level-card relative flex items-center justify-center py-4 px-3 text-center text-sm font-bold shadow-inner',
             },
         }).then(async (result) => {
             if (result.isConfirmed) {
@@ -107,7 +107,7 @@ function ExpandableSpell({ data }: ExpandableSpellProps) {
                     });
 
                 } catch (err) {
-                    Swal.fire({ 
+                    Swal.fire({
                         text: "Contraseña incorrecta o error en el servidor.",
                         icon: 'error',
                         confirmButtonText: 'Aceptar',
@@ -130,7 +130,7 @@ function ExpandableSpell({ data }: ExpandableSpellProps) {
     }
 
 
-        const personajes = personajesData.personajes || [];
+    const personajes = personajesData.personajes || [];
 
 
     return (
@@ -166,7 +166,7 @@ function ExpandableSpell({ data }: ExpandableSpellProps) {
                 )}
 
                 {editMode && (
-                    <form className="space-y-3" onSubmit={ handleSubmit(onSubmit) }>
+                    <form className="space-y-3" onSubmit={handleSubmit(onSubmit)}>
                         <div>
                             <label className="text-xs text-[#9a9188]">Nombre</label>
                             <input {...register('nombre')} className="w-full mt-1 p-2 rounded bg-[#120a0d] text-[#d6cdc3] border border-[#2b202a]" />
@@ -193,33 +193,37 @@ function ExpandableSpell({ data }: ExpandableSpellProps) {
                         </div>
                         <div>
                             <label className="text-xs text-[#9a9188]">Nivel</label>
-                                <select {...register('nivel', )} className="w-full mt-1 p-2 rounded bg-[#120a0d] text-[#d6cdc3] border border-[#2b202a]">
-                                    {niveles.map((nivel) => (
-                                        <option key={nivel} value={nivel} selected={data.nivel === nivel}>{nivel}</option>
-                                    ))}
-                                    
-                                </select>                        
-                            </div>
+                            <select {...register('nivel',)} className="w-full mt-1 p-2 rounded bg-[#120a0d] text-[#d6cdc3] border border-[#2b202a]">
+                                {niveles.map((nivel) => (
+                                    <option key={nivel} value={nivel} selected={data.nivel === nivel}>{nivel}</option>
+                                ))}
+
+                            </select>
+                        </div>
 
                         <div>
                             <label className="text-xs text-[#9a9188]">Descripción</label>
                             <textarea {...register('descripcion')} className="w-full mt-1 p-2 rounded bg-[#120a0d] text-[#d6cdc3] border border-[#2b202a]" rows={4} />
                         </div>
 
-                    <div>
-                        <label className="block text-sm font-semibold text-amber-950 mb-2">Usuarios (seleccionar uno o varios)</label>
-                        <div className="grid grid-cols gap-2 max-h-56 overflow-y-auto p-3 bg-[#0f0b0c] rounded-lg border border-[#2b202a]">
-                            {personajes.map((p: any) => (
-                                <label key={p.personaje} className="flex items-center gap-3 text-[#d6cdc3] px-3 py-2 rounded-md">
-                                    <input className="w-4 h-4" type="checkbox" value={p.personaje} {...register('usuariosConHechizo')} defaultChecked={data.usuariosConHechizo.includes(p.personaje)} />
-                                    <div className="text-sm">
-                                        <div className="font-medium">{p.personaje}</div>
-                                        <div className="text-xs text-[#9a9188]">{p.jugador}</div>
-                                    </div>
-                                </label>
-                            ))}
+                        <div>
+                            <label className="block text-sm font-semibold text-amber-950 mb-2">Usuarios (seleccionar uno o varios)</label>
+                            <div className="grid grid-cols gap-2 max-h-56 overflow-y-auto p-3 bg-[#0f0b0c] rounded-lg border border-[#2b202a]">
+                                {personajes.map((p: any) => (
+                                    <>
+                                    {p.subclase != "Rúnico" && 
+                                    <label key={p.personaje} className="flex items-center gap-3 text-[#d6cdc3] px-3 py-2 rounded-md">
+                                        <input className="w-4 h-4" type="checkbox" value={p.personaje} {...register('usuariosConHechizo')} defaultChecked={data.usuariosConHechizo.includes(p.personaje)} />
+                                        <div className="text-sm">
+                                            <div className="font-medium">{p.personaje}</div>
+                                            <div className="text-xs text-[#9a9188]">{p.jugador}</div>
+                                        </div>
+                                    </label>
+                                    }
+                                    </>
+                                ))}
+                            </div>
                         </div>
-                    </div>
 
                     </form>
                 )}

@@ -18,3 +18,7 @@ export const deleteSpell = (id: string, password: string) => {
 export const editSpell = (spellData: any) => {
     return axios.put(`/spells/`, spellData);
 }
+
+export const getRunesByUser = (username: string) => {
+    return axios.get(`/spells/${username}`);
+}

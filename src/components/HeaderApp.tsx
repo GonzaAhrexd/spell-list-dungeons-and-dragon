@@ -38,6 +38,12 @@ function HeaderApp() {
           showCancelButton: true,
           confirmButtonText: 'Sí, subir nivel',
           cancelButtonText: 'Cancelar',
+          background: '#0E090C',
+          color: '#f1f5f9',
+          customClass: {
+            confirmButton: 'antiqua-font w-full cursor-pointer mb-2 level-card relative flex items-center justify-center py-4 px-3 text-center text-sm font-bold shadow-inner',
+            cancelButton: 'antiqua-font w-full cursor-pointer mb-2 level-card relative flex items-center justify-center py-4 px-3 text-center text-sm font-bold shadow-inner'
+          }
         }).then((result) => {
           if (result.isConfirmed) {
             levelUp();
