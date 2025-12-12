@@ -4,10 +4,9 @@ import tailwindcss from '@tailwindcss/vite'
 
 // https://vite.dev/config/
 export default defineConfig({
-  base: "/spell-list-dungeons-and-dragon",
+  // base: "/spell-list-dungeons-and-dragon",
   plugins: [
     react(),
     tailwindcss()
-
   ],
 })

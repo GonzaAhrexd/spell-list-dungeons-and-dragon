@@ -16,6 +16,11 @@ import AdminManager from './AdminManager';
 import { pingServer } from '../api/services/ping.routes';
 import Swal from 'sweetalert2';
 
+import romanToNumber  from '../functions/RomanToNumber';
+import numberToRoman  from '../functions/NumberToRoman';
+
+import getLevels from '../functions/getLevels';
+
 function MainPage() {
 
 
@@ -94,6 +99,56 @@ function MainPage() {
 
   }
 
+  const handlePreviousLevel = () => {
+    if (selectedLevel) {
+      const currentLevelNumber = romanToNumber(selectedLevel);
+      console.log(currentLevelNumber)
+      if (currentLevelNumber > 1) {
+        const previousLevelRoman = numberToRoman(currentLevelNumber - 1);
+        setSelectedLevel(previousLevelRoman);
+      }else{
+        Swal.fire({
+          title: 'Nivel mínimo alcanzado',
+          text: 'No podés bajar más allá del nivel 1.',
+          icon: 'warning',
+          confirmButtonText: 'Cerrar',
+          background: '#0E090C',
+          color: '#f1f5f9',
+          customClass: {
+            confirmButton: 'antiqua-font w-full cursor-pointer mb-2 level-card relative flex items-center justify-center py-4 px-3 text-center text-sm font-bold shadow-inner',
+        }
+      })
+      }
+    }
+
+  }
+
+  const handleNextLevel = () => {
+    
+    const levelsSpell = getLevels(selectedCharacter);
+
+    const maxLevel = romanToNumber(levelsSpell[levelsSpell.length -1]);
+
+    if (selectedLevel) {
+      const currentLevelNumber = romanToNumber(selectedLevel);
+      if (currentLevelNumber < maxLevel) {
+        const nextLevelRoman = numberToRoman(currentLevelNumber + 1);
+        setSelectedLevel(nextLevelRoman);
+      }else{
+        Swal.fire({
+          title: 'Nivel máximo alcanzado',
+          text: 'No podés subir más allá del nivel ' + maxLevel,
+          icon: 'warning',
+          confirmButtonText: 'Cerrar',
+          background: '#0E090C',
+          color: '#f1f5f9',
+          customClass: {
+            confirmButton: 'antiqua-font w-full cursor-pointer mb-2 level-card relative flex items-center justify-center py-4 px-3 text-center text-sm font-bold shadow-inner',
+        }
+      })
+      }
+  }
+  }
 
 
   return (
@@ -126,7 +181,7 @@ function MainPage() {
               <RunesList level={selectedLevel} onBack={() => { setShowRunesList(false); setSelectedLevel(null); }} />
             }
             {showingSpellList &&
-              <SpellList level={selectedLevel} onBack={() => { setShowingSpellList(false); setSelectedLevel(null); }} />
+              <SpellList level={selectedLevel} onPreviousLevel={handlePreviousLevel} onNextLevel={handleNextLevel} onBack={() => { setShowingSpellList(false); setSelectedLevel(null); }} />
             }
 
             <ChangeCharacter setSeeSelectCharacter={setSeeSelectCharacter} />

@@ -1,4 +1,4 @@
-  const romanToNumber = (roman: string): number => {
+  const romanToNumber = (roman: string ): number => {
         const romanNumerals: { [key: string]: number } = {
             'I': 1,
             'II': 2,

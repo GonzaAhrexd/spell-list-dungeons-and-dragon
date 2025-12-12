@@ -9,6 +9,9 @@ import spellData from '../jsons/spell-list.json'
 // API
 import { getSpellsByUser } from '../api/services/spells.routes'
 
+// Iconos
+import { ArrowLongLeftIcon, ArrowLongRightIcon } from '@heroicons/react/16/solid';
+
 type JSONSpell = {
   nombre: string;
   tipo: "truco" | "hechizo" | "bendición";
@@ -30,10 +33,12 @@ type SpellData = {
 type SpellListProps = {
   level: string | null;
   onBack?: () => void;
+  onPreviousLevel: () => void;
+  onNextLevel: () => void;
 }
 
 
-function SpellList({ level, onBack }: SpellListProps) {
+function SpellList({ level, onBack, onPreviousLevel, onNextLevel }: SpellListProps) {
   const [selectedSpell, setSelectedSpell] = useState<JSONSpell | null>(null)
   const [spellsState, setSpellsState] = useState<JSONSpell[]>([])
   const [isLoading, setIsLoading] = useState(false)
@@ -129,6 +134,12 @@ function SpellList({ level, onBack }: SpellListProps) {
             <span aria-hidden className="back-arrow">←</span>
             <span>Para volver a la lista de niveles</span>
           </button>
+          <div className='flex flex-row justify-center items-center gap-2'>
+            <button className="spell-button cursor-pointer w-full text-xs text-left px-3 py-2 rounded-lg bg-white/90 dark:bg-black/10 shadow-sm flex flex-col justify-start items-start" onClick={() => onPreviousLevel()}>
+              <ArrowLongLeftIcon className="h-6 w-6 text-black items-center justify-center" /> Nivel Anterior</button>
+            <button className="spell-button cursor-pointer w-full text-xs text-left px-3 py-2 rounded-lg bg-white/90 dark:bg-black/10 shadow-sm flex flex-col justify-end items-end" onClick={() => onNextLevel()}>
+              <ArrowLongRightIcon className="h-6 w-6 text-black items-end justify-end" /> Nivel Siguiente</button>
+          </div>
         </div>
 
         <div className="content">

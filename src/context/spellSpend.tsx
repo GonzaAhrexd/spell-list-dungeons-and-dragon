@@ -154,6 +154,8 @@ export const SpendProvider = ({ children }: { children: ReactNode }) => {
                 setPotencia2((prev: any) => {
                     const next = Math.max(0, prev + (shouldDecrease ? - 1 : + 1));
                     registrarHechizo(2);
+                    // Guarda en el localStorage el nuevo valor
+                    localStorage.setItem('potencia2', JSON.stringify(next));
                     return next;
                 });
                 break;
@@ -161,6 +163,8 @@ export const SpendProvider = ({ children }: { children: ReactNode }) => {
                 setPotencia3((prev: any) => {
                     const next = Math.max(0, prev + (shouldDecrease ? - 1 : + 1));
                     registrarHechizo(3);
+                    // Guarda en el localStorage el nuevo valor
+                    localStorage.setItem('potencia3', JSON.stringify(next));
                     return next;
                 });
                 break;
@@ -168,6 +172,8 @@ export const SpendProvider = ({ children }: { children: ReactNode }) => {
                 setPotencia4((prev: any) => {
                     const next = Math.max(0, prev + (shouldDecrease ? - 1 : + 1));
                     registrarHechizo(4);
+                    // Guarda en el localStorage el nuevo valor
+                    localStorage.setItem('potencia4', JSON.stringify(next));
                     return next;
                 });
                 break;
@@ -175,6 +181,8 @@ export const SpendProvider = ({ children }: { children: ReactNode }) => {
                 setPotencia5((prev: any) => {
                     const next = Math.max(0, prev + (shouldDecrease ? - 1 : + 1));
                     registrarHechizo(5);
+                    // Guarda en el localStorage el nuevo valor
+                    localStorage.setItem('potencia5', JSON.stringify(next));
                     return next;
                 });
                 break;
@@ -182,6 +190,8 @@ export const SpendProvider = ({ children }: { children: ReactNode }) => {
                 setPotencia6((prev: any) => {
                     const next = Math.max(0, prev + (shouldDecrease ? - 1 : + 1));
                     registrarHechizo(6);
+                    // Guarda en el localStorage el nuevo valor
+                    localStorage.setItem('potencia6', JSON.stringify(next));
                     return next;
                 });
                 break;
@@ -194,10 +204,11 @@ export const SpendProvider = ({ children }: { children: ReactNode }) => {
   
 
 
-    const resetSpells = () => {
-
-        const { personajes } = personajesData; // data es tu JSON completo
-        const characterData = personajes.find(p => p.personaje === selectedCharacter.personaje);
+    const resetSpells = (characterName?: string) => {
+        const { personajes } = personajesData;
+        // Si se pasa un nombre de personaje, úsalo; si no, usa el selectedCharacter actual
+        const personajeABuscar = characterName || selectedCharacter.personaje;
+        const characterData = personajes.find(p => p.personaje === personajeABuscar);
 
         if (characterData) {
             setPotencia1(1000); // Potencia 1 se considera ilimitada
@@ -206,6 +217,15 @@ export const SpendProvider = ({ children }: { children: ReactNode }) => {
             setPotencia4(characterData.limitePotencias ? characterData.limitePotencias["4"] : 2);
             setPotencia5(characterData.limitePotencias ? characterData.limitePotencias["5"] : 1);
             setPotencia6(characterData.limitePotencias ? characterData.limitePotencias["6"] : 1);
+            setHistorialHechizos([]);
+        } else if (characterName === "Game Master") {
+            // Para el Game Master, establecer valores especiales
+            setPotencia1(1000);
+            setPotencia2(1000);
+            setPotencia3(1000);
+            setPotencia4(1000);
+            setPotencia5(1000);
+            setPotencia6(1000);
             setHistorialHechizos([]);
         }
 
@@ -228,12 +248,6 @@ export const SpendProvider = ({ children }: { children: ReactNode }) => {
         setNivelActual((prev: any) => Math.max(1, prev - 1));
     }
 
-    useEffect(() => {
-        if (selectedCharacter && typeof selectedCharacter === 'object' && selectedCharacter.personaje) {
-            resetSpells();
-        }
-    }, [selectedCharacter]);
-
     const handleSelectCharacter = (character: string) => {
         console.log(character)
         if(character === "Game Master"){
@@ -252,15 +266,16 @@ export const SpendProvider = ({ children }: { children: ReactNode }) => {
                     "6": 1000,
                 },
             });
-            setNivelActual(1);  
+            setNivelActual(1);
+            resetSpells("Game Master");  
             return;
         }
-
 
         const selected = personajesData.personajes.find(p => p.personaje === character);
         if (selected) {
             setSelectedCharacter(selected);
-            setNivelActual(1);        
+            setNivelActual(1);
+            resetSpells(character);        
         }
     }
 

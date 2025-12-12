@@ -65,10 +65,7 @@ function SpellsMenu({selectedLevel, handleSelectedLevel}: SpellsMenuProps) {
             initial =  characterSpells ? characterSpells.spells : [];
         }
 
-        console.log(initial)
-
         setSpellsState(initial);
-
         // Fetch backend spells for the user and append to local spells
         let mounted = true;
         const getSpellsUser = async () => {
@@ -76,7 +73,6 @@ function SpellsMenu({selectedLevel, handleSelectedLevel}: SpellsMenuProps) {
             try {
                 const response = await getSpellsByUser(selectedCharacter.personaje);
 
-                // console.log(response.data)
 
                 if (!mounted) return;
                 const backendSpells = Array.isArray(response.data) ? response.data : [];
