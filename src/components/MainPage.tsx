@@ -98,14 +98,9 @@ function MainPage() {
         confirmButton: 'antiqua-font w-full cursor-pointer mb-2 level-card relative flex items-center justify-center py-4 px-3 text-center text-sm font-bold shadow-inner',
     }
   })
-
-
-  const handleTiradas = () => {
-    
-
-  }
   }
 
+  
   const handlePreviousLevel = () => {
     if (selectedLevel) {
       const currentLevelNumber = romanToNumber(selectedLevel);
