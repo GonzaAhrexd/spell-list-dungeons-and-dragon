@@ -20,6 +20,7 @@ import romanToNumber  from '../functions/RomanToNumber';
 import numberToRoman  from '../functions/NumberToRoman';
 
 import getLevels from '../functions/getLevels';
+import TiradasModal from './TiradasModal/TiradasModal';
 
 function MainPage() {
 
@@ -37,6 +38,8 @@ function MainPage() {
   const [canUseSpells] = useState(selectedCharacter?.limitePotencias);
   const [showRunesSettings, setShowRunesSettings] = useState(false);
   const [showRunesList, setShowRunesList] = useState(false);
+
+  const [isTiradasModal, setIsTiradasModal] = useState(false);
 
   const handleSelectedLevel = (level: string) => {
     setSelectedLevel(level);
@@ -97,6 +100,10 @@ function MainPage() {
   })
 
 
+  const handleTiradas = () => {
+    
+
+  }
   }
 
   const handlePreviousLevel = () => {
@@ -158,8 +165,12 @@ function MainPage() {
       }
       {!seeSelectCharacter && selectedCharacter.personaje !== "Game Master" && 
         <>
+        {isTiradasModal &&
+        
+        <TiradasModal onClose={() => setIsTiradasModal(false)} />
+        }
           <main className="mobile-shell w-full max-w-[420px] mx-auto">
-            <HeaderApp />
+            <HeaderApp setIsTiradasModal={setIsTiradasModal} />
             
             <div className='flex justify-between'>
               <button className='antiqua-font w-full cursor-pointer mr-1 mb-2 level-card relative flex items-center justify-center py-4 px-3 text-center text-sm font-bold shadow-inner' onClick={handleSpellsMenu}>{canUseSpells ? "Hechizos" : isRunicMode ? "Runas" : "Habilidades"} </button>

@@ -1,0 +1,74 @@
+[
+  {
+    "nombre": "Atletismo",
+    "atributo": "Fuerza"
+  },
+  {
+    "nombre": "Acrobacias",
+    "atributo": "Destreza"
+  },
+  {
+    "nombre": "Juego de manos",
+    "atributo": "Destreza"
+  },
+  {
+    "nombre": "Sigilo",
+    "atributo": "Destreza"
+  },
+  {
+    "nombre": "Percepción",
+    "atributo": "Destreza"
+  },
+  {
+    "nombre": "Conocimiento arcano",
+    "atributo": "Inteligencia"
+  },
+  {
+    "nombre": "Historia",
+    "atributo": "Inteligencia"
+  },
+  {
+    "nombre": "Investigación",
+    "atributo": "Inteligencia"
+  },
+  {
+    "nombre": "Religión",
+    "atributo": "Inteligencia"
+  },
+  {
+    "nombre": "Naturaleza",
+    "atributo": "Sabiduría"
+  },
+  {
+    "nombre": "Tratar con animales",
+    "atributo": "Sabiduría"
+  },
+  {
+    "nombre": "Perspicacia",
+    "atributo": "Sabiduría"
+  },
+  {
+    "nombre": "Medicina",
+    "atributo": "Sabiduría"
+  },
+  {
+    "nombre": "Supervivencia/ Rastrear/ Encontrar",
+    "atributo": "Sabiduría"
+  },
+  {
+    "nombre": "Engaño",
+    "atributo": "Carisma"
+  },
+  {
+    "nombre": "Intimidación",
+    "atributo": "Carisma"
+  },
+  {
+    "nombre": "Interpretación / Actuación",
+    "atributo": "Carisma"
+  },
+  {
+    "nombre": "Persuasión",
+    "atributo": "Carisma"
+  }
+]
