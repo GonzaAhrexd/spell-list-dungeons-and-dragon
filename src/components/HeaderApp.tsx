@@ -3,13 +3,14 @@ import { SpendContext } from "../context/spellSpend"
 import Swal from "sweetalert2";
 import numberToRoman from "../functions/NumberToRoman";
 import DadoIcon from "./SVGs/Dado";
-
+import { MapIcon } from "@heroicons/react/24/outline";
 
 type HeaderAppProps = {
   setIsTiradasModal: (value: boolean) => void;
+  setMapMode: (value: boolean) => void;
 }
 
-function HeaderApp({ setIsTiradasModal }: HeaderAppProps) {
+function HeaderApp({ setIsTiradasModal, setMapMode }: HeaderAppProps) {
 
   const { selectedCharacter, nivelActual, levelDown, levelUp } = useContext(SpendContext);
 
@@ -64,9 +65,12 @@ function HeaderApp({ setIsTiradasModal }: HeaderAppProps) {
         <div className='flex justify-between items-center'>
           <div className="flex-1"></div>
           <h1 className="title flex-1 text-center">Hechizos</h1> 
-          <div className="flex-1 flex justify-end">
+          <div className="flex-1 flex gap-1 justify-end">
         <button className="cursor-pointer antiqua-font relative flex items-center justify-center  px-[8px] py-[8px] rounded-[10px] border border-[rgba(120,90,50,0.12)] bg-[linear-gradient(180deg,rgba(255,255,255,0.92),rgba(245,235,210,0.98))] text-[#2b1f0f] shadow-[inset_0_-4px_6px_rgba(0,0,0,0.06),0_6px_18px_rgba(0,0,0,0.45)] transition-[transform,box-shadow] duration-[140ms] ease-linear touch-manipulation" onClick={() => setIsTiradasModal(true)}>
           <DadoIcon className="w-6 h-6 m-auto mt-1 text-black"/>
+        </button>
+        <button className="cursor-pointer antiqua-font relative flex items-center justify-center  px-[8px] py-[8px] rounded-[10px] border border-[rgba(120,90,50,0.12)] bg-[linear-gradient(180deg,rgba(255,255,255,0.92),rgba(245,235,210,0.98))] text-[#2b1f0f] shadow-[inset_0_-4px_6px_rgba(0,0,0,0.06),0_6px_18px_rgba(0,0,0,0.45)] transition-[transform,box-shadow] duration-[140ms] ease-linear touch-manipulation" onClick={() => setMapMode(true)}>
+          <MapIcon className="w-6 h-6 m-auto mt-1 text-black"/>
         </button>
           </div>
         </div>

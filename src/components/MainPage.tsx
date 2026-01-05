@@ -2,6 +2,8 @@
 import { useState, useContext, useEffect } from 'react'
 // Contexto
 import { SpendContext } from '../context/spellSpend';
+// Librerías
+import Swal from 'sweetalert2';
 // Componentes
 import SpellList from './SpellList'
 import Consumptions from './Consumptions/Consumptions';
@@ -13,14 +15,17 @@ import RunesLog from './RunesLog/RunesLog';
 import RunesList from './runesList'
 import AdminManager from './AdminManager';
 
+// Backend
 import { pingServer } from '../api/services/ping.routes';
-import Swal from 'sweetalert2';
 
+// Funciones 
 import romanToNumber  from '../functions/RomanToNumber';
 import numberToRoman  from '../functions/NumberToRoman';
-
 import getLevels from '../functions/getLevels';
+
+// Modales
 import TiradasModal from './TiradasModal/TiradasModal';
+import MapMode from './MapMode/MapMode';
 
 function MainPage() {
 
@@ -39,7 +44,9 @@ function MainPage() {
   const [showRunesSettings, setShowRunesSettings] = useState(false);
   const [showRunesList, setShowRunesList] = useState(false);
 
+  // Componentes tipo modal
   const [isTiradasModal, setIsTiradasModal] = useState(false);
+  const [mapMode, setMapMode] = useState(false);
 
   const handleSelectedLevel = (level: string) => {
     setSelectedLevel(level);
@@ -164,8 +171,12 @@ function MainPage() {
         
         <TiradasModal onClose={() => setIsTiradasModal(false)} />
         }
+        {
+          mapMode &&
+          <MapMode onClose={() => setMapMode(false)} />
+        }
           <main className="mobile-shell w-full max-w-[420px] mx-auto">
-            <HeaderApp setIsTiradasModal={setIsTiradasModal} />
+            <HeaderApp setIsTiradasModal={setIsTiradasModal} setMapMode={setMapMode} />
             
             <div className='flex justify-between'>
               <button className='antiqua-font w-full cursor-pointer mr-1 mb-2 level-card relative flex items-center justify-center py-4 px-3 text-center text-sm font-bold shadow-inner' onClick={handleSpellsMenu}>{canUseSpells ? "Hechizos" : isRunicMode ? "Runas" : "Habilidades"} </button>
