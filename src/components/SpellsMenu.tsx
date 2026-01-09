@@ -165,7 +165,7 @@ function SpellsMenu({ selectedLevel, handleSelectedLevel }: SpellsMenuProps) {
                             aria-pressed={selectedLevel === level}
                         >
                             <span className="level-label antiqua-font">{level}</span>
-                            <span className="level-rune" aria-hidden>{romanToNumber(level) <= nivelActual ? "✦" : "🛇"}</span>
+                            <span className="level-rune" aria-hidden>{romanToNumber(level) <= nivelActual ? "✦" : "X"}</span>
                         </button>
                     ))}
                 </div>
