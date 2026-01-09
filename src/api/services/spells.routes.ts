@@ -19,6 +19,7 @@ export const editSpell = (spellData: any) => {
     return axios.put(`/spells/`, spellData);
 }
 
-export const getRunesByUser = (username: string) => {
-    return axios.get(`/spells/${username}`);
+export const getRunesByUser = async (username: string) => {
+    const response = await axios.get(`/spells/runes/${username}`);
+    return response.data;
 }

@@ -70,9 +70,9 @@ function RunesShow({ rune, onClose }: RunesShowProps) {
               </>
             ) : (
               (romanToNumber(rune.nivel) > nivelActual) ? 'Nivel insuficiente' :
-              (runasActivas > 0)
-                ? 'Utilizar'
-                : 'Agotado'
+                (runasActivas > 0)
+                  ? 'Utilizar'
+                  : 'Agotado'
             )}
           </button>
 

@@ -89,10 +89,13 @@ function SpellList({ level, onBack, onPreviousLevel, onNextLevel }: SpellListPro
         const backend = Array.isArray(resp.data) ? resp.data as JSONSpell[] : []
         if (!mounted) return
         setSpellsState(prev => {
-          const names = new Set(prev.map(s => s.nombre))
-          const toAdd = backend.filter(b => !names.has(b.nombre))
-          return [...prev, ...toAdd]
-        })
+          // Set con los nombres que vienen del BACKEND
+          const backendNames = new Set(backend.map(b => b.nombre));
+          //  Filtramos el JSON local eliminando cualquier hechizo que el backend también nos esté mandando.
+          const localSinDuplicados = prev.filter(p => !backendNames.has(p.nombre));
+          // Unimos todo
+          return [...localSinDuplicados, ...backend];
+        });
       } catch (err) {
         console.error('Error loading backend spells', err)
       } finally {
@@ -101,17 +104,17 @@ function SpellList({ level, onBack, onPreviousLevel, onNextLevel }: SpellListPro
     }
     fetchBackend()
     return () => { mounted = false }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedCharacter.personaje])
 
   // Si existe, extraés sus hechizos
-  const spells = spellsState; 
+  const spells = spellsState;
   const matched = spells.filter((spell: JSONSpell) => {
     // level prop is 'Trucos' when user selects tricks; in JSON tricks have nivel === null
     if (level === 'Trucos') return spell.nivel === null
     return spell.nivel === level
   })
-  
+
 
   if (isLoading) {
     return (
@@ -121,7 +124,7 @@ function SpellList({ level, onBack, onPreviousLevel, onNextLevel }: SpellListPro
     )
   }
 
-  
+
   return (
     <section className="parchment p-4 mt-4">
       <div className="spell-list text-black">
