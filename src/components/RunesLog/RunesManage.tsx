@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState, useMemo } from 'react';
 import { SpendContext } from '../../context/spellSpend';
-import RunesData from '../../jsons/runes-list.json';
+// import RunesData from '../../jsons/runes-list.json';
 import { getSpellsByUser } from '../../api/services/spells.routes';
 import Swal from 'sweetalert2';
 
@@ -19,10 +19,10 @@ function RunesManage() {
       setIsLoading(true);
       try {
         // 1. Obtener runas del JSON local para este personaje
-        const characterData = RunesData.personajes.find(p => p.personaje === selectedCharacter.personaje);
-        const localRunes = characterData 
-          ? characterData.runas.filter(r => r.tipoRuna === 'Armónica') 
-          : [];
+        // const characterData = RunesData.personajes.find(p => p.personaje === selectedCharacter.personaje);
+        // const localRunes = characterData 
+        //   ? characterData.runas.filter(r => r.tipoRuna === 'Armónica') 
+        //   : [];
 
         // 2. Obtener runas del Backend
         const response = await getSpellsByUser(selectedCharacter.personaje);
@@ -35,7 +35,7 @@ function RunesManage() {
         const runesMap = new Map();
         
         // Primero metemos las locales
-        localRunes.forEach(r => runesMap.set(r.nombre.trim(), r));
+        // localRunes.forEach(r => runesMap.set(r.nombre.trim(), r));
         
         // Luego las del backend (si el nombre coincide, sobrescribe a la local)
         backendRunes.forEach((r: any) => runesMap.set(r.nombre.trim(), r));

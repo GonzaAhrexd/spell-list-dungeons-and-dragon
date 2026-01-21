@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react'
 import { useContext } from 'react'
 import { SpendContext } from '../context/spellSpend';
 
-import runesData from '../jsons/runes-list.json'
 import RunesShow from './RunesShow';
 
 // API 
@@ -15,12 +14,6 @@ type RunesSpell = {
     descripcion?: string;
 }
 
-type Runes =  { 
-  personajes: Array<{
-      personaje: string;
-      runas: RunesSpell[]
-  }>
-}
 
 type RunesListProps = {
     level: string | null; 
@@ -38,11 +31,6 @@ function RunesList({level, onBack}: RunesListProps) {
 
   const { selectedCharacter } = useContext(SpendContext);
 
-  const data = runesData as Runes 
-
-  const characterRunes = data.personajes.find(p => p.personaje === selectedCharacter.personaje);
-  const jsonRunes = characterRunes ? characterRunes.runas : [];
-
   useEffect(() => {
     const fetchAndMergeRunes = async () => {
       if (!selectedCharacter?.personaje) return;
@@ -53,16 +41,12 @@ function RunesList({level, onBack}: RunesListProps) {
         // Filtrar solo las runas del backend (los que tienen tipoRuna definido)
         const backendRunes = response.data.filter((spell: any) => spell.tipoRuna && spell.tipoRuna !== '' && spell.tipoRuna !== 'Armónica');
         
-        // Combinar runas del JSON con las del backend, evitando duplicados por nombre
-        const names = new Set(jsonRunes.map(r => r.nombre));
-        const newBackendRunes = backendRunes.filter((r: any) => !names.has(r.nombre));
-        const mergedRunes = [...jsonRunes, ...newBackendRunes];
         
-        setRunes(mergedRunes);
+        setRunes(backendRunes);
       } catch (error) {
         console.error('Error al cargar las runas:', error);
         // Si hay error, usa solo las runas del JSON
-        setRunes(jsonRunes);
+        // setRunes(jsonRunes);
       } finally {
         setLoading(false);
       }
