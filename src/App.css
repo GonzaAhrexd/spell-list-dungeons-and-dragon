@@ -1,12 +1,12 @@
-@import url('https://fonts.googleapis.com/css2?family=Uncial+Antiqua&family=Montserrat:ital,wght@0,300;0,600;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Modern+Antiqua&display=swap');
 
 
 .antiqua-font{
-	font-family: 'Uncial Antiqua', serif;
+  font-family: "Modern Antiqua", serif;
 }
 
 body{
-	font-family: 'Uncial Antiqua', serif;
+  font-family: "Modern Antiqua", serif;
 }
 
 :root{
@@ -24,7 +24,7 @@ body{
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	font-family: 'Uncial Antiqua', serif;
+  font-family: "Modern Antiqua", serif;
 	/* font-family: 'Montserrat', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; */
 	-webkit-font-smoothing: antialiased;
 	color: #f3e6cf;
@@ -46,7 +46,7 @@ body{
 }
 
 .title{
-	font-family: 'Uncial Antiqua', serif;
+  font-family: "Modern Antiqua", serif;
 	font-size: 32px;
 	color: var(--parchment);
 	letter-spacing: 1px;
