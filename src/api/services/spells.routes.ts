@@ -8,8 +8,9 @@ export const addNewSpell = (spellData: any) => {
     return axios.post('/spells', spellData);
 }
 
-export const getSpellsByUser = (username: string) => {
-    return axios.get(`/spells/${username}`);
+export const getSpellsByUser = async (username: string) => {
+    const response = await axios.get(`/spells/${username}`);
+    return response.data;
 }
 
 export const deleteSpell = (id: string, password: string) => {

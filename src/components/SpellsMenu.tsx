@@ -5,7 +5,7 @@ import spellData from '../jsons/spell-list.json'
 import runesData from '../jsons/runes-list.json'
 import { useState } from 'react'
 import { getSpellsByUser } from "../api/services/spells.routes"
-
+import { useQuery } from '@tanstack/react-query'
 import romanToNumber from "../functions/RomanToNumber"
 
 type SpellsMenuProps = {
@@ -47,7 +47,6 @@ function SpellsMenu({ selectedLevel, handleSelectedLevel }: SpellsMenuProps) {
     // Modo rúnico
     const isRunicMode = selectedCharacter.subclase === "Rúnico";
     // Hooks
-    const [isLoading, setIsLoading] = useState(true);
     const [spellsState, setSpellsState] = useState<any[]>([]);
 
     // Obtene los levels en base a lo que hay en spellData para el personaje seleccionado
@@ -59,58 +58,43 @@ function SpellsMenu({ selectedLevel, handleSelectedLevel }: SpellsMenuProps) {
     const characterSpells = data.personajes.find(p => p.personaje === selectedCharacter.personaje);
     const characterRunes = runicData.personajes.find(p => p.personaje === selectedCharacter.personaje);
 
-    // Use effect para cargar los hechizos o runas del personaje seleccionado
+
+    
+  const { isLoading, data: backendSpells } = useQuery({
+    queryKey: ['spells'],
+    queryFn: async () => {
+      return await getSpellsByUser(selectedCharacter.personaje)
+    }
+  })
+
+    // Usa useEffect para cargar los hechizos o runas del personaje seleccionado
     useEffect(() => {
-        // Initialize spells from local JSON for the selected character
-        let initial
+        let initial;
         if (isRunicMode) {
             initial = characterRunes ? characterRunes.runas : [];
         } else {
             initial = characterSpells ? characterSpells.spells : [];
         }
 
-        // setSpellsState(initial); 
-        // Fetch backend spells for the user and append to local spells
-        let mounted = true;
-        const getSpellsUser = async () => {
-            setIsLoading(true);
-            try {
-
-                // console.log(characterSpells)
-
-                const response = await getSpellsByUser(selectedCharacter.personaje);
-
-
-                if (!mounted) return;
-                const backendSpells = Array.isArray(response.data) ? response.data : [];
-                // Merge backend spells with existing local spellsState safely
-                setSpellsState(() => {
-                    // 1. Obtenemos los nombres de los hechizos que vienen del backend
-                    const backendNames = new Set(backendSpells.map((s: any) => s.nombre));
-
-                    // 2. Filtramos la variable 'initial' (los del JSON) para ELIMINAR 
-                    // a los que se llamen igual que los del backend
-                    const filteredLocal = initial.filter(s => !backendNames.has(s.nombre));
-
-                    // 3. Unimos los locales limpios con los del backend
-                    // Al poner los del backend al final, nos aseguramos de que sean los que se vean
-                    return [...backendSpells, ...filteredLocal];
-                });
-
-            } catch (error) {
-                console.error("Error fetching spells:", error);
-            } finally {
-                if (mounted) setIsLoading(false);
-            }
-        };
-
-        getSpellsUser();
+        // Si hay datos del backend, mergea con los locales
+        if (backendSpells && Array.isArray(backendSpells)) {
+            const backendNames = new Set(backendSpells.map((s: any) => s.nombre));
+            const filteredLocal = initial.filter((s: any) => !backendNames.has(s.nombre));
+            setSpellsState([...backendSpells, ...filteredLocal]);
+        } else {
+            setSpellsState(initial);
+        }
+        // Solo depende de los datos del backend y el personaje seleccionado
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [backendSpells, selectedCharacter.personaje, isRunicMode]);
 
 
-        return () => {
-            mounted = false;
-        };
-    }, [selectedCharacter.personaje]);
+    useEffect(() => {
+
+        console.log("Hechizos cargados:", spellsState); 
+
+    }, [spellsState])
+
 
     let levelsSet: any
 

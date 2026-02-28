@@ -6,6 +6,7 @@ import RunesShow from './RunesShow';
 
 // API 
 import { getSpellsByUser } from '../api/services/spells.routes';
+import { useQuery } from '@tanstack/react-query'
 
 type RunesSpell = {
     nombre: string;
@@ -24,42 +25,39 @@ function RunesList({level, onBack}: RunesListProps) {
 
   const [selectedRunes, setSelectedRunes] = useState(null)
   const [runes, setRunes] = useState<RunesSpell[]>([])
-  const [loading, setLoading] = useState(true)
 
   const openRune = (rune: any) => setSelectedRunes(rune)
   const closeRune = () => setSelectedRunes(null)
 
   const { selectedCharacter } = useContext(SpendContext);
 
-  useEffect(() => {
-    const fetchAndMergeRunes = async () => {
-      if (!selectedCharacter?.personaje) return;
-      
-      try {
-        setLoading(true);
-        const response = await getSpellsByUser(selectedCharacter.personaje);
-        // Filtrar solo las runas del backend (los que tienen tipoRuna definido)
-        const backendRunes = response.data.filter((spell: any) => spell.tipoRuna && spell.tipoRuna !== '' && spell.tipoRuna !== 'Armónica');
-        
-        
-        setRunes(backendRunes);
-      } catch (error) {
-        console.error('Error al cargar las runas:', error);
-        // Si hay error, usa solo las runas del JSON
-        // setRunes(jsonRunes);
-      } finally {
-        setLoading(false);
+  
+    const { isLoading, data: backendRunes,  } = useQuery({
+      queryKey: ['runes'],
+      queryFn: async () => {
+        return await getSpellsByUser(selectedCharacter.personaje)
       }
-    };
+    })
+  
+  
 
-    fetchAndMergeRunes();
-  }, [selectedCharacter]);
+  useEffect(() => {
+    if (backendRunes && Array.isArray(backendRunes)) {
+      // Filtrar solo las runas del backend (los que tienen tipoRuna definido y no son Armónica)
+      const filteredRunes = backendRunes.filter(
+        (spell: any) => spell.tipo === "truco" || (spell.tipoRuna && spell.tipoRuna !== '' && spell.tipoRuna !== 'Armónica')
+      );
+      setRunes(filteredRunes);
+    }
+  }, [backendRunes]);
 
   const matched = runes.filter((rune: RunesSpell) => {
       // Quita las runas armónicas
   if (rune.tipoRuna === 'Armónica') return false
-    if (level === 'Trucos') return rune.nivel === null || rune.nivel === ''
-    return rune.nivel === level
+
+  if (level === 'Trucos') return rune.nivel === null 
+  
+  return rune.nivel === level
   })
 
 
@@ -81,9 +79,8 @@ function RunesList({level, onBack}: RunesListProps) {
 
         <div className="content">
           <h2 className="text-lg font-bold">Runas — Nivel: {level}</h2>
-          <p className="mt-2 text-sm opacity-80">Pulsa un hechizo para ver más detalles.</p>
-          
-          {loading ? (
+          <p className="mt-2 text-sm opacity-80">Pulsa un hechizo para ver más detalles.</p>          
+          {isLoading ? (
             <p className="mt-2 text-sm text-gray-500">Cargando runas...</p>
           ) : matched.length === 0 ? (
             <p className="mt-2 text-sm text-gray-500">No hay hechizos disponibles para este nivel.</p>
