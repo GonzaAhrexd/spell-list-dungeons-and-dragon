@@ -2,6 +2,7 @@ import { useContext, useEffect, useState, useMemo } from 'react';
 import { SpendContext } from '../../context/spellSpend';
 // import RunesData from '../../jsons/runes-list.json';
 import { getSpellsByUser } from '../../api/services/spells.routes';
+import { useQuery } from '@tanstack/react-query';
 import Swal from 'sweetalert2';
 
 function RunesManage() {
@@ -10,46 +11,26 @@ function RunesManage() {
   
   // Estado para guardar la unión de JSON + Backend
   const [allRunes, setAllRunes] = useState<any[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
+  // const [isLoading, setIsLoading] = useState(true);
+
+  const { isLoading, data: backendRunes } = useQuery({
+    queryKey: ['runes'],
+    queryFn: async () => {
+      return await getSpellsByUser(selectedCharacter.personaje);
+    }
+   });
 
   const romanValues = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII', 'XIII', 'XIV', 'XV'];
 
   useEffect(() => {
-    const fetchAndMergeRunes = async () => {
-      setIsLoading(true);
-      try {
-        // 1. Obtener runas del JSON local para este personaje
-        // const characterData = RunesData.personajes.find(p => p.personaje === selectedCharacter.personaje);
-        // const localRunes = characterData 
-        //   ? characterData.runas.filter(r => r.tipoRuna === 'Armónica') 
-        //   : [];
-
-        // 2. Obtener runas del Backend
-        const response = await getSpellsByUser(selectedCharacter.personaje);
-        const backendRunes = Array.isArray(response.data) 
-          ? response.data.filter((r: any) => r.tipoRuna === 'Armónica')
-          : [];
-
-        // 3. Mezclar priorizando Backend
-        // Usamos un Map donde la llave es el nombre para eliminar duplicados
-        const runesMap = new Map();
-        
-        // Primero metemos las locales
-        // localRunes.forEach(r => runesMap.set(r.nombre.trim(), r));
-        
-        // Luego las del backend (si el nombre coincide, sobrescribe a la local)
-        backendRunes.forEach((r: any) => runesMap.set(r.nombre.trim(), r));
-
-        setAllRunes(Array.from(runesMap.values()));
-      } catch (error) {
-        console.error('Error fetching user runes:', error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    fetchAndMergeRunes();
-  }, [selectedCharacter.personaje]); // Se ejecuta al cambiar de personaje
+    if (backendRunes && Array.isArray(backendRunes)) {
+      // Filtra solo las runas armónicas del backend
+      const backendArmónicas = backendRunes.filter((r: any) => r.tipoRuna === 'Armónica');
+      // Si quieres mezclar con locales, aquí puedes hacerlo
+      // Por ahora solo usamos las del backend
+      setAllRunes(backendArmónicas);
+    }
+  }, [backendRunes]);
 
   // Agrupar runas por nivel (Memorizado para rendimiento)
   const runesByLevel = useMemo(() => {

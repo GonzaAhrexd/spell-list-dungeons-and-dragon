@@ -32,13 +32,20 @@ function AddSpellScreen({ setAddSpell }: SetSpellProps) {
     const tipoSeleccionado = watch('tipo')
 
     const [isRuneMode, setIsRuneMode] = useState(false);
+    const [isTruco, setIsTruco] = useState(false);
 
     useEffect(() => {
         if (tipoSeleccionado === 'runa') {
             setIsRuneMode(true);
+            setIsTruco(false);
+        }
+        else if(tipoSeleccionado === 'truco') {
+            setIsTruco(true);
+            setIsRuneMode(false);
         }
         else {
             setIsRuneMode(false);
+            setIsTruco(false);
         }
     }, [tipoSeleccionado]);
 
@@ -95,7 +102,7 @@ function AddSpellScreen({ setAddSpell }: SetSpellProps) {
                         <label className="block text-sm font-semibold text-amber-950 mb-1">Tipo</label>
                         <select className="mt-1 w-full rounded-lg px-3 py-2 bg-white/80 border border-black/10 text-black focus:ring-amber-500" {...register('tipo', { required: true })}>
                             <option value="hechizo">Hechizo</option>
-                            <option value="habilidad">Habilidad</option>
+                            <option value="truco">Trucos</option>
                             <option value="runa">Runa</option>
                         </select>
                     </div>
@@ -120,6 +127,7 @@ function AddSpellScreen({ setAddSpell }: SetSpellProps) {
                             </select>
                         </div>
                         }
+                        {!isTruco && 
                         <div>
                             <label className="block text-sm font-semibold text-amber-950 mb-1">Nivel</label>
                             <input
@@ -130,6 +138,7 @@ function AddSpellScreen({ setAddSpell }: SetSpellProps) {
                                 {...register('nivelNum', { required: true, min: 1, max: 15 })}
                             />
                         </div>
+                        }
 
                     </div>
 

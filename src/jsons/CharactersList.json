@@ -41,9 +41,9 @@
         {
           "jugador": "Franco",
           "grupo": "B",
-          "personaje": "Marim de Garlim",
-          "clase": "Bardo",
-          "subclase": "Colegio de la Espada",
+          "personaje": "Rivarox",
+          "clase": "Draconiano",
+          "subclase": "-",
           "limitePotencias": {
             "1": "Infinity",
             "2": 4,

@@ -8,7 +8,7 @@ import SpellShow from './SpellShow'
 import spellData from '../jsons/spell-list.json'
 // API
 import { getSpellsByUser } from '../api/services/spells.routes'
-
+import { useQuery } from '@tanstack/react-query'
 // Iconos
 import { ArrowLongLeftIcon, ArrowLongRightIcon } from '@heroicons/react/16/solid';
 
@@ -41,7 +41,7 @@ type SpellListProps = {
 function SpellList({ level, onBack, onPreviousLevel, onNextLevel }: SpellListProps) {
   const [selectedSpell, setSelectedSpell] = useState<JSONSpell | null>(null)
   const [spellsState, setSpellsState] = useState<JSONSpell[]>([])
-  const [isLoading, setIsLoading] = useState(false)
+  // const [isLoading, setIsLoading] = useState(false)
 
   const openSpell = (spell: JSONSpell) => setSelectedSpell(spell)
   const closeSpell = () => setSelectedSpell(null)
@@ -76,36 +76,34 @@ function SpellList({ level, onBack, onPreviousLevel, onNextLevel }: SpellListPro
   // Esto busca el personaje actual en el JSON de hechizos
   const characterSpells = data.personajes.find(p => p.personaje === selectedCharacter.personaje);
 
-  useEffect(() => {
-    // initialize from local JSON
-    const initial = characterSpells ? characterSpells.spells : []
-    setSpellsState(initial)
 
-    let mounted = true
-    const fetchBackend = async () => {
-      setIsLoading(true)
-      try {
-        const resp = await getSpellsByUser(selectedCharacter.personaje)
-        const backend = Array.isArray(resp.data) ? resp.data as JSONSpell[] : []
-        if (!mounted) return
-        setSpellsState(prev => {
-          // Set con los nombres que vienen del BACKEND
-          const backendNames = new Set(backend.map(b => b.nombre));
-          //  Filtramos el JSON local eliminando cualquier hechizo que el backend también nos esté mandando.
-          const localSinDuplicados = prev.filter(p => !backendNames.has(p.nombre));
-          // Unimos todo
-          return [...localSinDuplicados, ...backend];
-        });
-      } catch (err) {
-        console.error('Error loading backend spells', err)
-      } finally {
-        if (mounted) setIsLoading(false)
-      }
+  const { isLoading, data: backendSpells, isError, error } = useQuery({
+    queryKey: ['spells'],
+    queryFn: async () => {
+      return await getSpellsByUser(selectedCharacter.personaje)
     }
-    fetchBackend()
-    return () => { mounted = false }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selectedCharacter.personaje])
+  })
+
+
+
+
+  useEffect(() => {
+    // Inicializa desde el JSON local
+    const initial = characterSpells ? characterSpells.spells : [];
+    setSpellsState(initial);
+  }, [characterSpells]);
+
+  useEffect(() => {
+    if (!backendSpells) return;
+    setSpellsState(prev => {
+      const backendNames = new Set(backendSpells.map((b: JSONSpell) => b.nombre));
+      // Filtra el JSON local eliminando duplicados
+      const localSinDuplicados = prev.filter(p => !backendNames.has(p.nombre));
+      // Une todo
+      return [...localSinDuplicados, ...backendSpells];
+    });
+  }, [backendSpells]);
+
 
   // Si existe, extraés sus hechizos
   const spells = spellsState;
@@ -120,6 +118,13 @@ function SpellList({ level, onBack, onPreviousLevel, onNextLevel }: SpellListPro
     return (
       <section className="parchment p-4 mt-4">
         <div className="text-black">Cargando hechizos...</div>
+      </section>
+    )
+  }
+  else if(isError){
+    return (
+      <section className="parchment p-4 mt-4">
+        <div className="text-black">Error al cargar hechizos: {(error as Error).message}</div>
       </section>
     )
   }
