@@ -161,7 +161,7 @@ function MainPage() {
 
 
   return (
-    <div className="app-viewport min-h-screen flex items-center justify-center p-4">
+    <div className="app-viewport h-screen flex items-center justify-center p-4">
       {selectedCharacter.personaje === "Game Master" && !seeSelectCharacter && 
         <AdminManager setSeeSelectCharacter={setSeeSelectCharacter} />
       }
@@ -209,7 +209,7 @@ function MainPage() {
 
 
       {(seeSelectCharacter ) &&
-        <main className="mobile-shell w-full max-w-[420px] mx-auto">
+        <main className="w-full max-w-[420px] mx-auto">
           <SelectCharacter />
         </main>
       }
