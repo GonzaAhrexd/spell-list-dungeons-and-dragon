@@ -1310,13 +1310,6 @@
           "potencia": 6
         },
         {
-          "nombre": "Deseo",
-          "tipo": "Hechizo",
-          "nivel": "IX",
-          "descripcion": "Altera la realidad a tu voluntad.",
-          "potencia": 6
-        },
-        {
           "nombre": "Prisión arcana",
           "tipo": "Hechizo",
           "nivel": "IX",
