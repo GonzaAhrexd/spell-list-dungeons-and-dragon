@@ -45,7 +45,7 @@ function RunesShow({ rune, onClose }: RunesShowProps) {
 
         <section className="mt-3 text-sm leading-relaxed">
           <p className="description text-lg regular-font">
-            {rune?.description}
+            {rune?.descripcion}
           </p>
         </section>
 
