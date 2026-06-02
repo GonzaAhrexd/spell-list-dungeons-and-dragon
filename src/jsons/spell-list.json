@@ -53,46 +53,11 @@
           "potencia": 1
         },
         {
-          "nombre": "Amistad animal",
-          "tipo": "hechizo",
-          "nivel": "I",
-          "descripcion": "Te permite ganarte la confianza de animales y hacer trato con ellos por un tiempo limitado.",
-          "potencia": 2
-        },
-        {
-          "nombre": "Armadura de mago",
-          "tipo": "hechizo",
-          "nivel": "I",
-          "descripcion": "Proporciona una armadura mágica. Solo disponible si alguien te lo enseña o lo aprendes de un libro/pergamino.",
-          "potencia": 2
-        },
-        {
-          "nombre": "Caída suave",
-          "tipo": "hechizo",
-          "nivel": "I",
-          "descripcion": "Reduce el daño por caídas y permite aterrizar con seguridad.",
-          "potencia": 2
-        },
-        {
           "nombre": "Curar heridas",
           "tipo": "hechizo",
           "nivel": "I",
           "descripcion": "Restaura puntos de vida a una criatura tocada.",
           "potencia": 2
-        },
-        {
-          "nombre": "Detectar magia",
-          "tipo": "hechizo",
-          "nivel": "I",
-          "descripcion": "Permite percibir presencias mágicas y aura de magia en objetos o criaturas.",
-          "potencia": 2
-        },
-        {
-          "nombre": "Detectar pensamientos",
-          "tipo": "hechizo",
-          "nivel": "I",
-          "descripcion": "Te permite leer pensamientos superficiales o profundos según lanzamiento y duración.",
-          "potencia": 4
         },
         {
           "nombre": "Disfrazarse",
@@ -107,13 +72,6 @@
           "nivel": "I",
           "descripcion": "Encantas a una criatura humanoide; te ofrece ventaja en interacciones sociales (tira 2 dados a favor).",
           "potencia": 2
-        },
-        {
-          "nombre": "Hechizar",
-          "tipo": "hechizo",
-          "nivel": "I",
-          "descripcion": "Hechizas a un objetivo para que no pueda golpearte (efecto depende de la mecánica de la campaña).",
-          "potencia": 3
         },
         {
           "nombre": "Miedo",
@@ -179,25 +137,11 @@
           "potencia": 4
         },
         {
-          "nombre": "Disipar magia",
-          "tipo": "hechizo",
-          "nivel": "III",
-          "descripcion": "Cancela efectos mágicos activos en un objetivo o área.",
-          "potencia": 2
-        },
-        {
           "nombre": "Rayo relampagueante",
           "tipo": "hechizo",
           "nivel": "III",
           "descripcion": "Lanza un rayo de energía eléctrica. Solo si lo aprendes de un libro/pergamino.",
           "potencia": 4
-        },
-        {
-          "nombre": "Revivir",
-          "tipo": "hechizo",
-          "nivel": "III",
-          "descripcion": "Restaura la vida a un aliado recientemente fallecido (condiciones aplican).",
-          "potencia": 1
         },
         {
           "nombre": "Contramagia",
@@ -254,20 +198,6 @@
           "nivel": "V",
           "descripcion": "Resucita a criaturas muertas más allá de la ventana del revivir; condiciones y consecuencias aplican.",
           "potencia": 4
-        },
-        {
-          "nombre": "Sueño profundo",
-          "tipo": "hechizo",
-          "nivel": "V",
-          "descripcion": "Induce un sueño muy profundo en múltiples objetivos, más poderoso que el hechizo de menor nivel.",
-          "potencia": 5
-        },
-        {
-          "nombre": "Telequinesis",
-          "tipo": "hechizo",
-          "nivel": "V",
-          "descripcion": "Permite mover objetos y criaturas con la mente. Solo si te lo enseñan.",
-          "potencia": 5
         },
         {
           "nombre": "Guardián de la fe",
@@ -1030,13 +960,6 @@
           "potencia": 2
         },
         {
-          "nombre": "Servant@ invisible",
-          "tipo": "Hechizo",
-          "nivel": "I",
-          "descripcion": "Invocas una entidad invisible que realiza tareas menores.",
-          "potencia": 2
-        },
-        {
           "nombre": "Reaprovechamiento de Vida",
           "tipo": "Habilidad",
           "nivel": "II",
@@ -1044,24 +967,10 @@
           "potencia": 3
         },
         {
-          "nombre": "Toque vampírico",
-          "tipo": "Hechizo",
-          "nivel": "III",
-          "descripcion": "Canalizas energía necrótica en un toque que drena la vida del enemigo.",
-          "potencia": 3
-        },
-        {
           "nombre": "Inmovilizar persona",
           "tipo": "Hechizo",
           "nivel": "III",
           "descripcion": "Paraliza a una criatura humana o similar.",
-          "potencia": 3
-        },
-        {
-          "nombre": "Ver invisibilidad",
-          "tipo": "Hechizo",
-          "nivel": "III",
-          "descripcion": "Percibes criaturas invisibles.",
           "potencia": 3
         },
         {
@@ -1076,20 +985,6 @@
           "tipo": "Hechizo",
           "nivel": "III",
           "descripcion": "Crea una red viscosa que inmoviliza.",
-          "potencia": 3
-        },
-        {
-          "nombre": "Nube apestosa",
-          "tipo": "Hechizo",
-          "nivel": "III",
-          "descripcion": "Nube tóxica que provoca náuseas.",
-          "potencia": 3
-        },
-        {
-          "nombre": "Espejismo menor",
-          "tipo": "Hechizo",
-          "nivel": "III",
-          "descripcion": "Ilusión visual pequeña o engañosa.",
           "potencia": 3
         },
         {
@@ -1121,13 +1016,6 @@
           "potencia": 3
         },
         {
-          "nombre": "Animar muertos",
-          "tipo": "Hechizo",
-          "nivel": "V",
-          "descripcion": "Levantas esqueletos o zombis bajo tu mando.",
-          "potencia": 4
-        },
-        {
           "nombre": "Contraconjuro",
           "tipo": "Hechizo",
           "nivel": "V",
@@ -1156,38 +1044,10 @@
           "potencia": 4
         },
         {
-          "nombre": "Vuelo",
-          "tipo": "Hechizo",
-          "nivel": "V",
-          "descripcion": "Otorgas la capacidad de volar.",
-          "potencia": 4
-        },
-        {
-          "nombre": "Ralentizar",
-          "tipo": "Hechizo",
-          "nivel": "V",
-          "descripcion": "Ralentiza movimientos, ataques y reflejos.",
-          "potencia": 4
-        },
-        {
-          "nombre": "Velocidad",
-          "tipo": "Hechizo",
-          "nivel": "V",
-          "descripcion": "Acelera a tus aliados, dándoles reflejos sobrenaturales.",
-          "potencia": 4
-        },
-        {
           "nombre": "Imagen mayor",
           "tipo": "Hechizo",
           "nivel": "V",
           "descripcion": "Ilusión detallada que puede incluir sonido, olor y movimiento.",
-          "potencia": 4
-        },
-        {
-          "nombre": "Forma gaseosa",
-          "tipo": "Hechizo",
-          "nivel": "V",
-          "descripcion": "Conviertes un cuerpo en una nube intangible.",
           "potencia": 4
         },
         {
@@ -1293,20 +1153,6 @@
           "tipo": "Hechizo",
           "nivel": "IX",
           "descripcion": "Destruye por completo materia viva o inerte.",
-          "potencia": 6
-        },
-        {
-          "nombre": "Telequinesis",
-          "tipo": "Hechizo",
-          "nivel": "IX",
-          "descripcion": "Controlas objetos y enemigos con la mente.",
-          "potencia": 6
-        },
-        {
-          "nombre": "Nube mortal",
-          "tipo": "Hechizo",
-          "nivel": "IX",
-          "descripcion": "Nube venenosa que causa una muerte lenta.",
           "potencia": 6
         },
         {
