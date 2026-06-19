@@ -158,8 +158,6 @@ function MainPage() {
 
   return (
     <div className="app-viewport min-h-screen flex items-center justify-center p-4">
-      <AdTest />
-      
       {selectedCharacter.personaje === "Game Master" && !seeSelectCharacter && (
         <AdminManager setSeeSelectCharacter={setSeeSelectCharacter} />
       )}
