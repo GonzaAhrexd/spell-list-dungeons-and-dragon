@@ -5,6 +5,7 @@ import { resolve } from "path";
 
 // https://vite.dev/config/
 export default defineConfig({
+  base: "/spell-list-dungeons-and-dragon",
   plugins: [react(), tailwindcss()],
   resolve: {
     alias: { "@": resolve(__dirname, "./src") },
