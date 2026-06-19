@@ -1,0 +1,409 @@
+// @ts-ignore
+import {
+  createContext,
+  type ReactNode,
+  useState,
+  useEffect,
+} from "react";
+import personajesData from "../../../jsons/CharactersList.json";
+
+type Character = {
+  jugador: string;
+  grupo: string;
+  personaje: string;
+  clase: string;
+  subclase: string;
+  runasPorNivel?: {
+    [key: number]: { runasTotales: number; runasActivas: number };
+  };
+  limitePotencias: {
+    "1": number;
+    "2": number;
+    "3": number;
+    "4": number;
+    "5": number;
+    "6": number;
+  };
+};
+
+export const SpendContext = createContext<{
+  potencia1: number;
+  potencia2: number;
+  potencia3: number;
+  potencia4: number;
+  potencia5: number;
+  potencia6: number;
+  runasActivas: number;
+  nivelActual: number;
+  selectedCharacter: Character;
+  historialHechizos: Array<{
+    nombre: string;
+    potencia: number;
+    timestamp: number;
+  }>;
+  armonicRunes: Array<{ level: number; runeName: string; disponible: boolean }>;
+  resetRunesSpend: () => void;
+  spendRune: () => void;
+  handleSelectCharacter: (character: string) => void;
+  spendSpell: (potencia: number, nombre: string, decrease?: boolean) => void;
+  resetSpells: () => void;
+  levelUp: () => void;
+  levelDown: () => void;
+  setArmonicRunes: (runes: Array<{ level: number; runeName: string }>) => void;
+  resetArmonicRunes: () => void;
+  useArmonicRune: (runeName: string) => void;
+}>({
+  potencia1: 100000,
+  potencia2: 4,
+  potencia3: 3,
+  potencia4: 3,
+  potencia5: 2,
+  potencia6: 1,
+  runasActivas: 0,
+  nivelActual: 1,
+  armonicRunes: [],
+  selectedCharacter: {
+    jugador: "",
+    grupo: "",
+    personaje: "",
+    clase: "",
+    subclase: "",
+    limitePotencias: {
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 0,
+    },
+  },
+  historialHechizos: [],
+  resetRunesSpend: () => {},
+  spendRune: () => {},
+  handleSelectCharacter: () => {},
+  spendSpell: () => {},
+  resetSpells: () => {},
+  levelUp: () => {},
+  levelDown: () => {},
+  setArmonicRunes: () => {},
+  resetArmonicRunes: () => {},
+  useArmonicRune: () => {},
+});
+
+export const SpendProvider = ({ children }: { children: ReactNode }) => {
+  // Función para cargar desde localStorage
+  const loadFromLocalStorage = (key: string, defaultValue: any) => {
+    try {
+      const stored = localStorage.getItem(key);
+      return stored ? JSON.parse(stored) : defaultValue;
+    } catch {
+      return defaultValue;
+    }
+  };
+
+  const defaultCharacter: Character = {
+    jugador: "",
+    grupo: "",
+    personaje: "none",
+    clase: "",
+    subclase: "",
+    limitePotencias: {
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 0,
+    },
+  };
+
+  const [potencia1, setPotencia1] = useState(() =>
+    loadFromLocalStorage("potencia1", 1000),
+  );
+  const [potencia2, setPotencia2] = useState(() =>
+    loadFromLocalStorage("potencia2", 0),
+  );
+  const [potencia3, setPotencia3] = useState(() =>
+    loadFromLocalStorage("potencia3", 0),
+  );
+  const [potencia4, setPotencia4] = useState(() =>
+    loadFromLocalStorage("potencia4", 0),
+  );
+  const [potencia5, setPotencia5] = useState(() =>
+    loadFromLocalStorage("potencia5", 0),
+  );
+  const [potencia6, setPotencia6] = useState(() =>
+    loadFromLocalStorage("potencia6", 0),
+  );
+  const [runasActivas, setRunasActivas] = useState(() =>
+    loadFromLocalStorage("runasActivas", 0),
+  );
+  const [selectedCharacter, setSelectedCharacter] = useState(() =>
+    loadFromLocalStorage("selectedCharacter", defaultCharacter),
+  );
+  const [nivelActual, setNivelActual] = useState(() =>
+    loadFromLocalStorage("nivelActual", 1),
+  );
+  const [historialHechizos, setHistorialHechizos] = useState<
+    Array<{ nombre: string; potencia: number; timestamp: number }>
+  >(() => loadFromLocalStorage("historialHechizos", []));
+  const [armonicRunes, setArmonicRunesHook] = useState(() =>
+    loadFromLocalStorage("armonicRunes", []),
+  );
+
+  // Sincroniza con localStorage cada vez que cambian
+  useEffect(() => {
+    localStorage.setItem("potencia1", JSON.stringify(potencia1));
+    localStorage.setItem("potencia2", JSON.stringify(potencia2));
+    localStorage.setItem("potencia3", JSON.stringify(potencia3));
+    localStorage.setItem("potencia4", JSON.stringify(potencia4));
+    localStorage.setItem("potencia5", JSON.stringify(potencia5));
+    localStorage.setItem("potencia6", JSON.stringify(potencia6));
+    localStorage.setItem("nivelActual", JSON.stringify(nivelActual));
+    localStorage.setItem(
+      "historialHechizos",
+      JSON.stringify(historialHechizos),
+    );
+    localStorage.setItem(
+      "selectedCharacter",
+      JSON.stringify(selectedCharacter),
+    );
+    localStorage.setItem("runasActivas", JSON.stringify(runasActivas));
+    localStorage.setItem("armonicRunes", JSON.stringify(armonicRunes));
+  }, [
+    potencia1,
+    potencia2,
+    potencia3,
+    potencia4,
+    potencia5,
+    potencia6,
+    historialHechizos,
+    selectedCharacter,
+    nivelActual,
+    runasActivas,
+    armonicRunes,
+  ]);
+
+  const spendSpell = (potencia: number, nombre: string, decrease?: boolean) => {
+    const shouldDecrease = decrease !== undefined ? decrease : true;
+
+    const registrarHechizo = (nivel: number) =>
+      setHistorialHechizos((h) => [
+        ...h,
+        { nombre, potencia: nivel, timestamp: Date.now() },
+      ]);
+
+    switch (potencia) {
+      case 1:
+        registrarHechizo(1);
+        break;
+      case 2:
+        setPotencia2((prev: any) => {
+          const next = Math.max(0, prev + (shouldDecrease ? -1 : +1));
+          registrarHechizo(2);
+          // Guarda en el localStorage el nuevo valor
+          localStorage.setItem("potencia2", JSON.stringify(next));
+          return next;
+        });
+        break;
+      case 3:
+        setPotencia3((prev: any) => {
+          const next = Math.max(0, prev + (shouldDecrease ? -1 : +1));
+          registrarHechizo(3);
+          // Guarda en el localStorage el nuevo valor
+          localStorage.setItem("potencia3", JSON.stringify(next));
+          return next;
+        });
+        break;
+      case 4:
+        setPotencia4((prev: any) => {
+          const next = Math.max(0, prev + (shouldDecrease ? -1 : +1));
+          registrarHechizo(4);
+          // Guarda en el localStorage el nuevo valor
+          localStorage.setItem("potencia4", JSON.stringify(next));
+          return next;
+        });
+        break;
+      case 5:
+        setPotencia5((prev: any) => {
+          const next = Math.max(0, prev + (shouldDecrease ? -1 : +1));
+          registrarHechizo(5);
+          // Guarda en el localStorage el nuevo valor
+          localStorage.setItem("potencia5", JSON.stringify(next));
+          return next;
+        });
+        break;
+      case 6:
+        setPotencia6((prev: any) => {
+          const next = Math.max(0, prev + (shouldDecrease ? -1 : +1));
+          registrarHechizo(6);
+          // Guarda en el localStorage el nuevo valor
+          localStorage.setItem("potencia6", JSON.stringify(next));
+          return next;
+        });
+        break;
+      default:
+        console.warn("[SpendContext] potencia desconocida", potencia);
+        break;
+    }
+  };
+
+  const resetSpells = (characterName?: string) => {
+    const { personajes } = personajesData;
+    // Si se pasa un nombre de personaje, úsalo; si no, usa el selectedCharacter actual
+    const personajeABuscar = characterName || selectedCharacter.personaje;
+    const characterData = personajes.find(
+      (p) => p.personaje === personajeABuscar,
+    );
+
+    if (characterData) {
+      setPotencia1(1000); // Potencia 1 se considera ilimitada
+      setPotencia2(
+        characterData.limitePotencias ? characterData.limitePotencias["2"] : 4,
+      );
+      setPotencia3(
+        characterData.limitePotencias ? characterData.limitePotencias["3"] : 3,
+      );
+      setPotencia4(
+        characterData.limitePotencias ? characterData.limitePotencias["4"] : 2,
+      );
+      setPotencia5(
+        characterData.limitePotencias ? characterData.limitePotencias["5"] : 1,
+      );
+      setPotencia6(
+        characterData.limitePotencias ? characterData.limitePotencias["6"] : 1,
+      );
+      setHistorialHechizos([]);
+    } else if (characterName === "Game Master") {
+      // Para el Game Master, establecer valores especiales
+      setPotencia1(1000);
+      setPotencia2(1000);
+      setPotencia3(1000);
+      setPotencia4(1000);
+      setPotencia5(1000);
+      setPotencia6(1000);
+      setHistorialHechizos([]);
+    }
+
+    localStorage.removeItem("potencia1");
+    localStorage.removeItem("potencia2");
+    localStorage.removeItem("potencia3");
+    localStorage.removeItem("potencia4");
+    localStorage.removeItem("potencia5");
+    localStorage.removeItem("potencia6");
+    localStorage.removeItem("nivelActual");
+    localStorage.removeItem("historialHechizos");
+  };
+
+  const levelUp = () => {
+    setNivelActual((prev: any) => prev + 1);
+  };
+
+  const levelDown = () => {
+    setNivelActual((prev: any) => Math.max(1, prev - 1));
+  };
+
+  const handleSelectCharacter = (character: string) => {
+    console.log(character);
+    if (character === "Game Master") {
+      setSelectedCharacter({
+        jugador: "Game Master",
+        grupo: "GM",
+        personaje: "Game Master",
+        clase: "GM",
+        subclase: "GM",
+        limitePotencias: {
+          "1": 1000,
+          "2": 1000,
+          "3": 1000,
+          "4": 1000,
+          "5": 1000,
+          "6": 1000,
+        },
+      });
+      setNivelActual(1);
+      resetSpells("Game Master");
+      return;
+    }
+
+    const selected = personajesData.personajes.find(
+      (p) => p.personaje === character,
+    );
+    if (selected) {
+      setSelectedCharacter(selected);
+      setNivelActual(1);
+      resetSpells(character);
+    }
+  };
+
+  const resetRunesSpend = () => {
+    setRunasActivas(
+      selectedCharacter?.runasPorNivel?.[nivelActual]?.runasActivas || 0,
+    );
+  };
+
+  const spendRune = () => {
+    setRunasActivas((prev: any) => Math.max(0, prev - 1));
+  };
+
+  const setArmonicRunes = (
+    runes: Array<{ level: number; runeName: string }>,
+  ) => {
+    setArmonicRunesHook(runes.map((rune) => ({ ...rune, disponible: true })));
+  };
+
+  const useArmonicRune = (runeName: string) => {
+    setArmonicRunesHook(
+      (
+        prevRunes: Array<{
+          level: number;
+          runeName: string;
+          disponible: boolean;
+        }>,
+      ) =>
+        prevRunes.map((rune) =>
+          rune.runeName === runeName && rune.disponible
+            ? { ...rune, disponible: false }
+            : rune,
+        ),
+    );
+  };
+
+  const resetArmonicRunes = () => {
+    // Pon todos las runas armónicas como disponibles
+    // @ts-ignore
+    setArmonicRunesHook(
+      armonicRunes.map((rune) => ({ ...rune, disponible: true })),
+    );
+  };
+
+  return (
+    <SpendContext.Provider
+      value={{
+        potencia1,
+        potencia2,
+        potencia3,
+        potencia4,
+        potencia5,
+        potencia6,
+        historialHechizos,
+        selectedCharacter,
+        nivelActual,
+        runasActivas,
+        armonicRunes,
+        resetRunesSpend,
+        spendRune,
+        levelUp,
+        levelDown,
+        handleSelectCharacter,
+        spendSpell,
+        resetSpells,
+        setArmonicRunes,
+        resetArmonicRunes,
+        useArmonicRune,
+      }}
+    >
+      {children}
+    </SpendContext.Provider>
+  );
+};
